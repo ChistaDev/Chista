@@ -8,5 +8,5 @@ import (
 func PhishingRoute(router *gin.Engine) {
 	v1 := router.Group("/api/v1")
 
-	v1.GET("/ioc", controller.GetPhishingDomains)
+	v1.GET("/phishing", controller.GetPhishingDomains)
 }
