@@ -36,11 +36,16 @@ func GetPhishingDomains(ctx *gin.Context) {
 		return
 	}
 
-	// Apply leveinsthein algortihm to generate new domains
-	similar_domains := helpers.GenerateSimilarDomains(query_phishing_domain_model.Hostname, 3, query_phishing_domain_model.TLD)
+	// Apply leveinsthein algortihm to generate new domains, set the treshold %33 of the provided input
+	wanted_distance := len(query_phishing_domain_model.Hostname) / 3
+	similar_domains := helpers.GenerateSimilarDomains(query_phishing_domain_model.Hostname, wanted_distance, query_phishing_domain_model.TLD)
 	fmt.Println(similar_domains)
 
 	// TO DO
-	// [] "kelimedeki harf sayısının %30una kadar distance alarak domain generate edilecek"
+	// [] Check the whois records of generated domains
+	// 	[] Check the NS records of generated domains
+	// [] Check dnstwister.it
+	// [] Check opensquat
+	// [] Check search.censys.io for SSL cert transparency
 
 }
