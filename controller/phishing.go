@@ -11,7 +11,7 @@ import (
 )
 
 // TO DO
-// [] Set a communication protocol between CLI & Server
+// [] Set a communication protocol between CLI & ServerP
 // [] Handle domains shorter than 3 letter hostnames like 'ab.com', 'au.com'
 
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param
