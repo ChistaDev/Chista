@@ -15,6 +15,7 @@ var (
 	Dump_Mode bool
 )
 
+// Load the .env file and get the content's of key. Return the content's of the key.
 func GoDotEnvVariable(key string) string {
 	// load .env file
 	err := godotenv.Load(".env")

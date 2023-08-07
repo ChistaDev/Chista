@@ -5,4 +5,9 @@ type PhishingDomain struct {
 	Domain   string `json:"domain" binding:"required"`
 	Hostname string
 	TLD      string
+	NS       []string
+}
+
+type PhishingDomainAsArray struct {
+	PhishingDomains []PhishingDomain
 }

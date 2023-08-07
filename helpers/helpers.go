@@ -2,10 +2,13 @@ package helpers
 
 import (
 	"fmt"
+	"net"
 	"net/url"
+	"os"
 	"strings"
 
 	"github.com/Chista-Framework/Chista/logger"
+	"github.com/joho/godotenv"
 )
 
 // Function to calculate the Levenshtein distance between two strings
@@ -67,6 +70,72 @@ func ParseDomain(domain string) (subdomain, hostname, tld string, err error) {
 	tld = parts[numParts-1]
 
 	return subdomain, hostname, tld, nil
+}
+
+// Check NS records of the provided domain -> (true, ['NS1','NS2',...], err) or (true, nil, err)
+func CheckNSRecords(domain string) (bool, []string, error) {
+	nsRecords, err := net.LookupNS(domain)
+	if err != nil {
+		if strings.Contains(err.Error(), "no such host") {
+			return false, nil, nil
+		}
+		return false, nil, err
+	}
+
+	var nsList []string
+	for _, record := range nsRecords {
+		nsList = append(nsList, record.Host)
+	}
+
+	return true, nsList, nil
+}
+
+// Check the whois records for the provided domain. Return (true, whois_response) or (false, nil)
+func Whois(domain string) (bool, string) {
+	whoisServer := GoDotEnvVariable("WHOIS_SERVER")
+
+	conn, err := net.Dial("tcp", whoisServer)
+	if err != nil {
+		return false, ""
+	}
+	defer conn.Close()
+
+	query := domain + "\r\n"
+	_, err = conn.Write([]byte(query))
+	if err != nil {
+		return false, ""
+	}
+
+	buf := make([]byte, 1024)
+	response := ""
+	for {
+		n, err := conn.Read(buf)
+		if err != nil {
+			break
+		}
+		response += string(buf[:n])
+	}
+
+	// Check if the response indicates that the domain has whois records
+	if strings.Contains(response, "No match for domain") ||
+		strings.Contains(response, "No match for") ||
+		strings.Contains(response, "DOMAIN NOT FOUND") {
+		return false, ""
+	}
+
+	return true, response
+}
+
+// Load the .env file and get the content's of key. Return the content's of the key.
+func GoDotEnvVariable(key string) string {
+	// load .env file
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		logger.Log.Fatalf("Error while openning ENV file.")
+	}
+
+	return os.Getenv(key)
 }
 
 // Function to find new strings similar to the given input string
