@@ -1,0 +1,3 @@
+time="2023-08-10T23:07:14+03:00" level=fatal msg="Error while openning ENV file." func=github.com/Chista-Framework/Chista/logger.GoDotEnvVariable file="C:/Users/resul/OneDrive/Desktop/Projects/Chista/logger/logger.go:24"
+time="2023-08-10T23:07:57+03:00" level=fatal msg="Error while openning ENV file." func=github.com/Chista-Framework/Chista/logger.GoDotEnvVariable file="C:/Users/resul/OneDrive/Desktop/Projects/Chista/logger/logger.go:24"
+time="2023-08-10T23:08:29+03:00" level=fatal msg="Error while openning ENV file." func=github.com/Chista-Framework/Chista/logger.GoDotEnvVariable file="C:/Users/resul/OneDrive/Desktop/Projects/Chista/logger/logger.go:24"
