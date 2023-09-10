@@ -27,6 +27,7 @@ func GetPhishingDomains(ctx *gin.Context) {
 	// [] Check dnstwister.it
 	// [] Check opensquat
 	// [] Check search.censys.io for SSL cert transparency
+	// [] Check levensthein
 	// Check HTTP/S services for detected domains, if the HTTP/s running, report them as phishing.
 
 	if len(LevenshteinDomains_Registered) > 0 {
