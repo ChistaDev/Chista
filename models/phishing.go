@@ -11,3 +11,7 @@ type PhishingDomain struct {
 type PhishingDomainAsArray struct {
 	PhishingDomains []PhishingDomain
 }
+
+type ResponseDomain struct {
+	Domain string `json:"domain"`
+}

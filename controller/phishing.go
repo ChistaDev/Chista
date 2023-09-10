@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var LevenshteinDomains_Registered []string
+var LevenshteinDomains_Registered []models.ResponseDomain
 
 // TO DO
 // [] Set a communication protocol between CLI & ServerP
@@ -83,7 +83,7 @@ func GetImpersonatingDomains(ctx *gin.Context) {
 		}
 	}
 
-	var response_possible_ph_domains []string
+	response_possible_ph_domains := []models.ResponseDomain{}
 	logger.Log.Infoln("NS Record Checker started...")
 	for _, valid_domain := range valid_domains {
 		// [x] Check the NS records of generated domains
@@ -95,11 +95,15 @@ func GetImpersonatingDomains(ctx *gin.Context) {
 		}
 		if hasNS {
 			// Add it to return list
-			response_possible_ph_domains = append(response_possible_ph_domains, valid_domain)
+			var respDomain models.ResponseDomain
+			respDomain.Domain = valid_domain
+			response_possible_ph_domains = append(response_possible_ph_domains, respDomain)
 		}
 	}
 
 	LevenshteinDomains_Registered = response_possible_ph_domains
+
+	// Respond JSON
 	ctx.JSON(http.StatusOK, &response_possible_ph_domains)
 	return
 }
