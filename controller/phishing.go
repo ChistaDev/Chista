@@ -8,19 +8,12 @@ import (
 	"github.com/Chista-Framework/Chista/logger"
 	"github.com/Chista-Framework/Chista/models"
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 )
 
 var LevenshteinDomains_Registered []models.ResponseDomain
 
 // TO DO
-// [] Set a communication protocol between CLI & ServerP
 // [] Handle domains shorter than 3 letter hostnames like 'ab.com', 'au.com'
-
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-}
 
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param
 func GetPhishingDomains(ctx *gin.Context) {
@@ -30,9 +23,11 @@ func GetPhishingDomains(ctx *gin.Context) {
 	// [] Check levensthein
 	// Check HTTP/S services for detected domains, if the HTTP/s running, report them as phishing.
 
-	if len(LevenshteinDomains_Registered) > 0 {
-		ctx.JSON(http.StatusOK, &LevenshteinDomains_Registered)
-		return
+	if len(LevenshteinDomains_Registered) <= 0 {
+		// Calculate levensthein
+
+	} else {
+		// Levensthein already calculated
 	}
 }
 
