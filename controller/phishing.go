@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -17,17 +18,77 @@ var LevenshteinDomains_Registered []models.ResponseDomain
 
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param
 func GetPhishingDomains(ctx *gin.Context) {
-	// [] Check dnstwister.it
+	// [x] Check dnstwister.it
 	// [] Check opensquat
 	// [] Check search.censys.io for SSL cert transparency
-	// [] Check levensthein
 	// Check HTTP/S services for detected domains, if the HTTP/s running, report them as phishing.
 
-	if len(LevenshteinDomains_Registered) <= 0 {
-		// Calculate levensthein
+	var query_phishing_domain_model models.PhishingDomain
+	if ctx.Query("domain") != "" {
+		// Parse the domain to get correct tld and host info.
+		_, hostname, tld, err := helpers.ParseDomain(ctx.Query("domain"))
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": "could not parse domain"})
+			logger.Log.Errorln("Could not parse domain.")
+			return
+		}
+		query_phishing_domain_model.Domain = (hostname + "." + tld)
+		query_phishing_domain_model.Hostname = hostname
+		query_phishing_domain_model.TLD = tld
+
+		// Check dnstwister.it
+		// Request to get hex form of domain -> https://dnstwister.report/api/to_hex/{domain}
+		logger.Log.Debugf("Domain: %v", query_phishing_domain_model.Domain)
+		dnstwister_toHex_url := "http://dnstwister.report/api/to_hex/" + query_phishing_domain_model.Domain
+		response, err := http.Get(dnstwister_toHex_url)
+		if err != nil {
+			logger.Log.Errorln("Error decoding response body:", err)
+			ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "could not convert domain to hex - dnstwister", "err": err})
+			return
+		}
+		defer response.Body.Close()
+
+		var dnstwister_toHex_response models.DnsTwisterToHexResponse
+		decoder := json.NewDecoder(response.Body)
+		if err := decoder.Decode(&dnstwister_toHex_response); err != nil {
+			logger.Log.Errorln("Could not parse dnstwister domain.")
+			return
+		}
+
+		// Fuzz the other domains -> https://dnstwister.report/api/fuzz/{domain_hex}
+		dnstwister_fuzz_url := dnstwister_toHex_response.FuzzURL
+		response, err = http.Get(dnstwister_fuzz_url)
+		if err != nil {
+			logger.Log.Errorln("Error decoding response body:", err)
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "could not convert domain to hex - dnstwister"})
+			return
+		}
+		defer response.Body.Close()
+		if response.StatusCode != http.StatusOK {
+			logger.Log.Errorln("HTTP Error:", response.Status)
+			return
+		}
+
+		var dnstwister_fuzzResponse models.DnsTwisterFuzzResponse
+		decoder = json.NewDecoder(response.Body)
+		if err := decoder.Decode(&dnstwister_fuzzResponse); err != nil {
+			logger.Log.Errorln("Error decoding response body - dnstwister fuzz:", err)
+			return
+		}
+
+		//ctx.JSON(http.StatusOK, &dnstwister_fuzzResponse)
+
+		// Check opensquat
+		// python37.exe opensquat.py  --phishing ph_results.txt
+		// 		Reads the keywords.txt for keywords, and searches phishing domains
+		//		Possible phishing results -> results.txt
+
+		return
 
 	} else {
-		// Levensthein already calculated
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "domain missing"})
+		logger.Log.Errorln("Domain missing.")
+		return
 	}
 }
 
@@ -47,7 +108,7 @@ func GetImpersonatingDomains(ctx *gin.Context) {
 			logger.Log.Errorln("Could not parse domain.")
 			return
 		}
-		query_phishing_domain_model.Domain = (hostname + tld)
+		query_phishing_domain_model.Domain = (hostname + "." + tld)
 		query_phishing_domain_model.Hostname = hostname
 		query_phishing_domain_model.TLD = tld
 
