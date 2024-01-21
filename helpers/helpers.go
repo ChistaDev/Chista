@@ -13,7 +13,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
 	"github.com/Chista-Framework/Chista/logger"
 	"github.com/Chista-Framework/Chista/models"
 	"github.com/TwiN/go-color"
@@ -58,6 +57,7 @@ func UniqueStrArray(input []string) []string {
 
 	return uniqueArray
 }
+
 
 func InitiliazeWebSocketConnection() error {
 	API_ONLY = GoDotEnvVariable("API_ONLY")
