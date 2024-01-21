@@ -1,9 +1,8 @@
 name: Build and Release
 
 on:
-  release:
-    types:
-      - created
+  push:
+    tags: ['v*']
 
 jobs:
   build:
@@ -43,8 +42,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./myapp
-        asset_name: myapp
+        asset_path: ./chista
+        asset_name: chista
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
