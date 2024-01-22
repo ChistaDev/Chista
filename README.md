@@ -1,7 +1,7 @@
 <div align="center">
   <img name="mit-license" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   <img name="version" src="https://img.shields.io/badge/version-1.0.0-blue">
-  <img name="issues" src="https://img.shields.io/github/issues/Chista-Framework/Chista">
+  <img name="issues" src="https://img.shields.io/github/issues/ChistaDev/Chista">
   <img name="maintained-yes" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg">
   <img name="made-with-go" src="https://img.shields.io/badge/Made%20with-Go-1f425f.svg">
   <img name="open-source" src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
