@@ -19,7 +19,7 @@ func GetLeaks(ctx *gin.Context) {
 	// Calculates the execution time
 	//defer helpers.TimeElapsed()()
 
-	// Wait for client's websocket server initliazation
+	// Wait for client's websocket server initliazation - test
 	helpers.InitiliazeWebSocketConnection()
 	time.Sleep(3 * time.Second)
 
