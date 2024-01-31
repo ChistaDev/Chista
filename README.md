@@ -301,7 +301,7 @@ We would like to thank all the individuals, developers, communities and the enti
 - Data Leak Module is powered by [Mozilla Monitor](https://monitor.mozilla.org/),
 - IOC Module is powered by [MalwareBazaar](https://bazaar.abuse.ch/)
 - Blacklist Module is powered by [MxToolBox](https://mxtoolbox.com/)
-- Ransomware Activities is Module powered by [RansomWatch](https://raw.githubusercontent.com/joshhighet/ransomwatch/)
+- Ransomware Activities Module is powered by [RansomWatch](https://raw.githubusercontent.com/joshhighet/ransomwatch/)
 - CTI Source Module is powered by [DeepDarkCTI](https://github.com/fastfire/deepdarkCTI/)
 - Threat Profile Module is powered by [Electronic Transactions Development Agency](https://apt.etda.or.th/cgi-bin/aptgroups.cgi), [RansomWatch](https://raw.githubusercontent.com/joshhighet/ransomwatch/)
 
