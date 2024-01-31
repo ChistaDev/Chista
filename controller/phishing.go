@@ -26,7 +26,7 @@ var (
 )
 
 // TO DO
-// [] Handle domains shorter than 3 letter hostnames like 'ab.com', 'au.com' - test
+// [] Handle domains shorter than 3 letter hostnames like 'ab.com', 'au.com' - test test2
 
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param
 func GetPhishingDomains(ctx *gin.Context) {
