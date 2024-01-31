@@ -1,0 +1,26 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+*.vscode
+*.log
+**/*.log
+*.log
+
+# Folders
+_obj
+_test
+
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
+
+# Go specific
+*.exe
+*.test
+*.prof
+
+# Env
+.env
+.ENV
+

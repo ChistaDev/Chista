@@ -1,0 +1,17 @@
+.c9/
+.c9*
+.~c9*
+.git
+__pycache__/
+*.pyc
+logs/
+venv/
+*.old
+*.bak
+*.txt
+*.dat
+*.log
+*.json
+test*.py
+phishing.db
+domain-names*.txt
