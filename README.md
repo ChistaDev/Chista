@@ -303,3 +303,7 @@ Thank you to everyone who has contributed to the development of Chista
 [Yusuf Yıldız](https://www.linkedin.com/in/yusufyildiz11/) :muscle:
 [Furkan Öztürk](https://www.linkedin.com/in/furkannozturk/) :muscle:
 [Resul Bozburun](https://www.linkedin.com/in/rbozburun/) 
+
+<h3>:heart: Project Graphic Designer</h3>
+
+[Yakuphan Devrez](https://www.linkedin.com/in/yakuphandevrez/)
