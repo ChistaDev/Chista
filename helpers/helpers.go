@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -77,6 +78,44 @@ func InitiliazeWebSocketConnection() error {
 	}
 	CONN = conn
 	return nil
+}
+
+// Verifies the given search.censys.io key and secret valid or not
+func VerifyCensysCredentials(api_id string, secret string) (bool, error) {
+	logger.Log.Debugf("search.censys.io account verification started.")
+	SendMessageWS("CTLogs-Censys", "search.censys.io account verification started.", "debug")
+	url := "https://search.censys.io/api/v1/account"
+	auth_key := "Authorization"
+	auth_value := "Basic " + base64.StdEncoding.EncodeToString([]byte(api_id+":"+secret))
+
+	resp_bytes, err := ApiRequester(url, "GET", auth_key, auth_value, nil)
+	if err != nil {
+		logger.Log.Errorf("APIRequster error  %v...", err)
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("APIRequster error  %v...", err), "error")
+		return false, nil
+	}
+
+	censys_response := models.CensysAccountEndpointResponseModel{}
+
+	// Convert returned bytes to struct
+	err = json.Unmarshal(resp_bytes, &censys_response)
+	if err != nil {
+		logger.Log.Debugf("ERROR - While requesting to account endpoint. Response: %v", resp_bytes)
+		logger.Log.Errorf("Cannot convert API request to Censys Response struct:  %v", err)
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("Cannot convert API request to Censys Response  struct:  %v", err), "error")
+		return false, nil
+	}
+
+	// Recieved a valid response and user email captured
+	if censys_response.Email != "" {
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("search.censys.io account verified. Used email: %v", censys_response.Email), "info")
+		logger.Log.Infof("search.censys.io account verified. Used email: %v", censys_response.Email)
+		return true, nil
+	} else {
+		SendMessageWS("CTLogs-Censys", "search.censys.io account couldn't verified. Please check your API credentials!", "error")
+		logger.Log.Error("search.censys.io account couldn't verified. Please check your API credentials!")
+		return false, nil
+	}
 }
 
 func CloseWSConnection() error {
@@ -285,7 +324,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Create a new request with the POST method and set the request body
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer(request_data))
 		if err != nil {
-			logger.Log.Errorf("Error creating request:", err)
+			logger.Log.Errorf("Error creating request: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}
@@ -298,7 +337,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Send the request
 		resp, err := client.Do(req)
 		if err != nil {
-			logger.Log.Errorf("Error creating request:", err)
+			logger.Log.Errorf("Error creating request: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}
@@ -307,7 +346,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Read the response body
 		responseBody, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			logger.Log.Errorf("Error reading response body:", err)
+			logger.Log.Errorf("Error reading response body: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}

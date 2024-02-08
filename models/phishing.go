@@ -21,6 +21,18 @@ type CrtShResponseModel []struct {
 	SerialNumber   string `json:"serial_number"`
 }
 
+type CensysAccountEndpointResponseModel struct {
+	Email      string `json:"email"`
+	Login      string `json:"login"`
+	FirstLogin string `json:"first_login"`
+	LastLogin  string `json:"last_login"`
+	Quota      struct {
+		Used      int    `json:"used"`
+		Allowance int    `json:"allowance"`
+		ResetsAt  string `json:"resets_at"`
+	} `json:"quota"`
+}
+
 type CensysCTSearchEndpointResponseModel struct {
 	Code   int    `json:"code"`
 	Status string `json:"status"`

@@ -127,14 +127,28 @@ func GetPhishingDomains(ctx *gin.Context) {
 		var extracted_domains_from_ct []string
 
 		// 	Check SSL CT and found websites if they don't redirect to original domain
-		for i := 0; i < len(punny_code_domains); i++ {
-			censys_hits, err := GetDomainsFromCensysCTLogs(punny_code_domains[i])
-			if err != nil {
-				logger.Log.Warnf("GetDomainsFromCensysCTLogs error :  %v", err)
-				helpers.SendMessageWS("CTLogs-Censys", fmt.Sprintf("GetDomainsFromCensysCTLogs error :  %v", err), "warn")
-			}
+		var isVerified bool
+		if helpers.GoDotEnvVariable("CENSYS_API_ID") != "" && helpers.GoDotEnvVariable("CENSYS_API_SECRET") != "" {
+			helpers.SendMessageWS("CTLogs", "CenSys credentials recieved. Trying to search for CT Logs on search.censys.io", "info")
+			// Verify search.censys.io API credentials
+			isVerified, _ = helpers.VerifyCensysCredentials(helpers.GoDotEnvVariable("CENSYS_API_ID"), helpers.GoDotEnvVariable("CENSYS_API_SECRET"))
 
-			extracted_domains_from_ct = append(extracted_domains_from_ct, censys_hits...)
+		} else {
+			isVerified = false
+			helpers.SendMessageWS("Phishing", "Since CenSys credentials didn't set, search.censys.io CT Logs process skipped.", "info")
+		}
+
+		for i := 0; i < len(punny_code_domains); i++ {
+			if isVerified {
+				censys_hits, err := GetDomainsFromCensysCTLogs(punny_code_domains[i])
+				if err != nil {
+					logger.Log.Warnf("GetDomainsFromCensysCTLogs error :  %v", err)
+					helpers.SendMessageWS("CTLogs-Censys", fmt.Sprintf("GetDomainsFromCensysCTLogs error :  %v", err), "warn")
+				}
+
+				extracted_domains_from_ct = append(extracted_domains_from_ct, censys_hits...)
+
+			}
 
 			crtsh_hits, err := GetDomainsFromCrtshCTLogs(punny_code_domains[i])
 			if err != nil {
