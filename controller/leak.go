@@ -14,18 +14,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GET /api/v1/leak - List all of the leak info related with used query params
+// GET /api/v1/leak - List all of the leak info related with used query params -test
 func GetLeaks(ctx *gin.Context) {
 	// Calculates the execution time
 	//defer helpers.TimeElapsed()()
 
-	// Wait for client's websocket server initliazation
+	// Wait for client's websocket server initliazation - test
 	helpers.InitiliazeWebSocketConnection()
 	time.Sleep(3 * time.Second)
 
 	logger.Log.Info("Checking leak information for the given identity...")
 	var verbosity int
-	MOZILLA_MONITOR := "https://monitor.firefox.com/api/v1/scan"
+	MOZILLA_MONITOR := "https://monitor.mozilla.org/api/v1/scan"
 	var email_model models.Email
 
 	if ctx.Query("verbosity") != "" {

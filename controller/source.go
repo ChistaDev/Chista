@@ -58,7 +58,7 @@ func GetSources(ctx *gin.Context) {
 	helpers.VERBOSITY = verbosity
 
 	sources := ctx.Query("src")
-	
+
 	GetCTIData(sources, ctx)
 
 	// Calls the function to beautify results.
