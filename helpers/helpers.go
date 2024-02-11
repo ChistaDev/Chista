@@ -60,6 +60,23 @@ func UniqueStrArray(input []string) []string {
 	return uniqueArray
 }
 
+// Returns true if search.censys.io API credentials set correctly else returns false
+func IsCensysCredsSet() bool {
+	var isSet bool
+	if GoDotEnvVariable("CENSYS_API_ID") != "" && GoDotEnvVariable("CENSYS_API_SECRET") != "" {
+		SendMessageWS("CensysCredentialChecker", "CenSys credentials recieved. Trying to search for CT Logs on search.censys.io", "info")
+		// Verify search.censys.io API credentials
+		isSet, _ = VerifyCensysCredentials(GoDotEnvVariable("CENSYS_API_ID"), GoDotEnvVariable("CENSYS_API_SECRET"))
+
+	} else {
+		isSet = false
+		SendMessageWS("CensysCredentialChecker", "Since CenSys credentials didn't set, search.censys.io CT Logs process skipped.", "info")
+	}
+
+	return isSet
+
+}
+
 func InitiliazeWebSocketConnection() error {
 	API_ONLY = GoDotEnvVariable("API_ONLY")
 	// Define the WebSocket endpoint URL.

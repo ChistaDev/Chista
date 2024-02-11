@@ -23,6 +23,7 @@ var (
 	LevenshteinDomains_Registered []models.ResponseDomain
 	ORIGINAL_WORKING_DIR          string
 	VERBOSITY                     int
+	isVerified                    bool
 )
 
 // TO DO
@@ -126,17 +127,8 @@ func GetPhishingDomains(ctx *gin.Context) {
 		punny_code_domains := GetPunnyCodeDomains(query_phishing_domain_model)
 		var extracted_domains_from_ct []string
 
-		// 	Check SSL CT and found websites if they don't redirect to original domain
-		var isVerified bool
-		if helpers.GoDotEnvVariable("CENSYS_API_ID") != "" && helpers.GoDotEnvVariable("CENSYS_API_SECRET") != "" {
-			helpers.SendMessageWS("CTLogs", "CenSys credentials recieved. Trying to search for CT Logs on search.censys.io", "info")
-			// Verify search.censys.io API credentials
-			isVerified, _ = helpers.VerifyCensysCredentials(helpers.GoDotEnvVariable("CENSYS_API_ID"), helpers.GoDotEnvVariable("CENSYS_API_SECRET"))
-
-		} else {
-			isVerified = false
-			helpers.SendMessageWS("Phishing", "Since CenSys credentials didn't set, search.censys.io CT Logs process skipped.", "info")
-		}
+		// 	Check Censys API credentials set correctly
+		isVerified = helpers.IsCensysCredsSet()
 
 		for i := 0; i < len(punny_code_domains); i++ {
 			if isVerified {
