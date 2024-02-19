@@ -630,7 +630,10 @@ func GenerateSimilarDomains(input string, threshold int, tld string) []string {
 		}
 	}
 
-	return similarStrings
+	// Make elements unique, remove duplicates
+	unique_similarStrings := UniqueStrArray(similarStrings)
+
+	return unique_similarStrings
 }
 
 // Helper function to manage functions running at specific intervals.

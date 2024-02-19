@@ -21,6 +21,7 @@ import (
 
 var (
 	LevenshteinDomains_Registered []models.ResponseDomain
+	QueriedDomain                 string // It holds previous request's queried domain
 	ORIGINAL_WORKING_DIR          string
 	VERBOSITY                     int
 	isVerified                    bool
@@ -654,15 +655,17 @@ func GetImpersonatingDomains(ctx *gin.Context) {
 		return
 	}
 
-	// Apply leveinsthein algortihm to generate new domains, set the treshold %33 of the provided input
-	wanted_distance := len(query_phishing_domain_model.Hostname) / 3
-	similar_domains := helpers.GenerateSimilarDomains(query_phishing_domain_model.Hostname, wanted_distance, query_phishing_domain_model.TLD)
-
 	// If LevenstheinDomains_Registered already calculated, simply return it
-	if len(LevenshteinDomains_Registered) > 0 {
+	// TO DO: The queried domain should be checked
+	if len(LevenshteinDomains_Registered) > 0 && QueriedDomain == query_phishing_domain_model.Domain {
 		ctx.JSON(http.StatusOK, &LevenshteinDomains_Registered)
 		return
 	}
+
+	// Apply leveinsthein algortihm to generate new domains, set the treshold %33 of the provided input
+	wanted_distance := len(query_phishing_domain_model.Hostname) / 3
+	similar_domains := helpers.GenerateSimilarDomains(query_phishing_domain_model.Hostname, wanted_distance, query_phishing_domain_model.TLD)
+	logger.Log.Debugf("Similar domains by levensthein: %v", similar_domains)
 
 	// [x] Check the whois records of generated domains
 	logger.Log.Infoln("Whois checker started...")
@@ -694,6 +697,7 @@ func GetImpersonatingDomains(ctx *gin.Context) {
 
 	// Set LevenstheinDomains_Registered for PhishingController
 	LevenshteinDomains_Registered = response_possible_ph_domains
+	QueriedDomain = query_phishing_domain_model.Domain
 
 	helpers.SendMessageWS("", "--------------------------------------------------------", "")
 	helpers.SendMessageWS("", "-------------- IMPERSONATE MODULE RESULTS --------------", "")
