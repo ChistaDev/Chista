@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -11,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -20,6 +22,12 @@ import (
 	"github.com/TwiN/go-color"
 	"github.com/gorilla/websocket"
 	"golang.org/x/net/idna"
+)
+
+const (
+	URL   string = `(?i)\b(?P<protocol>https?|ftp):\/\/(?P<domain>[-A-Z0-9.]+)(?P<file>\/[-A-Z0-9+&@#\/%=~_|!:,.;]*)?(?P<parameters>\?[A-Z0-9+&@#\/%=~_|!:,.;]*)?`
+	IP    string = `\b(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b`
+	EMAIL string = `(?P<email>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})`
 )
 
 var PSUDO_MAP = map[string]string{
@@ -39,10 +47,13 @@ var PSUDO_MAP = map[string]string{
 }
 
 var (
-	VERBOSITY int
-	CONN      *websocket.Conn
-	API_ONLY  string
-	MU        sync.Mutex
+	VERBOSITY  int
+	CONN       *websocket.Conn
+	API_ONLY   string
+	MU         sync.Mutex
+	regexURL   = regexp.MustCompile(URL)
+	regexEmail = regexp.MustCompile(EMAIL)
+	regexIP    = regexp.MustCompile(IP)
 )
 
 // Function to make unique string array. Eliminates the duplicates
@@ -634,6 +645,7 @@ func GenerateSimilarDomains(input string, threshold int, tld string) []string {
 }
 
 // Helper function to manage functions running at specific intervals.
+// It takes a map of functions and their intervals and runs the functions periodically.
 func RunPeriodicly(functions map[string]models.PeriodicFunctions, quit chan struct{}) {
 	SendMessageWS("Activities", "Checking and starting periodic functions...", "trace")
 	for name, function := range functions {
@@ -656,4 +668,70 @@ func RunPeriodicly(functions map[string]models.PeriodicFunctions, quit chan stru
 			}
 		}(name, function)
 	}
+}
+
+// Function to validate the given input string. Return the validated URL or an error.
+// It checks if the input is an email, IP address, or URL and returns the hostname part of the input.
+func URLValidator(userInput string) (string, error) {
+	if regexEmail.MatchString(userInput) {
+		matchedEmail := regexEmail.FindStringSubmatch(userInput)
+		if strings.Contains(matchedEmail[1], "@") {
+			userInput = matchedEmail[1]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking Domain: %v", userInput), "debug")
+			logger.Log.Debugf("Checking Domain: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid mail domain")
+		}
+
+	} else if regexIP.MatchString(userInput) {
+		matchedIPAdress := regexIP.FindStringSubmatch(userInput)
+		if matchedIPAdress[0] != "" {
+			userInput = matchedIPAdress[0]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking IP: %v", userInput), "debug")
+			logger.Log.Debugf("Checking IP: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid ip address")
+		}
+
+	} else if regexURL.MatchString(userInput) {
+		matchedDomain := regexURL.FindStringSubmatch(userInput)
+		if matchedDomain[2] != "" {
+			userInput = matchedDomain[2]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking URL: %v", userInput), "debug")
+			logger.Log.Debugf("Checking URL: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid URL")
+		}
+	}
+
+	return "", errors.New("sorry our regexes couldn't match your input, please enter a valid domain name or ip and try again")
+}
+
+func ParseGivenDomain(domainToParse string) (string, error) {
+	var userDomain string
+	parsedInput, err := url.Parse(domainToParse)
+	if err != nil {
+		return "", err
+	}
+
+	if parsedInput.Hostname() == "" {
+		userDomain = parsedInput.Path
+	} else {
+		userDomain = parsedInput.Hostname()
+	}
+
+	userDomain = strings.ReplaceAll(userDomain, " ", "")
+	userDomain = strings.ReplaceAll(userDomain, "+", "")
+	// checks if the user input is empty.
+	if userDomain == "" {
+		return "", errors.New("invalid input type please enter a valid domain name or ip and try again")
+	}
+
+	return userDomain, nil
 }
