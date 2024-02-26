@@ -83,8 +83,6 @@ func GetCTIData(urls string, ctx *gin.Context) {
 	// Splits parameters, arguments and fills into splitedParams.
 	for _, arg := range splitedQuery {
 		paramValue := strings.Split(arg, "=")
-		fmt.Println(paramValue[0], "=", paramValue[1])
-		fmt.Println(len(paramValue[1]))
 		if len(paramValue) == 2 {
 			splitedParams[paramValue[0]] = paramValue[1]
 		} else {
