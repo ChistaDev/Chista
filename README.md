@@ -311,11 +311,8 @@ We would like to thank all the individuals, developers, communities and the enti
 [Furkan Öztürk](https://www.linkedin.com/in/furkannozturk/) :muscle:
 [Resul Bozburun](https://www.linkedin.com/in/rbozburun/) 
 
-<h3>:heart: Project Developers </h3>
+<h3>:heart: Front-End Developer </h3>
 
-[Resul Bozburun](https://www.linkedin.com/in/rbozburun/) <br>
-[Yusuf Yıldız](https://www.linkedin.com/in/yusufyildiz11/) <br>
-[Furkan Öztürk](https://www.linkedin.com/in/furkannozturk/) <br>
 [Furkan Fırat](https://www.linkedin.com/in/furkan-f%C4%B1rat-058195161/) 
 
 <h3>:heart: Project Graphic Designer</h3>
