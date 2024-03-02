@@ -82,13 +82,21 @@ func GetCTIData(urls string, ctx *gin.Context) {
 	helpers.SendMessageWS("Source", "Seperating the given parameter(s) and argument(s)", "debug")
 	// Splits parameters, arguments and fills into splitedParams.
 	for _, arg := range splitedQuery {
+		if !strings.Contains(arg, "=") {
+			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`")
+			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`", "error")
+			ctx.JSON(http.StatusNotFound, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`"})
+			return
+		}
+
 		paramValue := strings.Split(arg, "=")
-		if len(paramValue) == 2 {
+
+		if len(paramValue) == 2 && paramValue[1] != "" && paramValue[0] != "" {
 			splitedParams[paramValue[0]] = paramValue[1]
 		} else {
-			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`")
-			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`", "error")
-			ctx.JSON(http.StatusNotFound, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`"})
+			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`")
+			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`", "error")
+			ctx.JSON(http.StatusNotFound, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`"})
 			return
 		}
 	}
