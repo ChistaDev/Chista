@@ -76,12 +76,13 @@ func CheckActivities(ctx *gin.Context) {
 		checkRansom(ransomGroups, ctx)
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 
-	case listGroups != "":
+	case listGroups == "all":
 		listAllRansomGroups(ctx)
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	default:
-		logger.Log.Debugln("Invalid query string or parameter.")
-		ctx.JSON(404, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
+		helpers.SendMessageWS("Activities", "Invalid query string or parameter.", "error")
+		ctx.JSON(400, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
+		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	}
 
 }
@@ -97,6 +98,7 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 
 		// Filtering the data according to input.
 		if loweredGroupName == "lockbit2" || loweredGroupName == "lockbit3" || loweredGroupName == "lockbit" {
+			loweredGroupName = "lockbit"
 			for _, datum := range jsonData {
 				if strings.Contains(datum.Group_name, loweredGroupName) {
 					filteredData = append(filteredData, datum)
@@ -112,10 +114,11 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 	}
 
 	if len(filteredData) == 0 {
-		logger.Log.Debugln("Data could not found.")
-		helpers.SendMessageWS("Activities", "Data could not found.", "error")
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Data not found"})
+		logger.Log.Debugln("Requested data could not found.")
+		helpers.SendMessageWS("Activities", "Requested data could not found.", "info")
+		ctx.JSON(http.StatusNotFound, gin.H{"Message": "Requested data could not found."})
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
+		return
 	}
 
 	// Returns the proper data.
@@ -124,7 +127,6 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 		helpers.SendMessageWS("", fmt.Sprintf("Group Name: %v\nLeaked: %v\nActivity Discovery Date: %v\n",
 			datum.Group_name, datum.Post_title, datum.Discover_date), "")
 	}
-
 }
 
 // Checks the data in the file if it's old.
