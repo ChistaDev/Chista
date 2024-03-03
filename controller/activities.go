@@ -137,6 +137,8 @@ func GetRansomwatchData() {
 	existingData, err := os.ReadFile(ransomDataPath)
 	if err != nil && !os.IsNotExist(err) {
 		logger.Log.Errorf("Error reading %s %v\n", ransomDataPath, err)
+		recreatedFile, _:= os.Create(ransomDataPath)
+		recreatedFile.Close()
 		return
 	}
 
@@ -172,6 +174,11 @@ func GetRansomwatchData() {
 
 func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	helpers.SendMessageWS("Activities", "Fetching ransom data...", "info")
+	if _, err := os.Stat(ransomDataPath); os.IsNotExist(err) {
+		logger.Log.Debugln("File does not exist. Recreating the file.")
+		helpers.SendMessageWS("Activities", "File does not exist. Recreating the file.", "info")
+		GetRansomwatchData()
+	}
 
 	// Opens the activitiesRansomData.json file.
 	file, err := os.Open(ransomDataPath)
