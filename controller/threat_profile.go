@@ -65,15 +65,28 @@ func GetThreatActorProfiles(ctx *gin.Context) {
 	case aptInput != "" && ransomInput != "":
 		ransomProfileData := checkRansomProfile(ransomInput, ctx)
 		aptData := checkAPTProfile(aptInput, ctx)
-		ctx.JSON(http.StatusOK, models.CombinedProfilesData{RansomProfileData: ransomProfileData, AptData: aptData})
 
+		if ransomProfileData.Name == "" && aptData.Actor != "" {
+			ctx.JSON(http.StatusOK, aptData)
+		} else if aptData.Actor == "" && ransomProfileData.Name != "" {
+			ctx.JSON(http.StatusOK, ransomProfileData)
+		}
 		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return
 	case aptInput != "":
 		aptProfileData := checkAPTProfile(aptInput, ctx)
+		if aptProfileData.Actor == "" {
+			helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+			return
+		}
 		ctx.JSON(http.StatusOK, aptProfileData)
 		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
 	case ransomInput != "":
 		ransomProfileData := checkRansomProfile(ransomInput, ctx)
+		if ransomProfileData.Name == "" {
+			helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+			return
+		}
 		ctx.JSON(http.StatusOK, ransomProfileData)
 		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
 	case listInput == "ransom":
@@ -86,7 +99,7 @@ func GetThreatActorProfiles(ctx *gin.Context) {
 		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
 	default:
 		logger.Log.Debugln("Invalid query string or parameter.")
-		ctx.JSON(404, gin.H{"Error": "Invalid query string parameter."})
+		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Invalid query string parameter."})
 	}
 
 }
@@ -166,9 +179,9 @@ func checkRansomProfile(ransomName string, ctx *gin.Context) models.RansomProfil
 		}
 	}
 
-	logger.Log.Debugln("Data could not found.")
-	helpers.SendMessageWS("Threat Profile", "Data could not found.", "error")
-	ctx.JSON(http.StatusNotFound, gin.H{"error": "Data not found"})
+	logger.Log.Debugln("Ransom data not found.")
+	helpers.SendMessageWS("Threat Profile", "Ransom data could not found.", "info")
+	ctx.JSON(http.StatusNotFound, gin.H{"Message": "Ransom data not found."})
 	return ransomDatum
 }
 
@@ -179,8 +192,11 @@ func GetRansomProfileData() {
 	// Reads threatProfileRansomwareProfiles.json
 	existingData, err := os.ReadFile(ransomProfileDataPath)
 	if err != nil && !os.IsNotExist(err) {
-		logger.Log.Errorf("Error reading %s %v\n", ransomProfileDataPath, err)
-		return
+		logger.Log.Errorf("Error reading %s %v", ransomProfileDataPath, err)
+		recreatedFile, _ := os.Create(ransomProfileDataPath)
+		recreatedFile.Close()
+		logger.Log.Infof("File created: %v", ransomProfileDataPath)
+		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("File created: %v\n", ransomProfileDataPath), "info")
 	}
 
 	// Fetchs latest data.
@@ -321,8 +337,9 @@ func checkAPTProfile(aptName string, ctx *gin.Context) models.AptData {
 		return aptData
 	}
 
-	helpers.SendMessageWS("Threat Profile", "Data couldn't find given group name.", "error")
-	ctx.JSON(http.StatusNotFound, gin.H{"error": "Data couldn't find given group name."})
+	logger.Log.Debugln("Data couldn't find given APT group name.")
+	helpers.SendMessageWS("Threat Profile", "Data couldn't find given APT group name.", "info")
+	ctx.JSON(http.StatusNotFound, gin.H{"Message": "Data couldn't find given APT group name."})
 	return aptData
 }
 
@@ -331,33 +348,37 @@ func getAPTData(destPath string) {
 	// HTTP request sending to aptURL.
 	resp, err := http.Get(aptURL)
 	if err != nil {
-		logger.Log.Debugf("Couldn't reach the URL: %v,\n", err)
+		logger.Log.Debugf("Couldn't reach the URL: %v", err)
 	}
 	defer resp.Body.Close()
 
 	// Creating temprory data for data.
 	tempFile, err := os.Create(tempDataPath)
 	if err != nil {
-		logger.Log.Debugf("File couldn't create: %v,\n", err)
+		logger.Log.Debugf("File couldn't create: %v", err)
 	}
 
 	// Writing the response into temprory file.
 	_, err = io.Copy(tempFile, resp.Body)
 	if err != nil {
-		logger.Log.Debugf("Content couldn't save: %v\n", err)
+		logger.Log.Debugf("Content couldn't save: %v", err)
 	}
 	tempFile.Close()
 
 	// Reads tempData.json
 	tempData, err := os.ReadFile(tempDataPath)
 	if err != nil {
-		logger.Log.Debugf("Couldn't read the temporary data: %v\n", err)
+		logger.Log.Debugf("Couldn't read the temporary data: %v", err)
 	}
 
 	// Reads threatProfileAptProfiles.json
 	currentData, err := os.ReadFile(destPath)
 	if err != nil {
-		logger.Log.Errorf("Couldn't read the current data: %v\n", err)
+		logger.Log.Errorf("Couldn't read the current data: %v", err)
+		recreatedFile, _ := os.Create(destPath)
+		recreatedFile.Close()
+		logger.Log.Infof("File created: %v", destPath)
+		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("File created: %v", destPath), "info")
 	}
 
 	// Compares the bytes of two file.
@@ -366,7 +387,7 @@ func getAPTData(destPath string) {
 
 		err = os.Remove(tempDataPath)
 		if err != nil {
-			logger.Log.Errorf("Error deleting tempData.json: %v\n", err)
+			logger.Log.Errorf("Error deleting tempData.json: %v", err)
 		}
 
 		return
@@ -394,11 +415,17 @@ func ScheduleAptData() {
 
 func openRansomFileGetRansomData(ctx *gin.Context) []models.RansomProfileData {
 	// Opens the threatProfileRansomwareProfiles.json file.
+	if _, err := os.Stat(ransomProfileDataPath); os.IsNotExist(err) {
+		GetRansomProfileData()
+	}
+	// Opens the file.
 	file, err := os.Open(ransomProfileDataPath)
 	if err != nil {
 		logger.Log.Debugf("Error opening %s %v\n", ransomProfileDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error opening threatProfileRansomwareProfiles.json"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error opening threatProfileRansomwareProfiles.json"})
 		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error opening %s %v\n", ransomProfileDataPath, err), "error")
+		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return nil
 	}
 	defer file.Close()
 
@@ -406,16 +433,20 @@ func openRansomFileGetRansomData(ctx *gin.Context) []models.RansomProfileData {
 	data, err := io.ReadAll(file)
 	if err != nil {
 		logger.Log.Errorf("Error reading %s %v\n", ransomProfileDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "File can't be read"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "File can't be read " + ransomProfileDataPath + " " + err.Error()})
 		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error reading %s %v\n", ransomProfileDataPath, err), "error")
+		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return nil
 	}
 
 	// Unmarshals the data fetched from the file.
 	var jsonRansomData []models.RansomProfileData
 	if err := json.Unmarshal(data, &jsonRansomData); err != nil {
-		logger.Log.Errorf("Error during unmarshal ransomware data: %v\n", err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error unmarshaling data."})
+		logger.Log.Errorf("Error while unmarshalling ransomware data: %v\n", err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error unmarshaling data " + err.Error()})
 		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error unmarshaling ransom data: %v", err), "error")
+		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return jsonRansomData
 	}
 
 	return jsonRansomData
@@ -423,20 +454,28 @@ func openRansomFileGetRansomData(ctx *gin.Context) []models.RansomProfileData {
 
 func openAPTFileGetAPTData(ctx *gin.Context) models.AptDataContainer {
 	// Reads data from threatProfileAptProfiles.json
+	if _, err := os.Stat(aptDataPath); os.IsNotExist(err) {
+		getAPTData(aptDataPath)
+	}
+	// Opens the file.
 	existingData, err := os.ReadFile(aptDataPath)
 	if err != nil {
-		logger.Log.Debugf("Error during read the file: %v", err)
-		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error during read the file: %v", err), "error")
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "File can't be read"})
+		logger.Log.Debugf("Error while reading the file: %v", err)
+		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error while reading the file: %v", err), "error")
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error while reading the file " + err.Error()})
+		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return models.AptDataContainer{}
 	}
 
 	// Unmarshalls the data.
 	var aptDataFromFile models.AptDataContainer
 	err = json.Unmarshal(existingData, &aptDataFromFile)
 	if err != nil {
-		logger.Log.Errorf("Error unmarshaling data: %v", err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error unmarshaling data."})
-		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error unmarshaling the apt data: %v", err), "error")
+		logger.Log.Errorf("Error unmarshalling the data: %v", err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error unmarshalling the data."})
+		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error unmarshalling the APT data: %v", err), "error")
+		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
+		return aptDataFromFile
 	}
 
 	return aptDataFromFile
