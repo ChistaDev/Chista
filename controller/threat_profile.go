@@ -189,7 +189,7 @@ func checkRansomProfile(ransomName string, ctx *gin.Context) models.RansomProfil
 func GetRansomProfileData() {
 	logger.Log.Debugln("Requesting source for ransom data.")
 
-	// Reads threatProfileRansomwareProfiles.json
+	// Reads threatProfileRansomwareProfiles.json.
 	existingData, err := os.ReadFile(ransomProfileDataPath)
 	if err != nil && !os.IsNotExist(err) {
 		logger.Log.Errorf("Error reading %s %v", ransomProfileDataPath, err)
