@@ -14,17 +14,35 @@ jobs:
       with:
         go-version: 1.21
 
+    # New
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Get dependencies
+      run: go get -d ./...
+    
     - name: Build
       run: go build -o chista
+
+    # New
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: chista-binary
+        path: ./chista
 
   release:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+    # New
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: chista-binary
+        path: ./
+    
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
