@@ -81,7 +81,7 @@ func CheckActivities(ctx *gin.Context) {
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	default:
 		helpers.SendMessageWS("Activities", "Invalid query string or parameter.", "error")
-		ctx.JSON(400, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
+		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	}
 
@@ -116,7 +116,7 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 	if len(filteredData) == 0 {
 		logger.Log.Debugln("Requested data could not found.")
 		helpers.SendMessageWS("Activities", "Requested data could not found.", "info")
-		ctx.JSON(http.StatusNotFound, gin.H{"Message": "Requested data could not found."})
+		ctx.JSON(http.StatusBadRequest, gin.H{"Message": "Requested data could not found."})
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 		return
 	}
@@ -184,7 +184,7 @@ func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	file, err := os.Open(ransomDataPath)
 	if err != nil {
 		logger.Log.Debugf("Error opening %s %v\n", ransomDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error opening activitiesRansomData.json"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error opening activitiesRansomData.json"})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error opening %s %v\n", ransomDataPath, err), "error")
 	}
 	defer file.Close()
@@ -194,7 +194,7 @@ func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	data, err := io.ReadAll(file)
 	if err != nil {
 		logger.Log.Errorf("Error reading %s %v\n", ransomDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "File can't be read"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "File can't be read"})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error reading %s: %v", ransomDataPath, err), "error")
 	}
 
@@ -202,7 +202,7 @@ func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	var jsonData []models.RansomActivityData
 	if err := json.Unmarshal(data, &jsonData); err != nil {
 		logger.Log.Errorf("Error during unmarshal data: %v\n", err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error unmarshaling data."})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error unmarshaling data."})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error unmarshaling ransom data: %v", err), "error")
 	}
 

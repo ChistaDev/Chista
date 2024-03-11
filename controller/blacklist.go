@@ -58,7 +58,7 @@ func CheckBlacklist(ctx *gin.Context) {
 	helpers.VERBOSITY = verbosity
 
 	// Creattes context for http request.
-	timeoutContext, timeoutCancel := context.WithTimeout(context.Background(), 45*time.Second)
+	timeoutContext, timeoutCancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer timeoutCancel()
 
 	chromedpContext, chromedpCancel := chromedp.NewContext(timeoutContext)
