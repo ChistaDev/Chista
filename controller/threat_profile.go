@@ -151,11 +151,11 @@ func getListOfAPTProfileNames(ctx *gin.Context) []string {
 func checkRansomProfile(ransomName string, ctx *gin.Context) models.RansomProfileData {
 	var ransomDatum models.RansomProfileData
 	logger.Log.Debugln("Fetching the ransomware profile data.")
-	helpers.SendMessageWS("Threat Profile", "Fetching ransom data...", "info")
+	helpers.SendMessageWS("Threat Profile", "Fetching ransom data", "info")
 
 	jsonRansomData := openRansomFileGetRansomData(ctx)
 
-	helpers.SendMessageWS("Threat Profile", "Filtering ransom data...", "debug")
+	helpers.SendMessageWS("Threat Profile", "Filtering ransom data", "debug")
 
 	// Filters the data according to input.
 	for _, d := range jsonRansomData {
