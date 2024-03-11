@@ -1,6 +1,6 @@
 <div align="center">
   <img name="mit-license" src="https://img.shields.io/badge/License-MIT-yellow.svg">
-  <img name="version" src="https://img.shields.io/badge/version-1.0.0-blue">
+  <img name="version" src="https://img.shields.io/badge/version-1.0.1-blue">
   <img name="issues" src="https://img.shields.io/github/issues/ChistaDev/Chista">
   <img name="maintained-yes" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg">
   <img name="made-with-go" src="https://img.shields.io/badge/Made%20with-Go-1f425f.svg">
@@ -310,6 +310,10 @@ We would like to thank all the individuals, developers, communities and the enti
 [Yusuf Yıldız](https://www.linkedin.com/in/yusufyildiz11/) :muscle:
 [Furkan Öztürk](https://www.linkedin.com/in/furkannozturk/) :muscle:
 [Resul Bozburun](https://www.linkedin.com/in/rbozburun/) 
+
+<h3>:heart: Front-End Developer </h3>
+
+[Furkan Fırat](https://www.linkedin.com/in/furkan-f%C4%B1rat-058195161/) 
 
 <h3>:heart: Project Graphic Designer</h3>
 
