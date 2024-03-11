@@ -37,7 +37,7 @@ func GetSources(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "Cannot initilaize WebSocket connection with Client. If you want to use just HTTP API set API_ONLY=true"})
 		return
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(2 * time.Second)
 	defer helpers.CloseWSConnection()
 
 	// Checking the verbosity condition.
@@ -82,15 +82,21 @@ func GetCTIData(urls string, ctx *gin.Context) {
 	helpers.SendMessageWS("Source", "Seperating the given parameter(s) and argument(s)", "debug")
 	// Splits parameters, arguments and fills into splitedParams.
 	for _, arg := range splitedQuery {
+		if !strings.Contains(arg, "=") {
+			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`")
+			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`", "error")
+			ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`"})
+			return
+		}
+
 		paramValue := strings.Split(arg, "=")
-		fmt.Println(paramValue[0], "=", paramValue[1])
-		fmt.Println(len(paramValue[1]))
-		if len(paramValue) == 2 {
+
+		if len(paramValue) == 2 && paramValue[1] != "" && paramValue[0] != "" {
 			splitedParams[paramValue[0]] = paramValue[1]
 		} else {
-			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`")
-			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`", "error")
-			ctx.JSON(http.StatusNotFound, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter`"})
+			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`")
+			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`", "error")
+			ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`"})
 			return
 		}
 	}
@@ -306,7 +312,7 @@ func filterSourceOutputs(ctx *gin.Context) {
 			}
 		default:
 			logger.Log.Errorln("Please pass a valid parameter.")
-			ctx.JSON(http.StatusNotFound, gin.H{"error": "Please pass a valid parameter."})
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Please pass a valid parameter."})
 			helpers.SendMessageWS("Source", fmt.Sprintln("Please pass a valid parameter."), "error")
 		}
 	}

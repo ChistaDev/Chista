@@ -10,7 +10,7 @@
   "tlp": "white",
   "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
   "uuid": "78e854d3-173f-4113-beed-a7b7400131ff",
-  "last-db-change": "2024-01-17",
+  "last-db-change": "2024-03-11",
   "values": [
     {
       "actor": "Big Panda",
@@ -1137,6 +1137,10 @@
           "activity": "HTC Global Services confirms cyberattack after data leaked online\nhttps://www.bleepingcomputer.com/news/security/htc-global-services-confirms-cyberattack-after-data-leaked-online/"
         },
         {
+          "date": "2023-11",
+          "activity": "Trans-Northern Pipelines investigating ALPHV ransomware attack claims\nhttps://www.bleepingcomputer.com/news/security/trans-northern-pipelines-investigating-alphv-ransomware-attack-claims/"
+        },
+        {
           "date": "2023-12",
           "activity": "AlphV claims an attack before even alerting the victim. How will that work out for them?\nhttps://www.databreaches.net/alphv-claims-an-attack-before-even-alerting-the-victim-how-will-that-work-out-for-them/"
         },
@@ -1147,12 +1151,32 @@
         {
           "date": "2023-12",
           "activity": "AlphV reacts to law enforcement action by allowing affiliates to attack hospitals, critical infrastructure\nhttps://www.databreaches.net/alphv-reacts-to-law-enforcement-action-by-allowing-affiliates-to-attack-hospitals-critical-infrastructure/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "ALPHV ransomware claims loanDepot, Prudential Financial breaches\nhttps://www.bleepingcomputer.com/news/security/alphv-ransomware-claims-loandepot-prudential-financial-breaches/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "UnitedHealth subsidiary Optum hack linked to BlackCat ransomware\nhttps://www.bleepingcomputer.com/news/security/unitedhealth-subsidiary-optum-hack-linked-to-blackcat-ransomware/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Hessen Consumer Center says systems encrypted by ransomware\nhttps://www.bleepingcomputer.com/news/security/hessen-consumer-center-says-systems-encrypted-by-ransomware/"
+        },
+        {
+          "date": "2024-03",
+          "activity": "BlackCat ransomware shuts down in exit scam, blames the 'feds'\nhttps://www.bleepingcomputer.com/news/security/blackcat-ransomware-shuts-down-in-exit-scam-blames-the-feds/\nhttps://www.bleepingcomputer.com/news/security/blackcat-ransomware-turns-off-servers-amid-claim-they-stole-22-million-ransom/"
         }
       ],
       "counter-operations": [
         {
           "date": "2023-12",
           "activity": "Justice Department Disrupts Prolific ALPHV/Blackcat Ransomware Variant\nhttps://www.justice.gov/opa/pr/justice-department-disrupts-prolific-alphvblackcat-ransomware-variant"
+        },
+        {
+          "date": "2024-02",
+          "activity": "US offers up to $15 million for tips on ALPHV ransomware gang\nhttps://www.bleepingcomputer.com/news/security/us-offers-up-to-15-million-for-tips-on-alphv-ransomware-gang/"
         }
       ],
       "information": [
@@ -1163,10 +1187,13 @@
         "https://securityintelligence.com/posts/blackcat-ransomware-levels-up-stealth-speed-exfiltration/",
         "https://www.trendmicro.com/en_us/research/23/f/malvertising-used-as-entry-vector-for-blackcat-actors-also-lever.html",
         "https://www.esentire.com/blog/the-notorious-alphv-blackcat-ransomware-gang-is-attacking-corporations-and-public-entities-using-google-ads-laced-with-malware-warns-esentire",
-        "https://www.bleepingcomputer.com/news/security/fbi-alphv-ransomware-raked-in-300-million-from-over-1-000-victims/"
+        "https://www.bleepingcomputer.com/news/security/fbi-alphv-ransomware-raked-in-300-million-from-over-1-000-victims/",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-353a",
+        "https://www.sygnia.co/blog/blackcat-ransomware/",
+        "https://www.menlosecurity.com/blog/swindled-blackcat-affiliate-wants-money-from-change-healthcare-ransom"
       ],
       "uuid": "2670c199-9e61-49ea-b587-467cff960c5c",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Scattered Spider",
@@ -1281,8 +1308,11 @@
         "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a",
         "https://www.reliaquest.com/wp-content/uploads/2023/11/231121_EXTERNAL_ScatteredSpiderThreatReport.pdf"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=muddled-libra"
+      ],
       "uuid": "4a45e10c-1486-44d7-b3ba-2b2086cf2afb",
-      "last-card-change": "2023-11-30"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Anchor Panda, APT 14",
@@ -1588,6 +1618,14 @@
         {
           "name": "Bronze Edison",
           "name-giver": "SecureWorks"
+        },
+        {
+          "name": "Sodium",
+          "name-giver": "Microsoft"
+        },
+        {
+          "name": "Salmon Typhoo",
+          "name-giver": "Microsoft"
         }
       ],
       "country": [
@@ -1644,10 +1682,11 @@
         }
       ],
       "information": [
-        "https://blog.trendmicro.com/trendlabs-security-intelligence/sykipot-now-targeting-us-civil-aviation-sector-information/"
+        "https://blog.trendmicro.com/trendlabs-security-intelligence/sykipot-now-targeting-us-civil-aviation-sector-information/",
+        "https://www.microsoft.com/en-us/security/blog/2024/02/14/staying-ahead-of-threat-actors-in-the-age-of-ai/"
       ],
       "uuid": "37543431-9ac9-488b-ad5a-eded5a6ff964",
-      "last-card-change": "2021-01-07"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "APT 5, Keyhole Panda",
@@ -2198,6 +2237,10 @@
         {
           "name": "Pupa",
           "name-giver": "Symantec"
+        },
+        {
+          "name": "Red Pegasus",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -2319,7 +2362,7 @@
         "https://attack.mitre.org/groups/G0073/"
       ],
       "uuid": "58c7e347-341c-4446-bf03-81fc1f7d9254",
-      "last-card-change": "2022-04-04"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 20, Violin Panda",
@@ -2338,6 +2381,10 @@
         },
         {
           "name": "TH3Bug",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Crawling Taurus",
           "name-giver": "Palo Alto"
         }
       ],
@@ -2404,10 +2451,10 @@
         "https://unit42.paloaltonetworks.com/recent-watering-hole-attacks-attributed-apt-group-th3bug-using-poison-ivy/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=th3bug"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=crawling-taurus"
       ],
       "uuid": "73a85c37-08ef-4df4-ac98-7cb07b58715b",
-      "last-card-change": "2022-02-10"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 29, Cozy Bear, The Dukes",
@@ -2495,6 +2542,34 @@
         {
           "name": "Midnight Blizzard",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "UNC3524",
+          "name-giver": "Mandiant"
+        },
+        {
+          "name": "Cranefly",
+          "name-giver": "Symantec"
+        },
+        {
+          "name": "TEMP.Monkeys",
+          "name-giver": "FireEye"
+        },
+        {
+          "name": "Cloaked Ursa",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Blue Dev 5",
+          "name-giver": "PWC"
+        },
+        {
+          "name": "NobleBaron",
+          "name-giver": "?"
+        },
+        {
+          "name": "Solar Phoenix",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -2589,10 +2664,12 @@
         "Cobalt Strike",
         "CosmicDuke",
         "CozyDuke",
+        "Danfuan",
         "EnvyScout",
         "FatDuke",
         "FoggyWeb",
         "GeminiDuke",
+        "Geppei",
         "GoldFinder",
         "GoldMax",
         "GraphicalNeutrino",
@@ -2608,8 +2685,10 @@
         "PolyglotDuke",
         "POSHSPY",
         "PowerDuke",
+        "QUIETEXIT",
         "RAINDROP",
         "RegDuke",
+        "reGeorg",
         "Rubeus",
         "SeaDuke",
         "Sharp-SMBExec",
@@ -2673,6 +2752,10 @@
         {
           "date": "2019-08",
           "activity": "SolarWinds Orion Supply-chain Attack\nhttps://www.dropbox.com/s/yu5uwsfyo9q4oj2/Whitepaper%20SolarWinds%20Orion%20Supply-chain%20Attack.pdf?dl=0"
+        },
+        {
+          "date": "2019-12",
+          "activity": "UNC3524: Eye Spy on Your Email\nhttps://www.mandiant.com/resources/blog/unc3524-eye-spy-email"
         },
         {
           "date": "2020",
@@ -2775,6 +2858,10 @@
           "activity": "Midnight Blizzard conducts targeted social engineering over Microsoft Teams\nhttps://www.microsoft.com/en-us/security/blog/2023/08/02/midnight-blizzard-conducts-targeted-social-engineering-over-microsoft-teams/"
         },
         {
+          "date": "2023-05",
+          "activity": "HPE: Russian hackers breached its security team’s email accounts\nhttps://www.bleepingcomputer.com/news/security/hpe-russian-hackers-breached-its-security-teams-email-accounts/"
+        },
+        {
           "date": "2023-06",
           "activity": "Kremlin-backed hacking group puts fresh emphasis on stealing credentials\nhttps://therecord.media/nobelium-hacking-group-stealing-credentials"
         },
@@ -2789,6 +2876,10 @@
         {
           "date": "2023-09",
           "activity": "Russian Foreign Intelligence Service (SVR) Exploiting JetBrains TeamCity CVE Globally\nhttps://www.cisa.gov/news-events/cybersecurity-advisories/aa23-347a"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Microsoft Actions Following Attack by Nation State Actor Midnight Blizzard\nhttps://msrc.microsoft.com/blog/2024/01/microsoft-actions-following-attack-by-nation-state-actor-midnight-blizzard/\nhttps://msrc.microsoft.com/blog/2024/03/update-on-microsoft-actions-following-attack-by-nation-state-actor-midnight-blizzard/"
         }
       ],
       "counter-operations": [
@@ -2821,16 +2912,19 @@
         "https://www.mandiant.com/resources/unc2452-merged-into-apt29",
         "https://www.mandiant.com/resources/blog/apt29-windows-credential-roaming",
         "https://raw.githubusercontent.com/prodaft/malware-ioc/master/SilverFish/SilverFish_TLPWHITE.pdf",
-        "https://download.microsoft.com/download/4/6/5/4650b04f-7db6-4a87-bf82-8ed1ad1c001c/MS%20Security%20Experts%20Cyberattack%20MagicWeb%202023.pdf"
+        "https://download.microsoft.com/download/4/6/5/4650b04f-7db6-4a87-bf82-8ed1ad1c001c/MS%20Security%20Experts%20Cyberattack%20MagicWeb%202023.pdf",
+        "https://www.microsoft.com/en-us/security/blog/2024/01/25/midnight-blizzard-guidance-for-responders-on-nation-state-attack/",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-057a"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0016/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=cozyduke"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=cloaked-ursa",
+        "https://pan-unit42.github.io/playbook_viewer/?pb=solarphoenix"
       ],
       "uuid": "93ba9804-335e-4782-855d-40af22b93201",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 30, Override Panda",
@@ -2948,6 +3042,10 @@
         {
           "name": "Violet Typhoon",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Red Keres",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -3024,7 +3122,7 @@
         "https://attack.mitre.org/groups/G0128/"
       ],
       "uuid": "e3e29e0b-f472-4a46-bbb7-d328b2348fcf",
-      "last-card-change": "2023-09-06"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 32, OceanLotus, SeaLotus",
@@ -3060,6 +3158,18 @@
         {
           "name": "SectorF01",
           "name-giver": "ThreatRecon"
+        },
+        {
+          "name": "Pond Loach",
+          "name-giver": "Accenture"
+        },
+        {
+          "name": "APT-LY-100",
+          "name-giver": "?"
+        },
+        {
+          "name": "Lotus Bane",
+          "name-giver": "Group-IB"
         }
       ],
       "country": [
@@ -3259,7 +3369,7 @@
         "https://attack.mitre.org/groups/G0050/"
       ],
       "uuid": "b79f69a4-18a3-4d4f-b6e5-5ad3e01c984b",
-      "last-card-change": "2022-12-29"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 33, Elfin, Magnallium",
@@ -3299,6 +3409,10 @@
         {
           "name": "Peach Sandstorm",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Yellow Orc",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -3393,7 +3507,7 @@
         "https://pan-unit42.github.io/playbook_viewer/?pb=oilrig"
       ],
       "uuid": "958e1f46-a2b6-4beb-8cb0-ddc90c08368e",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "APT 41",
@@ -4499,6 +4613,14 @@
         {
           "name": "T-APT-03",
           "name-giver": "Tencent"
+        },
+        {
+          "name": "Red Djinn",
+          "name-giver": "PWC"
+        },
+        {
+          "name": "Manga Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -4582,8 +4704,50 @@
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0098/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=mangataurus"
+      ],
       "uuid": "8914b19b-9d8a-469f-8b95-37db9894e070",
-      "last-card-change": "2022-12-30"
+      "last-card-change": "2024-03-10"
+    },
+    {
+      "actor": "Blackwood",
+      "names": [
+        {
+          "name": "Blackwood",
+          "name-giver": "ESET"
+        }
+      ],
+      "country": [
+        "China"
+      ],
+      "motivation": [
+        "Information theft and espionage"
+      ],
+      "first-seen": "2018",
+      "description": "(ESET) Blackwood is a China-aligned APT group active since at least 2018, engaging in cyberespionage operations against Chinese and Japanese individuals and companies. Blackwood has capabilities to conduct adversary-in-the-middle attacks to deliver the implant we named NSPX30 through updates of legitimate software, and to hide the location of its command and control servers by intercepting traffic generated by the implant.",
+      "observed-sectors": [
+        "Manufacturing"
+      ],
+      "observed-countries": [
+        "China",
+        "Japan",
+        "UK"
+      ],
+      "tools": [
+        "NSPX30"
+      ],
+      "operations": [
+        {
+          "date": "2024-01",
+          "activity": "Blackwood APT Group Has a New DLL Loader\nhttps://blog.sonicwall.com/en-us/2024/01/blackwood-apt-group-has-a-new-dll-loader/"
+        }
+      ],
+      "information": [
+        "https://www.welivesecurity.com/en/eset-research/nspx30-sophisticated-aitm-enabled-implant-evolving-since-2005/"
+      ],
+      "uuid": "6d70aaf2-6d2a-4578-b7d8-5c32edfa0024",
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Blind Eagle",
@@ -4815,6 +4979,10 @@
         {
           "name": "Stalker Panda",
           "name-giver": "Crowdstrike"
+        },
+        {
+          "name": "Stalker Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -4917,10 +5085,10 @@
         "https://attack.mitre.org/groups/G0060/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=tick"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=stalkertaurus"
       ],
       "uuid": "334d9e0e-dab2-4bc5-8db2-5ab016f36947",
-      "last-card-change": "2023-04-26"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Bronze Highland",
@@ -4960,6 +5128,7 @@
         "Nigeria",
         "Philippines",
         "Taiwan",
+        "Tibet",
         "Vietnam",
         "Africa"
       ],
@@ -4977,6 +5146,10 @@
         {
           "date": "2022-11",
           "activity": "Daggerfly: APT Actor Targets Telecoms Company in Africa\nhttps://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/apt-attacks-telecoms-africa-mgbot"
+        },
+        {
+          "date": "2023-09",
+          "activity": "Evasive Panda leverages Monlam Festival to target Tibetans\nhttps://www.welivesecurity.com/en/eset-research/evasive-panda-leverages-monlam-festival-target-tibetans/"
         }
       ],
       "information": [
@@ -4985,7 +5158,7 @@
         "https://vb2020.vblocalhost.com/uploads/VB2020-43.pdf"
       ],
       "uuid": "8c9d0ce1-0e92-4de2-b8e0-053b16ad37ed",
-      "last-card-change": "2023-06-21"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Bronze Starlight",
@@ -5173,6 +5346,10 @@
         {
           "name": "DEV-0586",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Ruinous Ursa",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -5213,8 +5390,11 @@
       "information": [
         "https://www.microsoft.com/en-us/security/blog/2023/06/14/cadet-blizzard-emerges-as-a-novel-and-distinct-russian-threat-actor/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=ruinousursa"
+      ],
       "uuid": "4f64a76f-0650-49dd-9386-d7813916463a",
-      "last-card-change": "2023-06-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Callisto Group",
@@ -5735,6 +5915,10 @@
         {
           "name": "ITG07",
           "name-giver": "IBM"
+        },
+        {
+          "name": "Radio Serpens",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -5826,10 +6010,10 @@
         "https://attack.mitre.org/groups/G0087/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=chafer"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=radioserpens"
       ],
       "uuid": "d7f937b7-b50b-4022-bca1-9e403ffefe45",
-      "last-card-change": "2021-11-02"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "ChamelGang",
@@ -6068,7 +6252,7 @@
         "Information theft and espionage"
       ],
       "first-seen": "2019",
-      "description": "A subgroup of the {{CIA}}.\n\n(ClearSky) Over the last few weeks, several significant leaks regarding a number of Iranian APTs took place. After analyzing and investigating the documents we conclude that they are authentic. Consequently, this causes considerable harm to the groups and their operation. The identity of the actor behind the leak is currently unknown, however based on the scope and the quality of the exposed documents and information, it appears that they are professional and highly capable. This leak will likely hamstring the groups’ operation in the near future. Accordingly, in our assessment this will minimize the risk of potential attacks in the next few months and possibly even year. Note –most of the leaks are posted on Telegram channels that were created specifically for this purpose.\n\nBelow are the three main Telegram groups on which the leaks were posted:\n• Lab Dookhtegam pseudonym (“The people whose lips are stitched and sealed” –translation from Persian) –In this channel attack tools attributed to the group ‘{{OilRig, APT 34, Helix Kitten, Chrysene}}’ were leaked; including a webshell that was inserted into the Technion, various tools that were used for DNS attacks, and more.\n• Green Leakers–In this channel attack tools attributed to the group ‘{{MuddyWater, Seedworm, TEMP.Zagros, Static Kitten}}’ were leaked. The group’s name and its symbol are identified with the “green movement”, which led the protests in Iran after the Presidential elections in 2009. These protests were heavily repressed by the revolutionary guards (IRGC)\n• Black Box–Unlike the previous two channels this has been around for a long time. On Friday May 5th, dozens of confidential documents labeled as “secret” (a high confidentiality level in Iran, one before the highest –top secret) were posted on this channel. The documents were related to Iranian attack groups’ activity. See {{[Unnamed group Iran]}}.",
+      "description": "A subgroup of the {{CIA}}.\n\n(ClearSky) Over the last few weeks, several significant leaks regarding a number of Iranian APTs took place. After analyzing and investigating the documents we conclude that they are authentic. Consequently, this causes considerable harm to the groups and their operation. The identity of the actor behind the leak is currently unknown, however based on the scope and the quality of the exposed documents and information, it appears that they are professional and highly capable. This leak will likely hamstring the groups’ operation in the near future. Accordingly, in our assessment this will minimize the risk of potential attacks in the next few months and possibly even year. Note –most of the leaks are posted on Telegram channels that were created specifically for this purpose.\n\nBelow are the three main Telegram groups on which the leaks were posted:\n• Lab Dookhtegam pseudonym (“The people whose lips are stitched and sealed” –translation from Persian) –In this channel attack tools attributed to the group ‘{{OilRig, APT 34, Helix Kitten, Chrysene}}’ were leaked; including a webshell that was inserted into the Technion, various tools that were used for DNS attacks, and more.\n• Green Leakers–In this channel attack tools attributed to the group ‘{{MuddyWater, Seedworm, TEMP.Zagros, Static Kitten}}’ were leaked. The group’s name and its symbol are identified with the “green movement”, which led the protests in Iran after the Presidential elections in 2009. These protests were heavily repressed by the revolutionary guards (IRGC)\n• Black Box–Unlike the previous two channels this has been around for a long time. On Friday May 5th, dozens of confidential documents labeled as “secret” (a high confidentiality level in Iran, one before the highest –top secret) were posted on this channel. The documents were related to Iranian attack groups’ activity. See {{[Unnamed groups: Iran]}}.",
       "observed-countries": [
         "China",
         "Iran",
@@ -6091,7 +6275,7 @@
         "https://www.zdnet.com/article/report-cia-most-likely-behind-apt34-and-fsb-hacks-and-data-dumps/"
       ],
       "uuid": "d4ccac4c-06b7-4b12-af53-7b96e160055a",
-      "last-card-change": "2020-07-19"
+      "last-card-change": "2024-03-11"
     },
     {
       "actor": "Circus Spider",
@@ -6288,6 +6472,10 @@
         {
           "name": "TAG-CR3",
           "name-giver": "Recorded Future"
+        },
+        {
+          "name": "Mule Libra",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -6422,10 +6610,10 @@
         "https://attack.mitre.org/groups/G0080/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=cobaltgang"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=mulelibra"
       ],
       "uuid": "d8339e9a-c946-4304-aac4-722d8652d273",
-      "last-card-change": "2021-12-09"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Cold River",
@@ -6473,6 +6661,10 @@
         {
           "name": "Star Blizzard",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "UNC4057",
+          "name-giver": "Mandiant"
         }
       ],
       "country": [
@@ -6498,7 +6690,8 @@
         "NATO"
       ],
       "tools": [
-        "DNSpionage"
+        "DNSpionage",
+        "SPICA"
       ],
       "operations": [
         {
@@ -6522,6 +6715,10 @@
           "activity": "Russian hackers targeted U.S. nuclear scientists\nhttps://www.reuters.com/world/europe/russian-hackers-targeted-us-nuclear-scientists-2023-01-06/"
         },
         {
+          "date": "2022-11",
+          "activity": "Russian threat group COLDRIVER expands its targeting of Western officials to include the use of malware\nhttps://blog.google/threat-analysis-group/google-tag-coldriver-russian-phishing-malware/"
+        },
+        {
           "date": "2023-03",
           "activity": "BlueCharlie, Previously Tracked as TAG 53, Continues to Deploy New Infrastructure in 2023\nhttps://go.recordedfuture.com/hubfs/reports/cta-2023-0802.pdf"
         }
@@ -6537,7 +6734,7 @@
         "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-341a"
       ],
       "uuid": "00b16489-daf4-4c61-90bf-0ffba2400e98",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Comment Crew, APT 1",
@@ -7481,6 +7678,10 @@
         {
           "name": "DarkCasino",
           "name-giver": "NSFOCUS"
+        },
+        {
+          "name": "Water Hydra",
+          "name-giver": "Trend Micro"
         }
       ],
       "country": [
@@ -7491,6 +7692,10 @@
       ],
       "first-seen": "2021",
       "description": "(NSFOCUS) In 2022, NSFOCUS Research Labs revealed a large-scale APT attack campaign called DarkCasino and identified an active and dangerous aggressive threat actor. By continuously tracking and in-depth study of the attacker’s activities, NSFOCUS Research Labs has ruled out its link with known APT groups, confirmed its high-level persistent threat nature, and following the operational name, named this APT group DarkCasino.\n\nIn August 2023, security vendor Group-IB followed up and disclosed a DarkCasino activity against cryptocurrency forum users, and captured a WinRAR 0-day vulnerability CVE-2023-38831 used by the APT threat actor DarkCasino in this attack.\n\nNSFOCUS Research Labs analyzed the APT group DarkCasino’s attack activities in WinRAR vulnerability exploitation and confirmed its techniques and tactics; At the same time, NSFOCUS Research Labs also found a large number of attacks by known APT organizations and unconfirmed attackers when tracking the exploitation of WinRAR vulnerabilities. Most of these attacks targeted national governments or multinational organizations.",
+      "observed-sectors": [
+        "Casinos and Gambling",
+        "Financial"
+      ],
       "observed-countries": [
         "Armenia",
         "Canada",
@@ -7516,7 +7721,7 @@
         "https://www.group-ib.com/blog/cve-2023-38831-winrar-zero-day/"
       ],
       "uuid": "eb2796ef-9b1f-4d1b-be66-80c292bb1486",
-      "last-card-change": "2023-11-30"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "DarkHotel",
@@ -7738,6 +7943,10 @@
         {
           "name": "ATK 77",
           "name-giver": "Thales"
+        },
+        {
+          "name": "Obscure Serpens",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -7784,10 +7993,10 @@
         "https://attack.mitre.org/groups/G0079/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=darkhydrus"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=obscureserpens"
       ],
       "uuid": "2849cc26-d6c8-4484-821e-cb0f7006bddc",
-      "last-card-change": "2020-04-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Dark Pink",
@@ -7797,8 +8006,8 @@
           "name-giver": "Group-IB"
         },
         {
-          "name": "Saaiwc",
-          "name-giver": "?"
+          "name": "Saaiwc Group",
+          "name-giver": "Anheng Hunting Labs"
         }
       ],
       "country": [
@@ -7846,7 +8055,7 @@
         "https://www.group-ib.com/blog/dark-pink-episode-2/"
       ],
       "uuid": "3e381f2a-364f-4428-9f3c-a5abf03bac64",
-      "last-card-change": "2023-06-21"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "DarkUniverse",
@@ -8518,6 +8727,10 @@
         {
           "name": "Bronze Overbrook",
           "name-giver": "SecureWorks"
+        },
+        {
+          "name": "Shallow Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -8574,10 +8787,10 @@
         "https://attack.mitre.org/groups/G0017/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=dragonok"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=shallowtaurus"
       ],
       "uuid": "6823d807-dfa8-42f3-84d5-986a7ef60c56",
-      "last-card-change": "2021-01-07"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "DragonSpark",
@@ -8767,8 +8980,16 @@
           "name-giver": "SecureWorks"
         },
         {
+          "name": "Chromium",
+          "name-giver": "Microsoft"
+        },
+        {
           "name": "Charcoal Typhoon",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Red Dev 10",
+          "name-giver": "PWC"
         },
         {
           "name": "Red Scylla",
@@ -8834,16 +9055,21 @@
         {
           "date": "2023 Early",
           "activity": "Earth Lusca Employs New Linux Backdoor, Uses Cobalt Strike for Lateral Movement\nhttps://www.trendmicro.com/en_us/research/23/i/earth-lusca-employs-new-linux-backdoor.html"
+        },
+        {
+          "date": "2023-12",
+          "activity": "Earth Lusca Uses Geopolitical Lure to Target Taiwan Before Elections\nhttps://www.trendmicro.com/en_us/research/24/b/earth-lusca-uses-geopolitical-lure-to-target-taiwan.html"
         }
       ],
       "information": [
-        "https://www.trendmicro.com/content/dam/trendmicro/global/en/research/22/a/earth-lusca-employs-sophisticated-infrastructure-varied-tools-and-techniques/technical-brief-delving-deep-an-analysis-of-earth-lusca-operations.pdf"
+        "https://www.trendmicro.com/content/dam/trendmicro/global/en/research/22/a/earth-lusca-employs-sophisticated-infrastructure-varied-tools-and-techniques/technical-brief-delving-deep-an-analysis-of-earth-lusca-operations.pdf",
+        "https://www.microsoft.com/en-us/security/blog/2024/02/14/staying-ahead-of-threat-actors-in-the-age-of-ai/"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G1006/"
       ],
       "uuid": "fd9f43c9-80bf-4abc-9345-f5332e26eeaa",
-      "last-card-change": "2023-10-12"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Earth Wendigo",
@@ -9072,6 +9298,10 @@
         {
           "name": "ZipToken",
           "name-giver": "?"
+        },
+        {
+          "name": "Iron Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -9226,10 +9456,10 @@
         "https://attack.mitre.org/groups/G0027/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=emissary_panda"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=iron-taurus"
       ],
       "uuid": "e67091ab-cbea-4d73-984d-e4b29f6c48a9",
-      "last-card-change": "2023-10-12"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "EmpireMonkey, CobaltGoblin",
@@ -9333,6 +9563,10 @@
         {
           "name": "Ghost Blizzard",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Blue Kraken",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -9465,7 +9699,7 @@
         "https://attack.mitre.org/groups/G0035/"
       ],
       "uuid": "a1492ea6-162c-46a9-a2d5-9618641b5ab2",
-      "last-card-change": "2023-06-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Equation Group",
@@ -11163,6 +11397,7 @@
         "QuietSieve",
         "RMS",
         "Resetter",
+        "SUBTLE-PAWS",
         "UltraVNC"
       ],
       "operations": [
@@ -11261,6 +11496,10 @@
         {
           "date": "2023-01",
           "activity": "Russia-backed hacker group Gamaredon attacking Ukraine with info-stealing malware\nhttps://therecord.media/russia-backed-hacker-group-gamaredon-attacking-ukraine-with-info-stealing-malware/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Operation “STEADY#URSA”\nSecuronix Threat Research Security Advisory: Analysis and Detection of STEADY#URSA Attack Campaign Targeting Ukraine Military Dropping New Covert SUBTLE-PAWS PowerShell Backdoor\nhttps://www.securonix.com/blog/security-advisory-steadyursa-attack-campaign-targets-ukraine-military/"
         }
       ],
       "information": [
@@ -11279,8 +11518,11 @@
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0047/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=tridentursa"
+      ],
       "uuid": "a48ab06b-092a-481d-ae0b-c4050ed281f7",
-      "last-card-change": "2023-09-06"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Gangnam Industrial Style",
@@ -11787,6 +12029,10 @@
         {
           "name": "TAG-CR5",
           "name-giver": "Recorded Future"
+        },
+        {
+          "name": "Pasty Draco",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -11843,10 +12089,10 @@
         "https://attack.mitre.org/groups/G0078/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=gorgongroup"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=pastydraco"
       ],
       "uuid": "7d44d2cd-98a0-4bcf-8ad3-02e3c382cbad",
-      "last-card-change": "2021-12-09"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Grayling",
@@ -11989,6 +12235,10 @@
         {
           "name": "Silk Typhoon",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Red Dev 13",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -12027,7 +12277,7 @@
         "https://attack.mitre.org/groups/G0125/"
       ],
       "uuid": "7c88c982-c383-4552-90b4-cbb67ec5240f",
-      "last-card-change": "2023-04-26"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Harvester",
@@ -12088,6 +12338,10 @@
         {
           "name": "ATK 120",
           "name-giver": "Thales"
+        },
+        {
+          "name": "Yellow Dev 9",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -12160,7 +12414,7 @@
         "https://attack.mitre.org/groups/G1001/"
       ],
       "uuid": "dbf635cb-f390-40f9-a2f2-81a11c2f1e11",
-      "last-card-change": "2022-12-30"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Hidden Lynx, Aurora Panda",
@@ -12275,12 +12529,18 @@
         "RevSocks",
         "W2K Res Kit"
       ],
+      "operations": [
+        {
+          "date": "2024-01",
+          "activity": "Iran-linked hackers claim attack on Albania's Institute of Statistics\nhttps://therecord.media/iran-linked-hackers-claim-attack-on-albania-census-org"
+        }
+      ],
       "information": [
         "https://www.clearskysec.com/wp-content/uploads/2024/01/No-Justice-Wiper.pdfhttps://www.clearskysec.com/wp-content/uploads/2024/01/No-Justice-Wiper.pdf",
         "https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-264a"
       ],
       "uuid": "f6519188-1362-4064-a07b-a82a9a0e8b4f",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Honeybee",
@@ -12454,6 +12714,10 @@
         {
           "name": "ATK 23",
           "name-giver": "Thales"
+        },
+        {
+          "name": "Red Wendigo",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -12545,7 +12809,7 @@
         "https://speakerdeck.com/ashley920/into-the-fog-the-return-of-icefog-apt"
       ],
       "uuid": "d311b620-e98f-4210-b136-cd24749584b0",
-      "last-card-change": "2021-04-20"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Inception Framework, Cloud Atlas",
@@ -12573,6 +12837,10 @@
         {
           "name": "The Rocra",
           "name-giver": "?"
+        },
+        {
+          "name": "Clean Ursa",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -12691,10 +12959,10 @@
         "https://attack.mitre.org/groups/G0100/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=inception"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=clean-ursa"
       ],
       "uuid": "7849ff33-1be0-4715-89b1-3adcb182561a",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "IndigoZebra",
@@ -12793,6 +13061,10 @@
         {
           "name": "Manatee Tempest",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Blue Lelantos",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -12936,7 +13208,7 @@
         "https://attack.mitre.org/groups/G0119/"
       ],
       "uuid": "a13e6ede-eb86-499f-837e-820845da04a6",
-      "last-card-change": "2023-04-26"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Infy, Prince of Persia",
@@ -13295,6 +13567,10 @@
         {
           "name": "Flea",
           "name-giver": "Symantec"
+        },
+        {
+          "name": "Red Vulture",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -13482,8 +13758,11 @@
         "https://attack.mitre.org/groups/G0004/",
         "https://attack.mitre.org/groups/G0135/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=playful-taurus"
+      ],
       "uuid": "110ed515-11db-4bf1-af41-a66f513ecf70",
-      "last-card-change": "2023-06-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Kimsuky, Velvet Chollima",
@@ -13527,6 +13806,10 @@
         {
           "name": "Emerald Sleet",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "KTA082",
+          "name-giver": "Kroll"
         }
       ],
       "country": [
@@ -13580,6 +13863,8 @@
         "SHARPEXT",
         "SniffPass",
         "SWEETDROP",
+        "TODDLERSHARK",
+        "Troll Stealer",
         "VENOMBITE",
         "WebBrowserPassView",
         "xRAT",
@@ -13753,6 +14038,18 @@
         {
           "date": "2023-12",
           "activity": "Kimsuky Group Uses AutoIt to Create Malware (RftRAT, Amadey)\nhttps://asec.ahnlab.com/en/59590/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Kimsuky disguised as a Korean company signed with a valid certificate to distribute Troll Stealer\nhttps://medium.com/s2wblog/kimsuky-disguised-as-a-korean-company-signed-with-a-valid-certificate-to-distribute-troll-stealer-cfa5d54314e2"
+        },
+        {
+          "date": "2024-01",
+          "activity": "TrollAgent That Infects Systems Upon Security Program Installation Process (Kimsuky Group)\nhttps://asec.ahnlab.com/en/61934/"
+        },
+        {
+          "date": "2024-03",
+          "activity": "TODDLERSHARK: ScreenConnect Vulnerability Exploited to Deploy BABYSHARK Variant\nhttps://www.kroll.com/en/insights/publications/cyber/screenconnect-vulnerability-exploited-to-deploy-babyshark"
         }
       ],
       "counter-operations": [
@@ -13772,17 +14069,20 @@
         "https://www.cybereason.com/blog/back-to-the-future-inside-the-kimsuky-kgh-spyware-suite",
         "https://www.darkreading.com/operations/how-north-korean-apt-kimsuky-is-evolving-its-tactics/d/d-id/1340956",
         "https://boho.or.kr/filedownload.do?attach_file_seq=2695&attach_file_id=EpF2695.pdf",
+        "https://asec.ahnlab.com/en/30532/",
+        "https://asec.ahnlab.com/en/60054/",
         "https://asec.ahnlab.com/wp-content/uploads/2023/03/2022-Threat-Trend-Report-on-Kimsuky.pdf",
         "https://asec.ahnlab.com/wp-content/uploads/2023/03/Unique-characteristics-of-Kimsuky-groups-spear-phishing-emails.pdf",
         "https://mandiant.widen.net/s/zvmfw5fnjs/apt43-report",
-        "https://blog.google/threat-analysis-group/how-were-protecting-users-from-government-backed-attacks-from-north-korea/"
+        "https://blog.google/threat-analysis-group/how-were-protecting-users-from-government-backed-attacks-from-north-korea/",
+        "https://www.microsoft.com/en-us/security/blog/2024/02/14/staying-ahead-of-threat-actors-in-the-age-of-ai/"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0094/",
         "https://attack.mitre.org/groups/G0086/"
       ],
       "uuid": "5e3544bf-98ad-4e9f-b65e-85f05c36486f",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Lancefly",
@@ -14026,6 +14326,7 @@
         "EternalBlue",
         "FALLCHILL",
         "Fimlis",
+        "FudModule",
         "Gh0st RAT",
         "Gopuram",
         "HARDRAIN",
@@ -14426,12 +14727,20 @@
           "activity": "SlowMist: Investigation of North Korean APT’s Large-Scale Phishing Attack on NFT Users\nhttps://slowmist.medium.com/slowmist-our-in-depth-investigation-of-north-korean-apts-large-scale-phishing-attack-on-nft-users-362117600519"
         },
         {
+          "date": "2022-09",
+          "activity": "Lazarus and the FudModule Rootkit: Beyond BYOVD with an Admin-to-Kernel Zero-Day\nhttps://decoded.avast.io/janvojtesek/lazarus-and-the-fudmodule-rootkit-beyond-byovd-with-an-admin-to-kernel-zero-day/"
+        },
+        {
           "date": "2022 Late",
           "activity": "DPRK Using Unpatched Zimbra Devices to Spy on Researchers\nhttps://www.darkreading.com/remote-workforce/dprk-using-unpatched-zimbra-devices-to-spy-on-researchers-"
         },
         {
           "date": "2022 Late",
           "activity": "3CX Software Supply Chain Compromise Initiated by a Prior Software Supply Chain Compromise; Suspected North Korean Actor Responsible\nhttps://www.mandiant.com/resources/blog/3cx-software-supply-chain-compromise\nhttps://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/xtrader-3cx-supply-chain"
+        },
+        {
+          "date": "2022 Late",
+          "activity": "North Korean hackers linked to defense sector supply-chain attack\nhttps://www.bleepingcomputer.com/news/security/north-korean-hackers-linked-to-defense-sector-supply-chain-attack/"
         },
         {
           "date": "2023 Early",
@@ -14516,6 +14825,14 @@
         {
           "date": "2023-10",
           "activity": "Diamond Sleet supply chain compromise distributes a modified CyberLink installer\nhttps://www.microsoft.com/en-us/security/blog/2023/11/22/diamond-sleet-supply-chain-compromise-distributes-a-modified-cyberlink-installer/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Lazarus Group Uses the DLL Side-Loading Technique\nhttps://asec.ahnlab.com/en/60792/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "New Malicious PyPI Packages used by Lazarus\nhttps://blogs.jpcert.or.jp/en/2024/02/lazarus_pypi.html"
         }
       ],
       "counter-operations": [
@@ -14596,13 +14913,14 @@
         "https://www.hhs.gov/sites/default/files/manage-engine-vulnerability-sector-alert-tlpclear.pdf",
         "https://eng.nis.go.kr/common/download.do?type=&seq=8E464392CD0485169FA97278AEE8B607",
         "https://go.recordedfuture.com/hubfs/reports/cta-2023-1130.pdf",
-        "https://www.trmlabs.com/post/north-korean-hackers-stole-600-million-in-crypto-in-2023"
+        "https://www.trmlabs.com/post/north-korean-hackers-stole-600-million-in-crypto-in-2023",
+        "https://jsac.jpcert.or.jp/archive/2024/pdf/JSAC2024_1_6_dongwook-kim_seulgi-lee_en.pdf"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0032/"
       ],
       "uuid": "41dcfaff-d5f0-484d-8649-ef8c61588eec",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Andariel, Silent Chollima",
@@ -15350,6 +15668,10 @@
         {
           "name": "TH-239",
           "name-giver": "Yoroi"
+        },
+        {
+          "name": "DecisiveArchitect",
+          "name-giver": "CrowdStrike"
         }
       ],
       "country": [
@@ -15388,7 +15710,7 @@
         "https://www.mandiant.com/resources/live-off-the-land-an-overview-of-unc1945"
       ],
       "uuid": "19246de9-ed86-49fc-9153-49f0bbe20feb",
-      "last-card-change": "2022-04-03"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "LockBit Gang",
@@ -15805,6 +16127,38 @@
         {
           "date": "2023-12",
           "activity": "Lockbit ransomware disrupts emergency care at German hospitals\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-disrupts-emergency-care-at-german-hospitals/"
+        },
+        {
+          "date": "2023-12",
+          "activity": "December cyberattack on Chicago community hospital claimed by LockBit gang\nhttps://therecord.media/ransomware-saint-anthony-hospital-chicago"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Taiwanese semiconductor company hit by ransomware attack\nhttps://therecord.media/foxsemicon-ransomware-attack-taiwan"
+        },
+        {
+          "date": "2024-01",
+          "activity": "LockBit Ransomware Distributed via Word Files Disguised as Resumes\nhttps://asec.ahnlab.com/en/60633/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Subway Puts a LockBit Investigation on the Menu\nhttps://www.darkreading.com/cyberattacks-data-breaches/subway-lockbit-investigation-on-menu"
+        },
+        {
+          "date": "2024-01",
+          "activity": "California union confirms ransomware attack following LockBit claims\nhttps://therecord.media/california-union-lockbit-attack-ransomware"
+        },
+        {
+          "date": "2024-01",
+          "activity": "LockBit Attempts to Stay Afloat With a New Version\nhttps://www.trendmicro.com/en_us/research/24/b/lockbit-attempts-to-stay-afloat-with-a-new-version.html"
+        },
+        {
+          "date": "2024-02",
+          "activity": "LockBit claims ransomware attack on Fulton County, Georgia\nhttps://www.bleepingcomputer.com/news/security/lockbit-claims-ransomware-attack-on-fulton-county-georgia/\nhttps://krebsonsecurity.com/2024/02/fulton-county-security-experts-call-lockbits-bluff/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "LockBit ransomware returns, restores servers after police disruption\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-returns-restores-servers-after-police-disruption/\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-returns-to-attacks-with-new-encryptors-servers/"
         }
       ],
       "counter-operations": [
@@ -15831,6 +16185,14 @@
         {
           "date": "2023-12",
           "activity": "Alleged LockBit operator to face new cybercrime charges in Canada\nhttps://therecord.media/lockbit-operator-to-face-new-charges-canada"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Operation “Cronos”\nLaw enforcement disrupt world’s biggest ransomware operation\nhttps://www.europol.europa.eu/media-press/newsroom/news/law-enforcement-disrupt-worlds-biggest-ransomware-operation\nhttps://therecord.media/lockbit-administrator-engaging-with-police"
+        },
+        {
+          "date": "2024-02",
+          "activity": "US offers $15 million bounty for info on LockBit ransomware gang\nhttps://www.bleepingcomputer.com/news/security/us-offers-15-million-bounty-for-info-on-lockbit-ransomware-gang/"
         }
       ],
       "information": [
@@ -15841,10 +16203,13 @@
         "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-165a",
         "https://medium.com/@lcam/lighting-the-exfiltration-infrastructure-of-a-lockbit-affiliate-and-more-f57fbb7a4e79",
         "https://analyst1.com/blog-negotiating-with-lockbit-uncovering-the-evolution-of-operations-and-newly-established-rules/",
-        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-325a"
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-325a",
+        "https://redsense.com/publications/lockbit-story-a-three-year-investigative-journey/",
+        "https://www.bleepingcomputer.com/news/security/lockbit-ransomware-gang-has-over-110-million-in-unspent-bitcoin/",
+        "https://www.resecurity.com/blog/article/lockbit-30s-bungled-comeback-highlights-the-undying-risk-of-torrent-based-data-leakage"
       ],
       "uuid": "1c9dfb2e-ae8a-43f1-8b60-bcf36d669edf",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-07"
     },
     {
       "actor": "LookBack, TA410",
@@ -15951,6 +16316,10 @@
         {
           "name": "ATK 78",
           "name-giver": "Thales"
+        },
+        {
+          "name": "Red Salamander",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -16038,7 +16407,7 @@
         "https://attack.mitre.org/groups/G0076/"
       ],
       "uuid": "3b0d3a5d-1858-4be6-b23e-c2620e6e1065",
-      "last-card-change": "2022-11-19"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Lucky Cat",
@@ -16362,6 +16731,10 @@
         {
           "name": "Ballistic Bobcat",
           "name-giver": "ESET"
+        },
+        {
+          "name": "CharmingCypress",
+          "name-giver": "Volexity"
         }
       ],
       "country": [
@@ -16375,12 +16748,14 @@
       "description": "Magic Hound is an Iranian-sponsored threat group operating primarily in the Middle East that dates back as early as 2014. The group behind the campaign has primarily targeted organizations in the energy, government, and technology sectors that are either based or have business interests in Saudi Arabia.\n\nMagic Hound has 1 subgroup:\n1. {{Subgroup: DEV-0270, Nemesis Kitten}}\n\nThis group appears to be the evolvement of {{Cutting Kitten, TG-2889}}.\n\nThere is some infrastructure overlap with {{Rocket Kitten, Newscaster, NewsBeef}}, {{ITG18}} and {{APT 42}}.",
       "observed-sectors": [
         "Defense",
+        "Education",
         "Energy",
         "Financial",
         "Government",
         "Healthcare",
         "IT",
         "Manufacturing",
+        "NGOs",
         "Oil and gas",
         "Technology",
         "Telecommunications",
@@ -16388,9 +16763,11 @@
       ],
       "observed-countries": [
         "Afghanistan",
+        "Belgium",
         "Brazil",
         "Canada",
         "Egypt",
+        "France",
         "Iran",
         "Iraq",
         "Israel",
@@ -16406,30 +16783,41 @@
         "UK",
         "USA",
         "Venezuela",
-        "Yemen"
+        "Yemen",
+        "Gaza"
       ],
       "tools": [
+        "7-Zip",
+        "BASICSTAR",
+        "ChromeHistoryView",
+        "CommandCam",
         "CWoolger",
         "DistTrack",
         "DownPaper",
         "FireMalv",
         "FRP",
         "Ghambar",
+        "GoProxy",
         "Havij",
         "HYPERSCRAPE",
         "Leash",
         "Matryoshka RAT",
+        "MediaPl",
         "Mimikatz",
+        "MischiefTut",
         "MPKBot",
         "NETWoolger",
+        "NOKNOK",
         "PINEFLOWER",
         "PowerLess Backdoor",
         "POWERSTAR",
+        "RATHOLE",
         "PsList",
         "PupyRAT",
         "Sponsor",
         "sqlmap",
-        "TDTESS"
+        "TDTESS",
+        "WinRAR"
       ],
       "operations": [
         {
@@ -16553,6 +16941,10 @@
           "activity": "Nation-state threat actor Mint Sandstorm refines tradecraft to attack high-value targets\nhttps://www.microsoft.com/en-us/security/blog/2023/04/18/nation-state-threat-actor-mint-sandstorm-refines-tradecraft-to-attack-high-value-targets/"
         },
         {
+          "date": "2023",
+          "activity": "CharmingCypress: Innovating Persistence\nhttps://www.volexity.com/blog/2024/02/13/charmingcypress-innovating-persistence/"
+        },
+        {
           "date": "2023-03",
           "activity": "Iranian Hackers Target Women Involved in Human Rights and Middle East Politics\nhttps://thehackernews.com/2023/03/iranian-hackers-target-women-involved.html"
         },
@@ -16571,6 +16963,10 @@
         {
           "date": "2023-08",
           "activity": "Iranian cyber spies are targeting dissidents in Germany, warns intelligence service\nhttps://therecord.media/charming-kitten-iran-targets-dissidents-in-germany"
+        },
+        {
+          "date": "2023-11",
+          "activity": "New TTPs observed in Mint Sandstorm campaign targeting high-profile individuals at universities and research orgs\nhttps://www.microsoft.com/en-us/security/blog/2024/01/17/new-ttps-observed-in-mint-sandstorm-campaign-targeting-high-profile-individuals-at-universities-and-research-orgs/"
         }
       ],
       "counter-operations": [
@@ -16606,7 +17002,7 @@
         "https://attack.mitre.org/groups/G0059/"
       ],
       "uuid": "bb9b25ed-9ddc-4f65-bd01-ab8d6efc34ac",
-      "last-card-change": "2023-10-12"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "DEV-0270, Nemesis Kitten",
@@ -16622,6 +17018,18 @@
         {
           "name": "DireFate",
           "name-giver": "BAE Systems"
+        },
+        {
+          "name": "Yellow Dev 23",
+          "name-giver": "PWC"
+        },
+        {
+          "name": "Yellow Dev 24",
+          "name-giver": "PWC"
+        },
+        {
+          "name": "Lord Nemesis",
+          "name-giver": "OP Innovate"
         }
       ],
       "country": [
@@ -16637,11 +17045,17 @@
         "WmiExec",
         "Living off the Land"
       ],
+      "operations": [
+        {
+          "date": "2023-11",
+          "activity": "Lord Nemesis Strikes: Supply Chain Attack on the Israeli Academic Sector\nhttps://op-c.net/blog/lord-nemesis-strikes-supply-chain-attack-on-the-israeli-academic-sector/"
+        }
+      ],
       "information": [
         "https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/"
       ],
       "uuid": "e96efff5-793f-430f-b8fb-5c64c83fa232",
-      "last-card-change": "2023-01-01"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Magic Kitten",
@@ -17252,6 +17666,14 @@
         {
           "name": "Mango Sandstorm",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Boggy Serpens",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Yellow Nix",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -17479,10 +17901,10 @@
         "https://attack.mitre.org/groups/G0069/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=muddywater"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=boggyserpens"
       ],
       "uuid": "0d5af1f9-fa2e-4ce9-a4ce-0c6fade938e9",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Mustang Panda, Bronze President",
@@ -17578,6 +18000,7 @@
         "China Chopper",
         "Cobalt Strike",
         "DCSync",
+        "DOPLUGS",
         "Hdump",
         "Hodur",
         "HopperTick",
@@ -17694,12 +18117,20 @@
           "activity": "Check Point Research reveals a malicious firmware implant for TP-Link routers, linked to Chinese APT group\nhttps://blog.checkpoint.com/security/check-point-research-reveals-a-malicious-firmware-implant-for-tp-link-routers-linked-to-chinese-apt-group/"
         },
         {
+          "date": "2023-07",
+          "activity": "Operation “SMUGX”\nEarth Preta Campaign Uses DOPLUGS to Target Asia\nhttps://www.trendmicro.com/en_us/research/24/b/earth-preta-campaign-targets-asia-doplugs.html"
+        },
+        {
           "date": "2023-08",
           "activity": "In August, ESET researchers identified a campaign by Mustang Panda targeting a governmental organization in Slovakia.\nhttps://web-assets.esetstatic.com/wls/en/papers/threat-reports/eset-apt-activity-report-q2-2023-q3-2023.pdf"
         },
         {
           "date": "2023-08",
           "activity": "Stately Taurus Targets the Philippines As Tensions Flare in the South Pacific\nhttps://unit42.paloaltonetworks.com/stately-taurus-targets-philippines-government-cyberespionage/"
+        },
+        {
+          "date": "2023-11",
+          "activity": "Stately Taurus Targets Myanmar Amidst Concerns over Military Junta’s Handling of Rebel Attacks\nhttps://csirt-cti.net/2024/01/23/stately-taurus-targets-myanmar/"
         }
       ],
       "information": [
@@ -17710,7 +18141,7 @@
         "https://attack.mitre.org/groups/G0129/"
       ],
       "uuid": "d8fa62d2-de5c-4c13-8cdf-6428d02bc4d6",
-      "last-card-change": "2023-11-30"
+      "last-card-change": "2024-03-07"
     },
     {
       "actor": "Naikon, Lotus Panda",
@@ -18354,6 +18785,14 @@
         {
           "name": "Scarred Manticore",
           "name-giver": "Check Point"
+        },
+        {
+          "name": "Evasive Serpens",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Yellow Maero",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -18584,10 +19023,10 @@
         "https://attack.mitre.org/groups/G0049/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=oilrig"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=evasive-serpens"
       ],
       "uuid": "eeb31f97-edcf-4836-b621-a1865305b91e",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Greenbug, Volatile Kitten",
@@ -20641,6 +21080,18 @@
         {
           "name": "ATK 11",
           "name-giver": "Thales"
+        },
+        {
+          "name": "Thirsty Gemini",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Capricorn Organisation",
+          "name-giver": "?"
+        },
+        {
+          "name": "Maha Grass",
+          "name-giver": "?"
         }
       ],
       "country": [
@@ -20731,10 +21182,10 @@
         "https://attack.mitre.org/groups/G0040/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=patchwork"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=thirstygemini"
       ],
       "uuid": "5ead2470-4d43-44e9-9306-de226d2477e1",
-      "last-card-change": "2023-09-06"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Pinchy Spider, Gold Southfield",
@@ -21141,6 +21592,10 @@
         {
           "name": "PKPLUG",
           "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Stately Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -21183,10 +21638,10 @@
         "https://unit42.paloaltonetworks.com/pkplug_chinese_cyber_espionage_group_attacking_asia/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=pkplug"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=statelytaurus"
       ],
       "uuid": "3fb2534f-f233-4247-a653-5fc809212951",
-      "last-card-change": "2021-08-09"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Platinum",
@@ -21654,6 +22109,10 @@
         {
           "name": "Sulphur",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "SearchFire",
+          "name-giver": "?"
         }
       ],
       "country": [
@@ -21689,7 +22148,7 @@
         "https://attack.mitre.org/groups/G0024/"
       ],
       "uuid": "028aa521-2de8-49c4-88d7-455f4d9141ba",
-      "last-card-change": "2020-04-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Rampant Kitten",
@@ -21725,6 +22184,10 @@
         },
         {
           "name": "Rancor Group",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Rancor Taurus",
           "name-giver": "Palo Alto"
         }
       ],
@@ -21766,10 +22229,10 @@
         "https://attack.mitre.org/groups/G0075/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=rancor"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=rancortaurus"
       ],
       "uuid": "020d538c-5250-46d8-9713-e739536cdd7e",
-      "last-card-change": "2020-05-01"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "RATicate",
@@ -21883,6 +22346,22 @@
         {
           "name": "Ruby Sleet",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Crooked Pisces",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Moldy Pisces",
+          "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Osmium",
+          "name-giver": "Microsoft"
+        },
+        {
+          "name": "Opal Sleet",
+          "name-giver": "Microsoft"
         }
       ],
       "country": [
@@ -21898,11 +22377,13 @@
         "Aerospace",
         "Automotive",
         "Chemical",
+        "Education",
         "Financial",
         "Government",
         "Healthcare",
         "High-Tech",
         "Manufacturing",
+        "Media",
         "Technology",
         "Transportation"
       ],
@@ -22147,6 +22628,10 @@
         {
           "date": "2023-12",
           "activity": "Distribution of Phishing Email Under the Guise of Personal Data Leak (Konni)\nhttps://asec.ahnlab.com/en/59763/"
+        },
+        {
+          "date": "2023-12",
+          "activity": "ScarCruft | Attackers Gather Strategic Intelligence and Target Cybersecurity Professionals\nhttps://www.sentinelone.com/labs/a-glimpse-into-future-scarcruft-campaigns-attackers-gather-strategic-intelligence-and-target-cybersecurity-professionals/"
         }
       ],
       "counter-operations": [
@@ -22171,10 +22656,11 @@
         "https://attack.mitre.org/groups/G0067/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=reaper"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=crooked-pisces",
+        "https://pan-unit42.github.io/playbook_viewer/?pb=moldypisces"
       ],
       "uuid": "be6e7cee-7c2c-4298-941d-01b2106284e6",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "RedAlpha",
@@ -22182,6 +22668,14 @@
         {
           "name": "RedAlpha",
           "name-giver": "Recorded Future"
+        },
+        {
+          "name": "DeepCliff",
+          "name-giver": "?"
+        },
+        {
+          "name": "Red Dev 3",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -22228,7 +22722,7 @@
         "https://citizenlab.ca/2018/01/spying-on-a-budget-inside-a-phishing-operation-with-targets-in-the-tibetan-community/"
       ],
       "uuid": "e049d10f-81fd-4cc0-bb61-46f75594a1b9",
-      "last-card-change": "2022-09-12"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "RedCurl",
@@ -22236,6 +22730,14 @@
         {
           "name": "RedCurl",
           "name-giver": "Group-IB"
+        },
+        {
+          "name": "Red Wolf",
+          "name-giver": "BI.ZONE"
+        },
+        {
+          "name": "Earth Kapre",
+          "name-giver": "Trend Micro"
         }
       ],
       "country": [
@@ -22262,6 +22764,7 @@
         "Ukraine"
       ],
       "tools": [
+        "Impacket",
         "LaZagne"
       ],
       "operations": [
@@ -22272,6 +22775,14 @@
         {
           "date": "2022-11",
           "activity": "RedCurl hackers return to spy on 'major Russian bank,' Australian company\nhttps://therecord.media/redcurl-hackers-russian-bank-australian-company"
+        },
+        {
+          "date": "2023",
+          "activity": "Hunting the hunter: BI.ZONE traces the footsteps of Red Wolf\nhttps://bi-zone.medium.com/hunting-the-hunter-bi-zone-traces-the-footsteps-of-red-wolf-3677783e164d"
+        },
+        {
+          "date": "2023",
+          "activity": "Unveiling Earth Kapre aka RedCurl’s Cyberespionage Tactics With Trend Micro MDR, Threat Intelligence\nhttps://www.trendmicro.com/en_us/research/24/c/unveiling-earth-kapre-aka-redcurls-cyberespionage-tactics-with-t.html"
         }
       ],
       "information": [
@@ -22279,7 +22790,7 @@
         "https://www.group-ib.com/resources/threat-research/red-curl.html"
       ],
       "uuid": "318f02e3-9165-43fb-b08b-fbf646f4dcf1",
-      "last-card-change": "2023-09-05"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "RedDelta",
@@ -22985,6 +23496,10 @@
         {
           "name": "Storm-0587",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Nascent Ursa",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -23041,8 +23556,11 @@
       "mitre-attack": [
         "https://attack.mitre.org/groups/G1003/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=nascentursa"
+      ],
       "uuid": "8f37f59a-226c-4059-9222-c5ad769f31ef",
-      "last-card-change": "2023-06-22"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Samurai Panda",
@@ -23325,7 +23843,7 @@
         },
         {
           "date": "2023-05",
-          "activity": "Russian hackers wiped thousands of systems in KyivStar attack\nhttps://www.bleepingcomputer.com/news/security/russian-hackers-wiped-thousands-of-systems-in-kyivstar-attack/"
+          "activity": "Russian hackers wiped thousands of systems in KyivStar attack\nhttps://www.bleepingcomputer.com/news/security/russian-hackers-wiped-thousands-of-systems-in-kyivstar-attack/\nhttps://therecord.media/kyivstar-ceo-on-russian-cyberattack-telecom"
         }
       ],
       "counter-operations": [
@@ -23350,7 +23868,7 @@
         "https://attack.mitre.org/groups/G0034/"
       ],
       "uuid": "7f0a4e84-4c28-4f8c-a70a-3cac308bca90",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Scarab",
@@ -23399,6 +23917,10 @@
         {
           "name": "Scarlet Mimic",
           "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Golfing Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -23442,10 +23964,10 @@
         "https://attack.mitre.org/groups/G0029/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=scarletmimic"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=golfing-taurus"
       ],
       "uuid": "d130ffbe-6498-4559-9b16-58fb88146c45",
-      "last-card-change": "2022-11-18"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Sea Turtle",
@@ -24396,6 +24918,10 @@
         {
           "name": "Fighting Ursa",
           "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Blue Athena",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -24776,6 +25302,10 @@
           "activity": "APT28 or Fancy Bear, a threat actor attributed to Russia GRU, was observed targeting users in Ukraine with a new variant of malware.\nhttps://blog.google/threat-analysis-group/update-on-cyber-activity-in-eastern-europe/"
         },
         {
+          "date": "2022-04",
+          "activity": "Pawn Storm Uses Brute Force and Stealth Against High-Value Targets\nhttps://www.trendmicro.com/en_us/research/24/a/pawn-storm-uses-brute-force-and-stealth.html"
+        },
+        {
           "date": "2022-06",
           "activity": "The Ukrainian Computer Emergency Response Team (CERT) is warning that Russian hacking groups are exploiting the Follina code execution vulnerability in new phishing campaigns to install the CredoMap malware and Cobalt Strike beacons.\nhttps://www.bleepingcomputer.com/news/security/russian-govt-hackers-hit-ukraine-with-cobalt-strike-credomap-malware/"
         },
@@ -24814,6 +25344,10 @@
         {
           "date": "2023-12",
           "activity": "Russian military hackers target Ukraine with new MASEPIE malware\nhttps://www.bleepingcomputer.com/news/security/russian-military-hackers-target-ukraine-with-new-masepie-malware/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Russian hackers hijack Ubiquiti routers to launch stealthy attacks\nhttps://www.bleepingcomputer.com/news/security/russian-hackers-hijack-ubiquiti-routers-to-launch-stealthy-attacks/"
         }
       ],
       "counter-operations": [
@@ -24844,6 +25378,10 @@
         {
           "date": "2023-04",
           "activity": "Hacked: Russian GRU officer wanted by the FBI, leader of the hacker group APT 28\nhttps://informnapalm.org/en/hacked-russian-gru-officer/"
+        },
+        {
+          "date": "2024-01",
+          "activity": "Justice Department Conducts Court-Authorized Disruption of Botnet Controlled by the Russian Federation’s Main Intelligence Directorate of the General Staff (GRU)\nhttps://www.justice.gov/opa/pr/justice-department-conducts-court-authorized-disruption-botnet-controlled-russian"
         }
       ],
       "information": [
@@ -24860,16 +25398,17 @@
         "https://exchange.xforce.ibmcloud.com/threat-group/guid:f7b33aa456eb38053abd85968f78833a",
         "https://en.wikipedia.org/wiki/Fancy_Bear",
         "https://services.google.com/fh/files/blogs/google_fog_of_war_research_report.pdf",
-        "https://blog.google/threat-analysis-group/ukraine-remains-russias-biggest-cyber-focus-in-2023/"
+        "https://blog.google/threat-analysis-group/ukraine-remains-russias-biggest-cyber-focus-in-2023/",
+        "https://www.microsoft.com/en-us/security/blog/2024/02/14/staying-ahead-of-threat-actors-in-the-age-of-ai/"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0007/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=sofacy"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=fighting-ursa"
       ],
       "uuid": "e6037735-ed1b-4ae3-a45b-45d66e2c80f1",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Sowbug",
@@ -25269,6 +25808,10 @@
         {
           "name": "ITG01",
           "name-giver": "IBM"
+        },
+        {
+          "name": "Granite Taurus",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -25456,10 +25999,10 @@
         "https://attack.mitre.org/groups/G0093/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=menupass"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=granite-taurus"
       ],
       "uuid": "2aa9ca75-fa1b-422e-9677-02983934f983",
-      "last-card-change": "2022-12-27"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Storm-0558",
@@ -26127,6 +26670,10 @@
         {
           "date": "2021-03",
           "activity": "Alleged Members of Egregor Ransomware Cartel Arrested\nhttps://www.trendmicro.com/en_us/research/21/c/egregor-ransomware-cartel-members-arrested.html"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Zeus, IcedID malware gangs leader pleads guilty, faces 40 years in prison\nhttps://www.bleepingcomputer.com/news/security/zeus-icedid-malware-gangs-leader-pleads-guilty-faces-40-years-in-prison/"
         }
       ],
       "information": [
@@ -26134,7 +26681,7 @@
         "https://www.fireeye.com/blog/threat-research/2020/05/tactics-techniques-procedures-associated-with-maze-ransomware-incidents.html"
       ],
       "uuid": "046da342-795f-491e-b6d1-b61cd6c1f2d9",
-      "last-card-change": "2022-02-10"
+      "last-card-change": "2024-03-07"
     },
     {
       "actor": "TA2541",
@@ -27698,18 +28245,23 @@
         {
           "name": "Yellow Liderc",
           "name-giver": "PWC"
+        },
+        {
+          "name": "UNC1549",
+          "name-giver": "Mandiant"
         }
       ],
       "country": [
         "Iran"
       ],
-      "sponsor": "State-sponsored",
+      "sponsor": "State-sponsored, Islamic Revolutionary Guard Corps (IRGC)",
       "motivation": [
         "Information theft and espionage"
       ],
       "first-seen": "2018",
       "description": "(Symantec) A previously undocumented attack group is using both custom and off-the-shelf malware to target IT providers in Saudi Arabia in what appear to be supply chain attacks with the end goal of compromising the IT providers’ customers.\n\nThe group, which we are calling Tortoiseshell, has been active since at least July 2018. Symantec has identified a total of 11 organizations hit by the group, the majority of which are based in Saudi Arabia. In at least two organizations, evidence suggests that the attackers gained domain admin-level access.",
       "observed-sectors": [
+        "Aerospace",
         "Defense",
         "IT",
         "Shipping and Logistics",
@@ -27743,6 +28295,10 @@
           "activity": "Yellow Liderc ships its scripts and delivers IMAPLoader malware\nhttps://www.pwc.com/gx/en/issues/cybersecurity/cyber-threat-intelligence/yellow-liderc-ships-its-scripts-delivers-imaploader-malware.html"
         },
         {
+          "date": "2022-06",
+          "activity": "When Cats Fly: Suspected Iranian Threat Actor UNC1549 Targets Israeli and Middle East Aerospace and Defense Sectors\nhttps://www.mandiant.com/resources/blog/suspected-iranian-unc1549-targets-israel-middle-east"
+        },
+        {
           "date": "2023-05",
           "activity": "Operation “Fata Morgana”\nFata Morgana: Watering hole attack on shipping and logistics websites\nhttps://www.clearskysec.com/wp-content/uploads/2023/05/Fata-Morgana-Israeli-Websites-Infected-by-Iranian-Group-1.8.pdf"
         },
@@ -27758,10 +28314,11 @@
         }
       ],
       "information": [
-        "https://www.symantec.com/blogs/threat-intelligence/tortoiseshell-apt-supply-chain"
+        "https://www.symantec.com/blogs/threat-intelligence/tortoiseshell-apt-supply-chain",
+        "https://www.microsoft.com/en-us/security/blog/2024/02/14/staying-ahead-of-threat-actors-in-the-age-of-ai/"
       ],
       "uuid": "8e5c68c0-c16a-4d8f-8829-14d27ab8cd32",
-      "last-card-change": "2023-11-29"
+      "last-card-change": "2024-03-07"
     },
     {
       "actor": "Tracer Kitten",
@@ -27825,6 +28382,14 @@
         {
           "name": "STEPPY-KAVACH",
           "name-giver": "Securonix"
+        },
+        {
+          "name": "Green Havildar",
+          "name-giver": "PWC"
+        },
+        {
+          "name": "APT-C-56",
+          "name-giver": "Qihoo 360"
         }
       ],
       "country": [
@@ -27987,7 +28552,7 @@
         "https://attack.mitre.org/groups/G0134/"
       ],
       "uuid": "be967aec-2b55-45f2-86e8-7f22cc66db85",
-      "last-card-change": "2023-10-12"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Traveling Spider",
@@ -28581,6 +29146,10 @@
         {
           "name": "Pensive Ursa",
           "name-giver": "Palo Alto"
+        },
+        {
+          "name": "Blue Python",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -28723,6 +29292,7 @@
         "Skipper",
         "SMBTouch",
         "TinyTurla",
+        "TinyTurla-NG",
         "Topinambour",
         "Tunnus",
         "TurlaChopper",
@@ -28884,6 +29454,10 @@
         {
           "date": "2023-07",
           "activity": "Over the Kazuar’s Nest: Cracking Down on a Freshly Hatched Backdoor Used by Pensive Ursa (Aka Turla)\nhttps://unit42.paloaltonetworks.com/pensive-ursa-uses-upgraded-kazuar-backdoor/"
+        },
+        {
+          "date": "2023-12",
+          "activity": "TinyTurla Next Generation - Turla APT spies on Polish NGOs\nhttps://blog.talosintelligence.com/tinyturla-next-generation/"
         }
       ],
       "information": [
@@ -28900,7 +29474,7 @@
         "https://attack.mitre.org/groups/G0010/"
       ],
       "uuid": "ebff5365-ae36-4e47-a310-28c1f3be0b3a",
-      "last-card-change": "2023-11-29"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Twisted Panda",
@@ -29093,38 +29667,6 @@
       ],
       "uuid": "d2fd8a6e-0f59-4f61-b42c-17b66cc17c9 1",
       "last-card-change": "2022-04-03"
-    },
-    {
-      "actor": "UNC3524",
-      "names": [
-        {
-          "name": "UNC3524",
-          "name-giver": "Mandiant"
-        },
-        {
-          "name": "Cranefly",
-          "name-giver": "Symantec"
-        }
-      ],
-      "country": [
-        "Russia"
-      ],
-      "motivation": [
-        "Information theft and espionage"
-      ],
-      "first-seen": "2019",
-      "description": "(Mandiant) In this blog post, we introduce UNC3524, a newly discovered suspected espionage threat actor that, to date, heavily targets the emails of employees that focus on corporate development, mergers and acquisitions, and large corporate transactions. On the surface, their targeting of individuals involved in corporate transactions suggests a financial motivation; however, their ability to remain undetected for an order of magnitude longer than the average dwell time of 21 days in 2021, as reported in M-Trends 2022, suggests an espionage mandate.",
-      "tools": [
-        "Danfuan",
-        "Geppei",
-        "reGeorg",
-        "QUIETEXIT"
-      ],
-      "information": [
-        "https://www.mandiant.com/resources/unc3524-eye-spy-email"
-      ],
-      "uuid": "00f308c7-517f-453c-9de0-f66a7e5faae0",
-      "last-card-change": "2022-11-18"
     },
     {
       "actor": "UNC4191",
@@ -29663,6 +30205,10 @@
         {
           "name": "Bronze Silhouette",
           "name-giver": "SecureWorks"
+        },
+        {
+          "name": "VOLTZITE",
+          "name-giver": "Dragos"
         }
       ],
       "country": [
@@ -29721,14 +30267,26 @@
         {
           "date": "2023-12",
           "activity": "Volt Typhoon Compromises 30% of Cisco RV320/325 Devices in 37 Days\nhttps://resources.securityscorecard.com/research/volt-typhoon"
+        },
+        {
+          "date": "2023-12",
+          "activity": "KV-Botnet: Don’t call it a Comeback\nhttps://blog.lumen.com/kv-botnet-dont-call-it-a-comeback/"
+        }
+      ],
+      "counter-operations": [
+        {
+          "date": "2023-12",
+          "activity": "U.S. Government Disrupts Botnet People’s Republic of China Used to Conceal Hacking of Critical Infrastructure\nhttps://www.justice.gov/opa/pr/us-government-disrupts-botnet-peoples-republic-china-used-conceal-hacking-critical"
         }
       ],
       "information": [
         "https://www.microsoft.com/en-us/security/blog/2023/05/24/volt-typhoon-targets-us-critical-infrastructure-with-living-off-the-land-techniques/https://www.microsoft.com/en-us/security/blog/2023/05/24/volt-typhoon-targets-us-critical-infrastructure-with-living-off-the-land-techniques/",
-        "https://www.securityweek.com/mandiant-intelligence-chief-raises-alarm-over-chinas-volt-typhoon-hackers-in-us-critical-infrastructure/"
+        "https://www.securityweek.com/mandiant-intelligence-chief-raises-alarm-over-chinas-volt-typhoon-hackers-in-us-critical-infrastructure/",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-038a",
+        "https://hub.dragos.com/hubfs/116-Datasheets/Dragos_IntelBrief_VOLTZITE_FINAL.pdf"
       ],
       "uuid": "a8b73194-0ca4-41b0-85ff-3793b83e47c0",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Wassonite",
@@ -30116,6 +30674,10 @@
         {
           "name": "WindShift",
           "name-giver": "DarkMatter"
+        },
+        {
+          "name": "Windy Phoenix",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -30143,10 +30705,10 @@
         "https://attack.mitre.org/groups/G0112/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=windshift"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=windyphoenix"
       ],
       "uuid": "b75fd09b-c1ba-4b08-8adc-61925e605e78",
-      "last-card-change": "2022-12-30"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Winnti Group, Blackfly, Wicked Panda",
@@ -30318,7 +30880,11 @@
         },
         {
           "name": "UNC4907",
-          "name-giver": "?"
+          "name-giver": "Mandiant"
+        },
+        {
+          "name": "TAG-70",
+          "name-giver": "Recorded Future"
         }
       ],
       "country": [
@@ -30327,13 +30893,14 @@
       "motivation": [
         "Information theft and espionage"
       ],
-      "first-seen": "2021",
+      "first-seen": "2020",
       "description": "(SentinelLabs) The Winter Vivern Advanced Persistent Threat (APT) is a noteworthy yet relatively underreported group that operates with pro-Russian objectives. DomainTools initially publicized the group in early 2021, naming it based on an initial command-and-control beacon URL string “wintervivern,” which is no longer in use. Subsequently, Lab52 shared additional analysis several months later, identifying new activity associated with Winter Vivern.\n\nThe group has avoided public disclosure since then, until recent attacks targeting Ukraine. A part of a Winter Vivern campaign was reported in recent weeks by the Polish CBZC, and then the Ukraine CERT as UAC-0114. In this activity, CERT-UA and the CBZC collaborated on the release of private technical details which assisted in our research to identify a wider set of activity on the threat actor, in addition to new victims and previously unknown specific technical details. Overall, we find that the Winter Vivern APT is a resource-limited but highly creative group that shows restraint in the scope of their attacks. Our analysis indicates that Winter Vivern activity aligns closely with global objectives that support the interests of Belarus and Russia’s governments.\n\nAlso see {{MoustachedBouncer}}.",
       "observed-sectors": [
         "Defense",
         "Government"
       ],
       "observed-countries": [
+        "Georgia",
         "India",
         "Lithuania",
         "Moldova",
@@ -30342,6 +30909,7 @@
         "Tunisia",
         "Ukraine",
         "USA",
+        "Uzbekistan",
         "Europe"
       ],
       "tools": [
@@ -30359,6 +30927,10 @@
         {
           "date": "2023-10",
           "activity": "Winter Vivern exploits zero-day vulnerability in Roundcube Webmail servers\nhttps://www.welivesecurity.com/en/eset-research/winter-vivern-exploits-zero-day-vulnerability-roundcube-webmail-servers/"
+        },
+        {
+          "date": "2023-10",
+          "activity": "Russia-Aligned TAG-70 Targets European Government and Military Mail Servers in New Espionage Campaign\nhttps://go.recordedfuture.com/hubfs/reports/cta-2024-0217.pdf"
         }
       ],
       "information": [
@@ -30367,7 +30939,7 @@
         "https://lab52.io/blog/winter-vivern-all-summer/"
       ],
       "uuid": "7b427e8e-151d-4f6e-9b4f-89cbb92e82bd",
-      "last-card-change": "2023-11-30"
+      "last-card-change": "2024-03-07"
     },
     {
       "actor": "WIP26",
@@ -30407,6 +30979,10 @@
         {
           "name": "WIRTE Group",
           "name-giver": "LAB52"
+        },
+        {
+          "name": "White Dev 21",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -30440,7 +31016,7 @@
         "https://attack.mitre.org/groups/G0090/"
       ],
       "uuid": "11af3547-2172-45ce-8d33-721c3d39bbc9",
-      "last-card-change": "2021-12-26"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Wizard Spider, Gold Blackburn",
@@ -30924,7 +31500,7 @@
         },
         {
           "date": "2023-12",
-          "activity": "TrickBot malware dev pleads guilty, faces 35 years in prison\nhttps://www.bleepingcomputer.com/news/security/trickbot-malware-dev-pleads-guilty-faces-35-years-in-prison/"
+          "activity": "TrickBot malware dev pleads guilty, faces 35 years in prison\nhttps://www.bleepingcomputer.com/news/security/trickbot-malware-dev-pleads-guilty-faces-35-years-in-prison/\nhttps://www.bleepingcomputer.com/news/security/russian-trickbot-malware-dev-sentenced-to-64-months-in-prison/"
         }
       ],
       "information": [
@@ -30947,7 +31523,7 @@
         "https://attack.mitre.org/groups/G0102/"
       ],
       "uuid": "480940e0-47b0-4295-9067-c2500ccfdaec",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Worok",
@@ -31087,6 +31663,10 @@
         {
           "name": "Cobalt Katana",
           "name-giver": "SecureWorks"
+        },
+        {
+          "name": "Hunter Serpens",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -31129,10 +31709,10 @@
         "https://unit42.paloaltonetworks.com/xhunt-campaign-attacks-on-kuwait-shipping-and-transportation-organizations/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=temp-xhunt"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=hunter-serpens"
       ],
       "uuid": "3a8ec920-4dfd-4a06-81e7-7be8ee639b73",
-      "last-card-change": "2021-08-10"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "YoroTrooper",
@@ -31231,10 +31811,52 @@
       "last-card-change": "2021-08-10"
     },
     {
-      "actor": "[Unnamed group Iran]",
+      "actor": "[Unnamed groups: China]",
       "names": [
         {
-          "name": "[Unnamed group Iran]",
+          "name": "[Unnamed groups: China]",
+          "name-giver": "?"
+        }
+      ],
+      "country": [
+        "China"
+      ],
+      "sponsor": "State-sponsored",
+      "motivation": [
+        "Information theft and espionage"
+      ],
+      "first-seen": "2022",
+      "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
+      "observed-sectors": [
+        "Defense",
+        "Government"
+      ],
+      "observed-countries": [
+        "Netherlands",
+        "Europe and Africa"
+      ],
+      "tools": [
+        "BOLDMOVE",
+        "COATHANGER"
+      ],
+      "operations": [
+        {
+          "date": "2022-10",
+          "activity": "Suspected Chinese Threat Actors Exploiting FortiOS Vulnerability (CVE-2022-42475)\nhttps://www.mandiant.com/resources/blog/chinese-actors-exploit-fortios-flaw"
+        },
+        {
+          "date": "2023",
+          "activity": "Ministry of Defence of the Netherlands uncovers COATHANGER, a stealthy Chinese FortiGate RAT\nhttps://www.ncsc.nl/binaries/ncsc/documenten/publicaties/2024/februari/6/mivd-aivd-advisory-coathanger-tlp-clear/TLP-CLEAR+MIVD+AIVD+Advisory+COATHANGER.pdf"
+        }
+      ],
+      "uuid": "e319c38c-1f2c-434b-b1b9-6457bc585bcd",
+      "last-card-change": "2024-03-11"
+    },
+    {
+      "actor": "[Unnamed groups: Iran]",
+      "names": [
+        {
+          "name": "[Unnamed groups: Iran]",
           "name-giver": "?"
         }
       ],
@@ -31246,10 +31868,11 @@
         "Information theft and espionage"
       ],
       "first-seen": "2019",
-      "description": "(ClearSky) Over the last few weeks, several significant leaks regarding a number of Iranian APTs took place. After analyzing and investigating the documents we conclude that they are authentic. Consequently, this causes considerable harm to the groups and their operation. The identity of the actor behind the leak is currently unknown, however based on the scope and the quality of the exposed documents and information, it appears that they are professional and highly capable. This leak will likely hamstring the groups’ operation in the near future. Accordingly, in our assessment this will minimize the risk of potential attacks in the next few months and possibly even year. Note –most of the leaks are posted on Telegram channels that were created specifically for this purpose.\n\nUnlike the previous two channels this has been around for a long time. On Friday May 5th, dozens of confidential documents labeled as “secret” (a high confidentiality level in Iran, one before the highest –top secret) were posted on this channel. The documents were related to Iranian attack groups’ activity.\n\nUpdate: this leak may have been the work of the {{CIA}}.",
+      "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
       "observed-sectors": [
         "Aviation",
         "Government",
+        "Industrial",
         "IT",
         "Telecommunications"
       ],
@@ -31285,19 +31908,79 @@
         "Syria",
         "Thailand",
         "Turkey",
-        "UAE"
+        "UAE",
+        "USA"
+      ],
+      "operations": [
+        {
+          "date": "2023-11",
+          "activity": "Pennsylvania water authority hit with cyberattack allegedly tied to pro-Iran group\nhttps://therecord.media/water-authority-pennsylvania-cyberattack-pro-iran-group"
+        },
+        {
+          "date": "2023-11",
+          "activity": "North Texas water utility serving 2 million hit with cyberattack\nhttps://therecord.media/north-texas-water-utility-cyberattack"
+        },
+        {
+          "date": "2023-12",
+          "activity": "Florida water agency latest to confirm cyber incident as feds warn of nation-state attacks\nhttps://therecord.media/florida-water-agency-ransomware-cisa-warning-utilities"
+        }
       ],
       "counter-operations": [
         {
           "date": "2019-05",
           "activity": "On Friday May 5th, dozens of confidential documents labeled as “secret” were leaked on Telegram.\nhttps://www.clearskysec.com/wp-content/uploads/2019/05/Iranian-Nation-State-APT-Leak-Analysis-and-Overview.pdf"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Treasury Sanctions Actors Responsible for Malicious Cyber Activities on Critical Infrastructure\nhttps://home.treasury.gov/news/press-releases/jy2072"
         }
       ],
       "information": [
-        "https://www.clearskysec.com/wp-content/uploads/2019/05/Iranian-Nation-State-APT-Leak-Analysis-and-Overview.pdf"
+        "https://www.waterisac.org/portal/tlpclear-water-utility-control-system-cyber-incident-advisory-icsscada-incident-municipal"
       ],
       "uuid": "01106777-4eb0-4a37-b7d3-c8ca539e2403",
-      "last-card-change": "2020-07-19"
+      "last-card-change": "2024-03-11"
+    },
+    {
+      "actor": "[Unnamed groups: Russia]",
+      "names": [
+        {
+          "name": "[Unnamed groups: Russia]",
+          "name-giver": "?"
+        }
+      ],
+      "country": [
+        "Russia"
+      ],
+      "motivation": [
+        "Financial gain"
+      ],
+      "first-seen": "2022",
+      "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
+      "observed-sectors": [
+        "Financial"
+      ],
+      "observed-countries": [
+        "Australia"
+      ],
+      "operations": [
+        {
+          "date": "2022-10",
+          "activity": "Medibank cyber incident\nhttps://www.medibank.com.au/livebetter/newsroom/post/medibank-cyber-incident\nhttps://www.bankinfosecurity.com/medibank-hackers-dump-stolen-on-dark-web-a-20604"
+        }
+      ],
+      "counter-operations": [
+        {
+          "date": "2024-01",
+          "activity": "Australia, US, UK Sanction Russian Over 2022 Medibank Breach\nhttps://www.bankinfosecurity.com/australia-us-uk-sanction-russian-over-2022-medibank-breach-a-24163"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Russia arrests three alleged SugarLocker ransomware members\nhttps://therecord.media/russia-arrests-sugarlocker-ransomware-members"
+        }
+      ],
+      "uuid": "d8af7e66-0392-4082-bdb9-f7157083d079",
+      "last-card-change": "2024-03-11"
     },
     {
       "actor": "8220 Gang",
@@ -31309,6 +31992,10 @@
         {
           "name": "8220 Mining Group",
           "name-giver": "Talos"
+        },
+        {
+          "name": "Returned Libra",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -31346,8 +32033,11 @@
         "https://www.radware.com/security/ddos-threats-attacks/threat-advisories-attack-reports/the-8220-gang-targeting-cloud-providers/",
         "https://www.imperva.com/blog/imperva-detects-undocumented-8220-gang-activities/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=returnedlibra"
+      ],
       "uuid": "8384088d-a679-47bb-bff5-957830937ae3",
-      "last-card-change": "2024-01-16"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Achilles",
@@ -32845,6 +33535,14 @@
         {
           "name": "Marigold Sandstorm",
           "name-giver": "Microsoft"
+        },
+        {
+          "name": "Vengeful Kitten",
+          "name-giver": "CrowdStrike"
+        },
+        {
+          "name": "White Dev 95",
+          "name-giver": "PWC"
         }
       ],
       "country": [
@@ -32894,7 +33592,7 @@
         "https://attack.mitre.org/groups/G1009/"
       ],
       "uuid": "71af54b8-3a64-42a0-9b8f-94d8fcb684a8",
-      "last-card-change": "2023-04-26"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Mummy Spider, TA542",
@@ -33444,6 +34142,43 @@
       "last-card-change": "2021-01-05"
     },
     {
+      "actor": "ResumeLooters",
+      "names": [
+        {
+          "name": "ResumeLooters",
+          "name-giver": "Group-IB"
+        }
+      ],
+      "country": [
+        "[Unknown]"
+      ],
+      "motivation": [
+        "Financial gain"
+      ],
+      "first-seen": "2023",
+      "description": "(Group-IB) In November 2023, Group-IB’s Threat Intelligence unit detected a massive malicious campaign targeting employment agencies and retail companies primarily located in the APAC region, to steal and sell sensitive user data.\n\nThe campaign was attributed to a previously unknown group. Due to the threat actor’s focus on job search platforms and the theft of resumes, Group-IB dubbed it ResumeLooters. Overall, the researchers identified 65 websites compromised by ResumeLooters between November 2023 and December 2023. By using SQL injection attacks against websites, the threat actor attempts to steal user databases that may include names, phone numbers, emails, and DOBs, as well as information about job seekers’ experience, employment history, and other sensitive personal data. The stolen data is then put up for sale by the threat actor in Telegram channels, identified by Group-IB’s Threat intelligence platform.",
+      "observed-sectors": [
+        "Financial",
+        "Retail",
+        "Delivery, Job seeking, Professional services and Real estate."
+      ],
+      "observed-countries": [
+        "Australia",
+        "Brazil",
+        "China",
+        "India",
+        "Taiwan",
+        "Thailand",
+        "Turkey",
+        "Vietnam"
+      ],
+      "information": [
+        "https://www.group-ib.com/blog/resumelooters/"
+      ],
+      "uuid": "316700c9-382f-4846-a537-02b2749a397c",
+      "last-card-change": "2024-03-06"
+    },
+    {
       "actor": "Retefe Gang, Operation Emmental",
       "names": [
         {
@@ -33618,6 +34353,10 @@
         {
           "name": "Iron Group",
           "name-giver": "Intezer"
+        },
+        {
+          "name": "Aged Libra",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -33677,10 +34416,10 @@
         "https://attack.mitre.org/groups/G0106/"
       ],
       "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=rockegroup"
+        "https://pan-unit42.github.io/playbook_viewer/?pb=agedlibra"
       ],
       "uuid": "bacc587d-719b-4555-bc37-db7a9455dc6a",
-      "last-card-change": "2022-12-30"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Salty Spider",
@@ -33994,10 +34733,11 @@
         "https://www.zdnet.com/article/a-hacker-group-is-selling-more-than-73-million-user-records-on-the-dark-web/",
         "https://www.bleepingcomputer.com/news/security/hacker-leaks-386-million-user-records-from-18-companies-for-free/",
         "https://www.bankinfosecurity.com/anatomy-breach-criminal-data-brokers-hit-dave-a-14715",
-        "https://www.bankinfosecurity.com/blogs/data-breaches-shinyhunters-dominance-continues-p-2998"
+        "https://www.bankinfosecurity.com/blogs/data-breaches-shinyhunters-dominance-continues-p-2998",
+        "https://www.helpnetsecurity.com/2024/03/07/shinyhunters-group/"
       ],
       "uuid": "92cc31c7-3c18-4ae2-9f9b-649b6cb029e1",
-      "last-card-change": "2024-01-17"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "Shark Spider",
@@ -34247,6 +34987,10 @@
         {
           "name": "Shathak",
           "name-giver": "?"
+        },
+        {
+          "name": "Monster Libra",
+          "name-giver": "Palo Alto"
         }
       ],
       "country": [
@@ -34281,8 +35025,11 @@
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0127/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=monsterlibra"
+      ],
       "uuid": "269da320-1b20-4721-9bd6-17e0a355fe7d",
-      "last-card-change": "2023-02-15"
+      "last-card-change": "2024-03-10"
     },
     {
       "actor": "TA554",
@@ -34389,6 +35136,10 @@
         {
           "date": "2020-03",
           "activity": "Vault 7 court case ends in mistrial on most serious charges\nhttps://www.cyberscoop.com/vault-7-mistrial-cia-joshua-schulte/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Former CIA Officer Joshua Adam Schulte Sentenced To 40 Years In Prison For Espionage And Child Pornography Crimes\nhttps://www.justice.gov/usao-sdny/pr/former-cia-officer-joshua-adam-schulte-sentenced-40-years-prison-espionage-and-child"
         }
       ],
       "information": [
@@ -34397,7 +35148,7 @@
         "https://www.wyden.senate.gov/imo/media/doc/wyden-cybersecurity-lapses-letter-to-dni.pdf"
       ],
       "uuid": "ddcea012-f9ad-4602-bcfb-a04f2913d58c",
-      "last-card-change": "2020-07-17"
+      "last-card-change": "2024-03-06"
     },
     {
       "actor": "Yanbian Gang",

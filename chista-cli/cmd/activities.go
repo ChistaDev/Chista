@@ -26,17 +26,22 @@ activities -r lorenz,ragnarlocker,onyx
 activities -r "onyx hiveleak"	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Reqest method running.
-		if ransom != "" {
-			activitesQuery(ransom)
+		if ransom != "" && listAllRansomGroups {
+			fmt.Println("[-] Please use -r or -l, not both.")
+			return
 		} else if listAllRansomGroups {
 			listAllGroups()
+		} else if ransom != "" {
+			activitesQuery(ransom)
+		} else {
+			fmt.Println("[-] Please use -h or --help for more information.")
 		}
 	},
 }
 
 func init() {
 	// Catching the convenient parameters through flags.
-	ActivitiesCmd.Flags().StringVarP(&ransom, "ransom", "r", "", "Write down a valid ransomware group name.")
+	ActivitiesCmd.Flags().StringVarP(&ransom, "ransom", "r", "", "Type a valid ransomware group name.")
 	ActivitiesCmd.Flags().BoolVarP(&listAllRansomGroups, "list", "l", false, "Lists all the names of ransomware groups.")
 	ActivitiesCmd.Flags().BoolVarP(&activtiesVerbosity, "verbose", "v", false, "Use -v for verbosity")
 }
@@ -58,7 +63,7 @@ func activitesQuery(ransom string) {
 func listAllGroups() {
 	apiUrl, apiQuery := activitiesAPIURLQueryCreate()
 
-	apiQuery.Set("list", "true")
+	apiQuery.Set("list", "all")
 	apiUrl.RawQuery = apiQuery.Encode()
 	URL = apiUrl.String()
 

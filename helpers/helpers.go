@@ -2,7 +2,9 @@ package helpers
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -19,6 +22,12 @@ import (
 	"github.com/TwiN/go-color"
 	"github.com/gorilla/websocket"
 	"golang.org/x/net/idna"
+)
+
+const (
+	URL   string = `(?i)\b(?P<protocol>https?|ftp):\/\/(?P<domain>[-A-Z0-9.]+)(?P<file>\/[-A-Z0-9+&@#\/%=~_|!:,.;]*)?(?P<parameters>\?[A-Z0-9+&@#\/%=~_|!:,.;]*)?`
+	IP    string = `\b(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b`
+	EMAIL string = `(?P<email>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})`
 )
 
 var PSUDO_MAP = map[string]string{
@@ -38,10 +47,13 @@ var PSUDO_MAP = map[string]string{
 }
 
 var (
-	VERBOSITY int
-	CONN      *websocket.Conn
-	API_ONLY  string
-	MU        sync.Mutex
+	VERBOSITY  int
+	CONN       *websocket.Conn
+	API_ONLY   string
+	MU         sync.Mutex
+	regexURL   = regexp.MustCompile(URL)
+	regexEmail = regexp.MustCompile(EMAIL)
+	regexIP    = regexp.MustCompile(IP)
 )
 
 // Function to make unique string array. Eliminates the duplicates
@@ -57,6 +69,23 @@ func UniqueStrArray(input []string) []string {
 	}
 
 	return uniqueArray
+}
+
+// Returns true if search.censys.io API credentials set correctly else returns false
+func IsCensysCredsSet() bool {
+	var isSet bool
+	if GoDotEnvVariable("CENSYS_API_ID") != "" && GoDotEnvVariable("CENSYS_API_SECRET") != "" {
+		SendMessageWS("CensysCredentialChecker", "CenSys credentials recieved. Trying to search for CT Logs on search.censys.io", "info")
+		// Verify search.censys.io API credentials
+		isSet, _ = VerifyCensysCredentials(GoDotEnvVariable("CENSYS_API_ID"), GoDotEnvVariable("CENSYS_API_SECRET"))
+
+	} else {
+		isSet = false
+		SendMessageWS("CensysCredentialChecker", "Since CenSys credentials didn't set, search.censys.io CT Logs process skipped.", "info")
+	}
+
+	return isSet
+
 }
 
 func InitiliazeWebSocketConnection() error {
@@ -77,6 +106,44 @@ func InitiliazeWebSocketConnection() error {
 	}
 	CONN = conn
 	return nil
+}
+
+// Verifies the given search.censys.io key and secret valid or not
+func VerifyCensysCredentials(api_id string, secret string) (bool, error) {
+	logger.Log.Debugf("search.censys.io account verification started.")
+	SendMessageWS("CTLogs-Censys", "search.censys.io account verification started.", "debug")
+	url := "https://search.censys.io/api/v1/account"
+	auth_key := "Authorization"
+	auth_value := "Basic " + base64.StdEncoding.EncodeToString([]byte(api_id+":"+secret))
+
+	resp_bytes, err := ApiRequester(url, "GET", auth_key, auth_value, nil)
+	if err != nil {
+		logger.Log.Errorf("APIRequster error  %v...", err)
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("APIRequster error  %v...", err), "error")
+		return false, nil
+	}
+
+	censys_response := models.CensysAccountEndpointResponseModel{}
+
+	// Convert returned bytes to struct
+	err = json.Unmarshal(resp_bytes, &censys_response)
+	if err != nil {
+		logger.Log.Debugf("ERROR - While requesting to account endpoint. Response: %v", resp_bytes)
+		logger.Log.Errorf("Cannot convert API request to Censys Response struct:  %v", err)
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("Cannot convert API request to Censys Response  struct:  %v", err), "error")
+		return false, nil
+	}
+
+	// Recieved a valid response and user email captured
+	if censys_response.Email != "" {
+		SendMessageWS("CTLogs-Censys", fmt.Sprintf("search.censys.io account verified. Used email: %v", censys_response.Email), "info")
+		logger.Log.Infof("search.censys.io account verified. Used email: %v", censys_response.Email)
+		return true, nil
+	} else {
+		SendMessageWS("CTLogs-Censys", "search.censys.io account couldn't verified. Please check your API credentials!", "error")
+		logger.Log.Error("search.censys.io account couldn't verified. Please check your API credentials!")
+		return false, nil
+	}
 }
 
 func CloseWSConnection() error {
@@ -285,7 +352,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Create a new request with the POST method and set the request body
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer(request_data))
 		if err != nil {
-			logger.Log.Errorf("Error creating request:", err)
+			logger.Log.Errorf("Error creating request: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}
@@ -298,7 +365,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Send the request
 		resp, err := client.Do(req)
 		if err != nil {
-			logger.Log.Errorf("Error creating request:", err)
+			logger.Log.Errorf("Error creating request: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}
@@ -307,7 +374,7 @@ func ApiRequester(url string, method string, auth_key string, auth_value string,
 		// Read the response body
 		responseBody, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			logger.Log.Errorf("Error reading response body:", err)
+			logger.Log.Errorf("Error reading response body: %v", err)
 			SendMessageWS("", fmt.Sprintf("API Requester error: %v", err), "error")
 			return nil, err
 		}
@@ -574,10 +641,14 @@ func GenerateSimilarDomains(input string, threshold int, tld string) []string {
 		}
 	}
 
-	return similarStrings
+	// Make elements unique, remove duplicates
+	unique_similarStrings := UniqueStrArray(similarStrings)
+
+	return unique_similarStrings
 }
 
 // Helper function to manage functions running at specific intervals.
+// It takes a map of functions and their intervals and runs the functions periodically.
 func RunPeriodicly(functions map[string]models.PeriodicFunctions, quit chan struct{}) {
 	SendMessageWS("Activities", "Checking and starting periodic functions...", "trace")
 	for name, function := range functions {
@@ -600,4 +671,70 @@ func RunPeriodicly(functions map[string]models.PeriodicFunctions, quit chan stru
 			}
 		}(name, function)
 	}
+}
+
+// Function to validate the given input string. Return the validated URL or an error.
+// It checks if the input is an email, IP address, or URL and returns the hostname part of the input.
+func URLValidator(userInput string) (string, error) {
+	if regexEmail.MatchString(userInput) {
+		matchedEmail := regexEmail.FindStringSubmatch(userInput)
+		if strings.Contains(matchedEmail[1], "@") {
+			userInput = matchedEmail[1]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking Domain: %v", userInput), "debug")
+			logger.Log.Debugf("Checking Domain: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid mail domain")
+		}
+
+	} else if regexIP.MatchString(userInput) {
+		matchedIPAdress := regexIP.FindStringSubmatch(userInput)
+		if matchedIPAdress[0] != "" {
+			userInput = matchedIPAdress[0]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking IP: %v", userInput), "debug")
+			logger.Log.Debugf("Checking IP: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid ip address")
+		}
+
+	} else if regexURL.MatchString(userInput) {
+		matchedDomain := regexURL.FindStringSubmatch(userInput)
+		if matchedDomain[2] != "" {
+			userInput = matchedDomain[2]
+
+			SendMessageWS("Blacklist", fmt.Sprintf("Checking URL: %v", userInput), "debug")
+			logger.Log.Debugf("Checking URL: %v", userInput)
+			return userInput, nil
+		} else {
+			return "", errors.New("invalid input type please enter a valid URL")
+		}
+	}
+
+	return "", errors.New("sorry our regexes couldn't match your input, please enter a valid domain name or ip and try again")
+}
+
+func ParseGivenDomain(domainToParse string) (string, error) {
+	var userDomain string
+	parsedInput, err := url.Parse(domainToParse)
+	if err != nil {
+		return "", err
+	}
+
+	if parsedInput.Hostname() == "" {
+		userDomain = parsedInput.Path
+	} else {
+		userDomain = parsedInput.Hostname()
+	}
+
+	userDomain = strings.ReplaceAll(userDomain, " ", "")
+	userDomain = strings.ReplaceAll(userDomain, "+", "")
+	// checks if the user input is empty.
+	if userDomain == "" {
+		return "", errors.New("invalid input type please enter a valid domain name or ip and try again")
+	}
+
+	return userDomain, nil
 }

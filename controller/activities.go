@@ -76,12 +76,13 @@ func CheckActivities(ctx *gin.Context) {
 		checkRansom(ransomGroups, ctx)
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 
-	case listGroups != "":
+	case listGroups == "all":
 		listAllRansomGroups(ctx)
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	default:
-		logger.Log.Debugln("Invalid query string or parameter.")
-		ctx.JSON(404, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
+		helpers.SendMessageWS("Activities", "Invalid query string or parameter.", "error")
+		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Invalid Request, you have to pass a valid parameter and argument."})
+		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
 	}
 
 }
@@ -97,6 +98,7 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 
 		// Filtering the data according to input.
 		if loweredGroupName == "lockbit2" || loweredGroupName == "lockbit3" || loweredGroupName == "lockbit" {
+			loweredGroupName = "lockbit"
 			for _, datum := range jsonData {
 				if strings.Contains(datum.Group_name, loweredGroupName) {
 					filteredData = append(filteredData, datum)
@@ -112,10 +114,11 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 	}
 
 	if len(filteredData) == 0 {
-		logger.Log.Debugln("Data could not found.")
-		helpers.SendMessageWS("Activities", "Data could not found.", "error")
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Data not found"})
+		logger.Log.Debugln("Requested data could not found.")
+		helpers.SendMessageWS("Activities", "Requested data could not found.", "info")
+		ctx.JSON(http.StatusBadRequest, gin.H{"Message": "Requested data could not found."})
 		helpers.SendMessageWS("Activities", "chista_EXIT_chista", "info")
+		return
 	}
 
 	// Returns the proper data.
@@ -124,7 +127,6 @@ func checkRansom(ransomNames []string, ctx *gin.Context) {
 		helpers.SendMessageWS("", fmt.Sprintf("Group Name: %v\nLeaked: %v\nActivity Discovery Date: %v\n",
 			datum.Group_name, datum.Post_title, datum.Discover_date), "")
 	}
-
 }
 
 // Checks the data in the file if it's old.
@@ -135,6 +137,8 @@ func GetRansomwatchData() {
 	existingData, err := os.ReadFile(ransomDataPath)
 	if err != nil && !os.IsNotExist(err) {
 		logger.Log.Errorf("Error reading %s %v\n", ransomDataPath, err)
+		recreatedFile, _:= os.Create(ransomDataPath)
+		recreatedFile.Close()
 		return
 	}
 
@@ -170,12 +174,17 @@ func GetRansomwatchData() {
 
 func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	helpers.SendMessageWS("Activities", "Fetching ransom data...", "info")
+	if _, err := os.Stat(ransomDataPath); os.IsNotExist(err) {
+		logger.Log.Debugln("File does not exist. Recreating the file.")
+		helpers.SendMessageWS("Activities", "File does not exist. Recreating the file.", "info")
+		GetRansomwatchData()
+	}
 
 	// Opens the activitiesRansomData.json file.
 	file, err := os.Open(ransomDataPath)
 	if err != nil {
 		logger.Log.Debugf("Error opening %s %v\n", ransomDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error opening activitiesRansomData.json"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error opening activitiesRansomData.json"})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error opening %s %v\n", ransomDataPath, err), "error")
 	}
 	defer file.Close()
@@ -185,7 +194,7 @@ func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	data, err := io.ReadAll(file)
 	if err != nil {
 		logger.Log.Errorf("Error reading %s %v\n", ransomDataPath, err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "File can't be read"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "File can't be read"})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error reading %s: %v", ransomDataPath, err), "error")
 	}
 
@@ -193,7 +202,7 @@ func openAndPutintoModel(ctx *gin.Context) []models.RansomActivityData {
 	var jsonData []models.RansomActivityData
 	if err := json.Unmarshal(data, &jsonData); err != nil {
 		logger.Log.Errorf("Error during unmarshal data: %v\n", err)
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Error unmarshaling data."})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error unmarshaling data."})
 		helpers.SendMessageWS("Activities", fmt.Sprintf("Error unmarshaling ransom data: %v", err), "error")
 	}
 

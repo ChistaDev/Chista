@@ -67,9 +67,9 @@ In this document, you'll find `usage & installation` guide. You can check our [d
   - [https://go.dev/dl/](https://go.dev/dl/)
 - Python 3.6+
   - It is needed for OpenSquat.
-- OpenSquat
+- OpenSquat **(Optional, increases Phishing & Impersonate module performance)**
   - https://github.com/atenreiro/opensquat
-- search.censys.io API ID and API KEY
+- search.censys.io API ID and API KEY **(Optional, increases Phishing & Impersonate module performance)**
   - It's used in Phishing module and controlled in .ENV file with `CENSYS_API_SECRET` key. We'll see .ENV file in the **Configuration** section.
 - `7777` and `7778` ports should be available
 - "**google-chrome**" executable file should present in $PATH

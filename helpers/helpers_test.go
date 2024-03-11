@@ -8,11 +8,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestVerifyCensysCredentials(t *testing.T) {
+	api_id := "test"
+	secret := "test"
+	InitiliazeWebSocketConnection()
+	VerifyCensysCredentials(api_id, secret)
+}
+
 // Tests curl -X 'GET' 'https://search.censys.io/api/v2/certificates/search?q=xn--p-bga9c0ugb.com&per_page=100' -H 'accept: application/json' -H 'Authorization: Basic <Token>'
 func TestApiRequester(t *testing.T) {
 	a := assert.New(t)
 	input := []string{
-		"koksan.com",
+		"paypal.com",
 		"sibersaldirilar.com",
 	}
 	var extracted_domains_from_ct []string
