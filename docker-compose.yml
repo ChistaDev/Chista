@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    restart: always
+    container_name: swagger_ui
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./doc/openapi.json:/openapi.json
+    environment:
+      SWAGGER_JSON: /openapi.json

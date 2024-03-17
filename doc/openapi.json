@@ -1,0 +1,504 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Chista | Open Source Threat Intelligence Framework",
+    "description": "Chista is an Open Source Cyber Threat Intelligence (CTI) Framework designed to help users understand, predict and defend against cyber threats. You can find out more about\nChista at [github repository](https://github.com/ChistaDev/Chista). You can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features.\n\nSome useful links:\n- [Chista Repository](https://github.com/ChistaDev/Chista)\n- [Chista Documentation](https://github.com/ChistaDev/Chista/blob/main/chista-docs-v1.md)",
+    "contact": {
+      "email": "info@chista.github.io"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://github.com/ChistaDev/Chista/blob/main/LICENSE"
+    },
+    "version": "1.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7777/api/v1"
+    }
+  ],
+  "paths": {
+    "/blacklist": {
+      "summary": "provide information about the blacklist status of a given IP or domain",
+      "description": "The Blacklist API is designed to provide information about the blacklist       status of a given IP or domain. It interacts with the mxtoolbox.com       website to fetch and analyze the blacklist data.The API uses chromedp to       interact with the mxtoolbox.com website. The HTML response is scraped to extract relevant information from the blacklist table.",
+      "get": {
+        "summary": "",
+        "description": "It interacts with the mxtoolbox.com website to fetch and analyze the blacklist data.",
+        "operationId": "checkBlacklist",
+        "parameters": [
+          {
+            "name": "asset",
+            "in": "query",
+            "description": "The IP address or domain to be checked",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Blacklisted": {
+                    "value": "[\n    {\n        \"status\": \"Status Blacklisted\",\n        \"name\": \"Spamhaus ZEN\",\n        \"link\": \"https://mxtoolbox.com/Problem/Blacklist/Spamhaus-ZEN/?page=prob_blacklist&amp;ip=61.53.91.245&amp;link=button&amp;action=blacklist:61.53.91.245&amp;showLogin=1&amp;hidetoc=1&amp;reason=127.0.0.11, 127.0.0.4\"\n    },\n    {\n        \"status\": \"Status Blacklisted\",\n        \"name\": \"UCEPROTECTL3\",\n        \"link\": \"https://mxtoolbox.com/Problem/Blacklist/UCEPROTECTL3/?page=prob_blacklist&amp;ip=61.53.91.245&amp;link=button&amp;action=blacklist:61.53.91.245&amp;showLogin=1&amp;hidetoc=1&amp;reason=127.0.0.2\"\n    }\n]"
+                  },
+                  "Not blacklisted": {
+                    "value": "{\"message\":\"IP/Domain is not blacklisted.\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "blacklist"
+        ]
+      }
+    },
+    "/activities": {
+      "summary": "Everything about ransomware activities",
+      "get": {
+        "summary": "",
+        "description": "The API provides endpoints to list all activities, filter activities by ransomware group names, and retrieve a list of all available ransomware group names.",
+        "operationId": "getActivity",
+        "parameters": [
+          {
+            "name": "ransom",
+            "in": "query",
+            "description": "The ransomware group(s) name(s) to be checked",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "quantum"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "list",
+            "in": "query",
+            "description": "Lists all ransomware group names",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "all"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Example Output": {
+                    "value": "[\n    {\n        \"group_name\": \"quantum\",\n        \"post_title\": \"Maple Lodge Farms\",\n        \"discovered\": \"2021-09-09 23:46:53.997398\"\n    },\n    {\n        \"group_name\": \"clop\",\n        \"post_title\": \"kalepw.com\",\n        \"discovered\": \"2023-08-29 09:36:25.329597\"\n    }\n]"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "HTTP 400 BAD REQUEST",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Error": {
+                    "value": "{\n    \"Error\": \"Invalid Request, you have to pass a valid parameter and argument.\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "activities"
+        ]
+      }
+    },
+    "/source": {
+      "summary": "Every source data related given parameters",
+      "get": {
+        "summary": "",
+        "description": "Source module retrieves CTI (Cyber Threat Intelligence) links based on the provided sources. You have to separate the parameters you send with commas. Usable source parameters: ransom - market - forum - exploit - telegram - discord. You can pass \"all\" or \"your expectations\" as an argument.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "src",
+            "in": "query",
+            "description": "The sources to be checked",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ransom=lockbit,exploit=all,discord=all"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Expected output": {
+                    "value": "{\n    \"ransom\": [\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 1)\",\n            \"url\": \"http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 2)\",\n            \"url\": \"http://lockbitapt2yfbt7lchxejug47kmqvqqxvvjpqkmevv4l3azl3gy6pyd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 3)\",\n            \"url\": \"http://lockbitapt34kvrip6xojylohhxrwsvpzdffgs5z4pbbsywnzsbdguqd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 4)\",\n            \"url\": \"http://lockbitapt5x4zkjbcqmz6frdhecqqgadevyiwqxukksspnlidyvd7qd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 5)\",\n            \"url\": \"http://lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 6)\",\n            \"url\": \"http://lockbitapt72iw55njgnqpymggskg5yp75ry7rirtdg4m7i42artsbqd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 7)\",\n            \"url\": \"http://lockbitaptawjl6udhpd323uehekiyatj6ftcxmkwe5sezs4fqgpjpid.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (dark mirror 8)\",\n            \"url\": \"http://lockbitaptbdiajqtplcrigzgdjprwugkkut63nbvy2d5r4w2agyekqd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (\\\"leaked\\\")\",\n            \"url\": \"http://lockbit7z2jwcskxpbokpemdxmltipntwlkmidcll2qirbu7ykg46eyd.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (\\\"file share\\\")\",\n            \"url\": \"http://lockbitfile2tcudkcqqt2ve6btssyvqwlizbpv5vz337lslmhff2uad.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (\\\"private note\\\")\",\n            \"url\": \"http://lockbitnotexk2vnf2q2zwjefsl3hjsnk4u74vq4chxrqpjclfydk4ad.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (\\\"private note\\\")\",\n            \"url\": \"http://lockbitsup4yezcd5enk5unncx3zcy7kw6wllyqmiyhvanjj352jayid.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 1)\",\n            \"url\": \"http://lockbit3753ekiocyo5epmpy6klmejchjtzddoekjlnt6mu3qh4de2id.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 2)\",\n            \"url\": \"http://lockbit3g3ohd3katajf6zaehxz4h4cnhmz5t735zpltywhwpc6oy3id.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 3)\",\n            \"url\": \"http://lockbit3olp7oetlc4tl5zydnoluphh7fvdt5oa6arcp2757r7xkutid.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 4)\",\n            \"url\": \"http://lockbit435xk3ki62yun7z5nhwz6jyjdp2c64j5vge536if2eny3gtid.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 5)\",\n            \"url\": \"http://lockbit4lahhluquhoka3t4spqym2m3dhe66d6lr337glmnlgg2nndad.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 6)\",\n            \"url\": \"http://lockbit6knrauo3qafoksvl742vieqbujxw7rd6ofzdtapjb4rrawqad.onion\"\n        },\n        {\n            \"name\": \"lockbit 3.0 (new dark mirror 7)\",\n            \"url\": \"http://lockbit7ouvrsdgtojeoj5hvu6bljqtghitekwpdy3b6y62ixtsu5jqd.onion\"\n        }\n    ],\n    \"exploit\": [\n        {\n            \"name\": \"0day.today\",\n            \"url\": \"https://0day.today\"\n        },\n        {\n            \"name\": \"0dayfans\",\n            \"url\": \"https://0dayfans.com\"\n        },\n        {\n            \"name\": \"1337pwn\",\n            \"url\": \"https://www.1337pwn.com/exploits\"\n        },\n        {\n            \"name\": \"awesome cve poc\",\n            \"url\": \"https://github.com/qazbnm456/awesome-cve-poc\"\n        },\n        {\n            \"name\": \"chinese national vulnerability database\",\n            \"url\": \"https://www.cnvd.org.cn\"\n        },\n        {\n            \"name\": \"cxsecurity\",\n            \"url\": \"https://cxsecurity.com/exploit\"\n        },\n        {\n            \"name\": \"exploit collector\",\n            \"url\": \"https://exploit.kitploit.com/\"\n        },\n        {\n            \"name\": \"exploit database\",\n            \"url\": \"https://www.exploit-db.com\"\n        },\n        {\n            \"name\": \"exploit notes\",\n            \"url\": \"https://exploit-notes.hdks.org/\"\n        },\n        {\n            \"name\": \"exploit.ph\",\n            \"url\": \"https://exploit.ph\"\n        },\n        {\n            \"name\": \"exploit service\",\n            \"url\": \"https://t.me/exploitservice\"\n        },\n        {\n            \"name\": \"in the wild\",\n            \"url\": \"https://inthewild.io/feed\"\n        },\n        {\n            \"name\": \"hitcon\",\n            \"url\": \"https://zeroday.hitcon.org/vulnerability\"\n        },\n        {\n            \"name\": \"pwnwiki\",\n            \"url\": \"http://pwnwiki.io/#!index.md\"\n        },\n        {\n            \"name\": \"rapid7\",\n            \"url\": \"https://www.rapid7.com/db/?type=metasploit\"\n        },\n        {\n            \"name\": \"seebug\",\n            \"url\": \"https://www.seebug.org\"\n        },\n        {\n            \"name\": \"sploitus\",\n            \"url\": \"https://sploitus.com\"\n        },\n        {\n            \"name\": \"trickest cve-poc list\",\n            \"url\": \"https://github.com/trickest/cve\"\n        },\n        {\n            \"name\": \"vuldb\",\n            \"url\": \"https://vuldb.com\"\n        },\n        {\n            \"name\": \"vulnerability lab\",\n            \"url\": \"https://www.vulnerability-lab.com\"\n        },\n        {\n            \"name\": \"vulnmon\",\n            \"url\": \"https://vulmon.com\"\n        }\n    ],\n    \"discord\": [\n        {\n            \"name\": \"lolzteam\",\n            \"url\": \"https://discord.com/invite/lzt\"\n        }\n    ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "source"
+        ]
+      }
+    },
+    "/threat_profile": {
+      "get": {
+        "summary": "",
+        "description": "This endpoint retrieves Threat Profile data based on the source files. Additional information, you can query ransom and apt parameters together.",
+        "operationId": "getThreatProfile",
+        "parameters": [
+          {
+            "name": "ransom",
+            "in": "query",
+            "description": "The ransomware group name to be checked",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "synack"
+            }
+          },
+          {
+            "name": "apt",
+            "in": "query",
+            "description": "The APT group name to be checked",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "springdragon"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "list",
+            "in": "query",
+            "description": "Lists all apt or ransomware group names",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "apt"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Ransom Output": {
+                    "value": "{\n    \"name\": \"synack\",\n    \"meta\": \"no longer in operation - rebrand\",\n    \"locations\": [\n        {\n            \"fqdn\": \"xqkz2rmrqkeqf6sjbrb47jfwnqxcd4o2zvaxxzrpbh2piknms37rw2ad.onion\",\n            \"title\": \"end of game\",\n            \"version\": 3,\n            \"slug\": \"http://xqkz2rmrqkeqf6sjbrb47jfwnqxcd4o2zvaxxzrpbh2piknms37rw2ad.onion/\",\n            \"updated\": \"2021-09-08 00:03:21.496917\",\n            \"lastscrape\": \"2021-08-18 00:02:29.699387\"\n        }\n    ],\n    \"profile\": [\n        \"https://www.zdnet.com/article/synack-ransomware-group-releases-decryption-keys-as-they-rebrand-to-el-cometa\"\n    ]\n}"
+                  },
+                  "APT Output": {
+                    "value": "{\n    \"actor\": \"Lotus Blossom, Spring Dragon, Thrip\",\n    \"names\": [\n        {\n            \"name\": \"Lotus Blossom\",\n            \"name-giver\": \"Palo Alto\"\n        },\n        {\n            \"name\": \"Spring Dragon\",\n            \"name-giver\": \"Kaspersky\"\n        },\n        {\n            \"name\": \"Dragonfish\",\n            \"name-giver\": \"iDefense\"\n        },\n        {\n            \"name\": \"Billbug\",\n            \"name-giver\": \"Symantec\"\n        },\n        {\n            \"name\": \"Thrip\",\n            \"name-giver\": \"Symantec\"\n        },\n        {\n            \"name\": \"Bronze Elgin\",\n            \"name-giver\": \"SecureWorks\"\n        },\n        {\n            \"name\": \"CTG-8171\",\n            \"name-giver\": \"SecureWorks\"\n        },\n        {\n            \"name\": \"ATK 1\",\n            \"name-giver\": \"Thales\"\n        },\n        {\n            \"name\": \"ATK 78\",\n            \"name-giver\": \"Thales\"\n        }\n    ],\n    \"country\": [\n        \"China\"\n    ],\n    \"description\": \"(Kaspersky) Spring Dragon is a long running APT actor that operates on a massive scale. The group has been running campaigns, mostly in countries and territories around the South China Sea, since as early as 2012. The main targets of Spring Dragon attacks are high profile governmental organizations and political parties, education institutions such as universities, as well as companies from the telecommunications sector.\\n\\nSpring Dragon is known for spear phishing and watering hole techniques and some of its tools have previously been analyzed and reported on by security researchers, including Kaspersky Lab.\\n\\n{{Operation Poisoned News, TwoSail Junk}} may be one of their campaigns.\",\n    \"uuid\": \"3b0d3a5d-1858-4be6-b23e-c2620e6e1065\",\n    \"last-card-change\": \"2022-11-19\",\n    \"motivation\": [\n        \"Information theft and espionage\"\n    ],\n    \"first-seen\": \"2012\",\n    \"observed-sectors\": [\n        \"Aerospace\",\n        \"Defense\",\n        \"Education\",\n        \"Government\",\n        \"High-Tech\",\n        \"Satellites\",\n        \"Telecommunications\"\n    ],\n    \"observed-countries\": [\n        \"ASEAN\",\n        \"Brunei\",\n        \"Cambodia\",\n        \"Hong Kong\",\n        \"Indonesia\",\n        \"Japan\",\n        \"Laos\",\n        \"Macao\",\n        \"Malaysia\",\n        \"Myanmar\",\n        \"Philippines\",\n        \"Singapore\",\n        \"Taiwan\",\n        \"Thailand\",\n        \"USA\",\n        \"Vietnam\"\n    ],\n    \"tools\": [\n        \"Catchamas\",\n        \"Elise\",\n        \"Emissary\",\n        \"gpresult\",\n        \"Hannotog\",\n        \"Mimikatz\",\n        \"PsExec\",\n        \"Rikamanu\",\n        \"Sagerunex\",\n        \"Spedear\",\n        \"WMI Ghost\",\n        \"Living off the Land\"\n    ],\n    \"operations\": [\n        {\n            \"date\": \"2015-06\",\n            \"activity\": \"Operation “Lotus Blossom”\\nToday Unit 42 published new research identifying a persistent cyber espionage campaign targeting government and military organizations in Southeast Asia. The adversary group responsible for the campaign, which we named “Lotus Blossom,” is well organized and likely state-sponsored, with support from a country that has interests in Southeast Asia. The campaign has been in operation for some time; we have identified over 50 different attacks taking place over the past three years.\\nhttps://unit42.paloaltonetworks.com/operation-lotus-blossom/\"\n        },\n        {\n            \"date\": \"2015-11\",\n            \"activity\": \"Attack on French Diplomat\\nWe observed a targeted attack in November directed at an individual working for the French Ministry of Foreign Affairs. The attack involved a spear-phishing email sent to a single French diplomat based in Taipei, Taiwan and contained an invitation to a Science and Technology support group event.\\nhttps://unit42.paloaltonetworks.com/attack-on-french-diplomat-linked-to-operation-lotus-blossom/\"\n        },\n        {\n            \"date\": \"2017 Early\",\n            \"activity\": \"In the beginning of 2017, Kaspersky Lab became aware of new activities by an APT actor we have been tracking for several years called Spring Dragon (also known as LotusBlossom).\\nInformation about the new attacks arrived from a research partner in Taiwan and we decided to review the actor’s tools, techniques and activities.\\nUsing Kaspersky Lab telemetry data we detected the malware in attacks against some high-profile organizations around the South China Sea.\\nhttps://securelist.com/spring-dragon-updated-activity/79067/\"\n        },\n        {\n            \"date\": \"2018-01\",\n            \"activity\": \"Attacks on Association of South East Asian Nations (ASEAN) countries\\nDuring the last weeks of January (2018), nation state actors from Lotus Blossom conducted a targeted malware spam campaign against the Association of South East Asian Nations (ASEAN) countries.\\nhttps://community.rsa.com/community/products/netwitness/blog/2018/02/13/lotus-blossom-continues-asean-targeting\\nhttps://www.accenture.com/t20180127T003755Z_w_/us-en/_acnmedia/PDF-46/Accenture-Security-Dragonfish-Threat-Analysis.pdf\"\n        },\n        {\n            \"date\": \"2018-01\",\n            \"activity\": \"Back in January 2018, TAA triggered an alert at a large telecoms operator in Southeast Asia.\\nhttps://www.symantec.com/blogs/threat-intelligence/thrip-hits-satellite-telecoms-defense-targets\"\n        },\n        {\n            \"date\": \"2018-06\",\n            \"activity\": \"Since Symantec first exposed the Thrip group in 2018, the stealthy China-based espionage group has continued to mount attacks in South East Asia, hitting military organizations, satellite communications operators, and a diverse range of other targets in the region.\\nhttps://www.symantec.com/blogs/threat-intelligence/thrip-apt-south-east-asia\"\n        },\n        {\n            \"date\": \"2022-03\",\n            \"activity\": \"Billbug: State-sponsored Actor Targets Cert Authority, Government Agencies in Multiple Asian Countries\\nhttps://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/espionage-asia-governments-cert-authority\"\n        }\n    ],\n    \"mitre-attack\": [\n        \"https://attack.mitre.org/groups/G0030/\",\n        \"https://attack.mitre.org/groups/G0076/\"\n    ],\n    \"sponsor\": \"State-sponsored\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "HTTP 400 BAD REQUEST",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Error": {
+                    "value": "{\n    \"Error\": \"Invalid query string parameter.\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "threat profile"
+        ]
+      }
+    },
+    "/leak": {
+      "get": {
+        "summary": "",
+        "description": "It simply sends an API request to the Mozilla Monitor and shows the response as customized view.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email to be checked",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "info@chista.github.io"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Leaked": {
+                    "value": "{\n    \"success\": true,\n    \"breaches\": [\n        {\n            \"Name\": \"Wattpad\",\n            \"Title\": \"Wattpad\",\n            \"Domain\": \"wattpad.com\",\n            \"BreachDate\": \"2020-06-29T00:00:00Z\",\n            \"DataClasses\": [\n                \"bios\",\n                \"dates-of-birth\",\n                \"email-addresses\",\n                \"genders\",\n                \"geographic-locations\",\n                \"ip-addresses\",\n                \"names\",\n                \"passwords\",\n                \"social-media-profiles\",\n                \"user-website-urls\",\n                \"usernames\"\n            ]\n        },\n        {\n            \"Name\": \"YouNow\",\n            \"Title\": \"YouNow\",\n            \"Domain\": \"younow.com\",\n            \"BreachDate\": \"2019-02-15T00:00:00Z\",\n            \"DataClasses\": [\n                \"email-addresses\",\n                \"ip-addresses\",\n                \"names\",\n                \"social-media-profiles\",\n                \"usernames\"\n            ]\n        }\n    ],\n    \"total\": 2\n}"
+                  },
+                  "Not Leaked": {
+                    "value": "{\n    \"success\": true,\n    \"breaches\": [],\n    \"total\": 0\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "leak"
+        ]
+      }
+    },
+    "/ioc_feed": {
+      "get": {
+        "summary": "",
+        "description": "Fetches IOC data for a specific attacker from the MalwareBazaar API.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "atacker",
+            "in": "query",
+            "description": "The signature of the attacker.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "quantum"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Attacker Found": {
+                    "value": "{\n    \"query_status\": \"ok\",\n    \"data\": [\n        {\n            \"sha256_hash\": \"c74873d7b8cc622379ed49bd0b0e477167ae176aa329b01338666ec4c1a4426b\",\n            \"sha3_384_hash\": \"e5d21778289accac47e5014a00ed4f9b894a05acf4667568f0603d9052d864d3dd19885e1222144818e69f99a1ad469e\",\n            \"sha1_hash\": \"8fd8f62a848a1d9c1ff18c7bc16e8a6d2c67c37e\",\n            \"md5_hash\": \"d35a5caf8af43432ec2f5a2318b20597\",\n            \"first_seen\": \"2022-01-08 17:55:29\",\n            \"last_seen\": \"2022-01-08 19:41:41\",\n            \"file_name\": \"Quantum.bin\",\n            \"file_type\": \"exe\",\n            \"signature\": \"Quantum\",\n            \"tags\": [\n                \"exe\",\n                \"Quantum\",\n                \"Ransomware\"\n            ]\n        }\n    ]\n}"
+                  },
+                  "Not found": {
+                    "value": "{\n    \"query_status\": \"no_results\",\n    \"data\": null\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ioc"
+        ]
+      }
+    },
+    "/phishing": {
+      "get": {
+        "summary": "",
+        "description": "Phishing Controller aims to collect possible phishing URLs for the given domain name. It uses many different sources and techniques to generate a valid URL list.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "The domain to be checked",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "The exclude domain adress(es)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "xyz.example.com,en.example.com,www.example.com"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Expected Output": {
+                    "value": "{\n    \"possible_phishing_urls\": [\n        \"http://paypazl.com\",\n        \"http://xn--payal-wo1b.com\",\n        \"http://xn--paypl-uqa.com\",\n        \"http://pay0pal.com\",\n        \"http://pzaypal.com\",\n        \"http://payapl.com\",\n        \"http://paypa1.com\",\n        \"http://paypal.net\",\n        \"http://xn--pypal-3wa.com\",\n        \"http://pa6pal.com\",\n        \"http://pa-ypal.com\",\n        \"http://xn--paypl-nwb.com\",\n        \"http://xn--paypl-0qa.com\",\n        \"http://paypalj.com\",\n        \"http://paypla.com\",\n        \"http://ppaypal.com\",\n        \"http://xn--paypl-m11b.com\",\n        \"http://payoal.com\",\n        \"http://xn--pypal-gra.com\",\n        \"http://paypaal.com\",\n        \"http://pagpal.com\",\n        \"http://payxal.com\",\n        \"http://paaypal.com\",\n        \"http://paypalr.com\",\n        \"http://pyapal.com\",\n        \"http://xn--paypl-uwa.com\",\n        \"http://paypalm.com\",\n        \"http://paypall.com\",\n        \"http://qaypal.com\",\n        \"http://psaypal.com\",\n        \"http://xn--pypal-mra.com\",\n        \"http://xn--aypal-ytb.com\",\n        \"http://payypal.com\",\n        \"http://pqaypal.com\",\n        \"http://paypayl.com\",\n        \"http://xn--pypal-j11b.com\",\n        \"http://paypalk.com\",\n        \"http://paypala.com\",\n        \"http://security-paypal.com\",\n        \"http://paypaql.com\",\n        \"http://paypsl.com\",\n        \"http://paypap.com\",\n        \"http://paypalo.com\",\n        \"http://paypaml.com\",\n        \"http://xn--aypal-ho1b.com\",\n        \"http://0aypal.com\",\n        \"http://paypalh.com\",\n        \"http://paypaol.com\",\n        \"http://www-paypal.com\",\n        \"http://paypil.com\",\n        \"http://paqypal.com\",\n        \"http://paypwl.com\",\n        \"http://paypal.com\",\n        \"http://xn--papal-rva.com\",\n        \"http://pahypal.com\"\n    ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "phishing"
+        ]
+      }
+    },
+    "/impersonate": {
+      "get": {
+        "summary": "",
+        "description": "Impersonating domains controller executes the Levensthein algortihm do generate possible list of impersonating domains.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "The domain to be checked",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "The exclude domain adress(es)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "xyz.example.com,en.example.com,www.example.com"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "Specifies the verbosity level for logging (Optional)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Expected Output": {
+                    "value": "[\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"pypal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"mpaypal.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"cpaypal.com\"\n    },\n    {\n        \"domain\": \"pjaypal.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"pypal.com\"\n    },\n    {\n        \"domain\": \"paypale.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"jpaypal.com\"\n    },\n    {\n        \"domain\": \"paypeal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"pypal.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"vpaypal.com\"\n    },\n    {\n        \"domain\": \"paaypal.com\"\n    },\n    {\n        \"domain\": \"pzaypal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"gpaypal.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"pypal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"payrpal.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"paypalq.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"paypapl.com\"\n    },\n    {\n        \"domain\": \"payqpal.com\"\n    },\n    {\n        \"domain\": \"paypawl.com\"\n    },\n    {\n        \"domain\": \"upaypal.com\"\n    },\n    {\n        \"domain\": \"ipaypal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"pypal.com\"\n    },\n    {\n        \"domain\": \"paypa.com\"\n    },\n    {\n        \"domain\": \"paxypal.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"paypual.com\"\n    },\n    {\n        \"domain\": \"psaypal.com\"\n    },\n    {\n        \"domain\": \"pyaypal.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    },\n    {\n        \"domain\": \"aypal.com\"\n    },\n    {\n        \"domain\": \"payal.com\"\n    },\n    {\n        \"domain\": \"papal.com\"\n    },\n    {\n        \"domain\": \"paypl.com\"\n    }\n]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "impersonate"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "activities",
+      "description": "Everything about ransomware activities"
+    },
+    {
+      "name": "impersonate",
+      "description": "Everything about impersonating domains"
+    },
+    {
+      "name": "phishing",
+      "description": "Everything about phishing domains"
+    },
+    {
+      "name": "threat profile",
+      "description": "Everything about threat groups"
+    },
+    {
+      "name": "ioc",
+      "description": "Everything about IOC feeds of attackers"
+    },
+    {
+      "name": "blacklist",
+      "description": "Everything about blacklisted feeds"
+    },
+    {
+      "name": "source",
+      "description": "Everything about resources"
+    },
+    {
+      "name": "leak",
+      "description": "Everything about leaked data"
+    }
+  ]
+}
