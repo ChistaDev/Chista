@@ -30,6 +30,44 @@ var (
 // TO DO
 // [] Handle domains shorter than 3 letter hostnames like 'ab.com', 'au.com' - test test2
 
+// Periodic function. It should be registered to main.tasks
+func PeriodicPhishingMonitorTask() {
+	/*
+		Check the temp/phishing_monitor_domains.txt, if it's not empty:
+			Call MonitorPhishingDomain with each domain one by one
+	*/
+
+}
+
+// Calls the GetPhishingDomains(ctx) with a psuedo HTTP request and saves the results to temp/phishing_monitor_results.json
+func MonitorPhishingDomain(domain string) {
+	/*
+		Call  the GetPhishingDomains(ctx) and capture the response
+		Check temp/phishing_monitor_results.json is empty or new updates detected for the given domain, update the file.
+		After updating the JSON object, update the "status" property as "updated"
+	*/
+
+}
+
+// POST /api/v1/phishing/monitor - Registers the given 'domain' to monitor phishing events. Results can be accessible with GET /api/v1/phishing/monitor
+func RegisterMonitorPhishingDomains(ctx *gin.Context) {
+	/* Save the domain to temp/phishing_monitor_domains.txt
+	   Call MonitorPhishingDomain with the domain
+	   Respond with 201 REGISTERED
+	*/
+}
+
+// GET /api/v1/phishing/monitor -  Shows the status about monitoring domain for phishing
+func GetMonitorPhishingDomains(ctx *gin.Context) {
+	/*
+		Read temp/phishing_monitor_results.json file for given domain
+		If the results changed for domain (if status is 'updated'), change the "status" property as "shared" for the JSON object (domain)
+			Then, show the results with "updated" status to the user
+		If the results same (if status is 'shared'), show the results with "no_update" status
+
+	*/
+}
+
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param
 func GetPhishingDomains(ctx *gin.Context) {
 	// Calculates the execution time
