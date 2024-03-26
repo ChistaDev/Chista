@@ -72,7 +72,7 @@ type PhishingDomainAsArray struct {
 }
 
 type ResponseDomain struct {
-	Domain string `json:"domain"`
+	Domain string `json:"domain" binding:"required"`
 }
 
 type DnsTwisterToHexResponse struct {

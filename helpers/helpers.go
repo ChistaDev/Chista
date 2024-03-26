@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
@@ -617,6 +618,28 @@ func GenerateDomainsWithUnsupportedChars(domain string) []string {
 // Load the .env file and get the content's of key. Return the content's of the key.
 func GoDotEnvVariable(key string) string {
 	return os.Getenv(key)
+}
+
+// Checks if the given file includes the given string as a line
+func IsFileIncludeLine(filePath, domain string) (bool, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return false, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		if strings.TrimSpace(scanner.Text()) == domain {
+			return true, nil
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return false, err
+	}
+
+	return false, nil
 }
 
 // Function to find new strings similar to the given input string

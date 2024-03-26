@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -25,6 +26,8 @@ var (
 	ORIGINAL_WORKING_DIR          string
 	VERBOSITY                     int
 	isVerified                    bool
+	PH_MON_SOURCE_DIR             string = "temp"
+	PH_MON_SOURCE_FILE            string = "phishing_monitor_domains.txt"
 )
 
 // TO DO
@@ -46,6 +49,12 @@ func MonitorPhishingDomain(domain string) {
 		Check temp/phishing_monitor_results.json is empty or new updates detected for the given domain, update the file.
 		After updating the JSON object, update the "status" property as "updated"
 	*/
+	fmt.Println("MONITOR CALLED")
+
+}
+
+// DELETE /api/v1/phishing/monitor - Removes the given 'domain' from Phishing Monitor
+func RemoveMonitorPhishingDomains(ctx *gin.Context) {
 
 }
 
@@ -55,6 +64,76 @@ func RegisterMonitorPhishingDomains(ctx *gin.Context) {
 	   Call MonitorPhishingDomain with the domain
 	   Respond with 201 REGISTERED
 	*/
+
+	// Unmarshal the JSON data into a map
+	var data models.ResponseDomain
+	if err := ctx.ShouldBindJSON(&data); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON request body"})
+		return
+	}
+
+	var domainToRegister models.PhishingDomain
+	_, hostname, tld, err := helpers.ParseDomain(fmt.Sprintf("%v", data.Domain))
+	if err != nil {
+		logger.Log.Error(err.Error())
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Couldn't parse the posted domain"})
+		return
+	}
+
+	domainToRegister.Domain = (hostname + "." + tld)
+	domainToRegister.Hostname = hostname
+	domainToRegister.TLD = tld
+
+	// Call MonitorPhishingDomain with the domain
+	alreadyRegistered, err := helpers.IsFileIncludeLine(filepath.Join(PH_MON_SOURCE_DIR, PH_MON_SOURCE_FILE), domainToRegister.Domain)
+	if err != nil {
+		logger.Log.Error(err.Error())
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if alreadyRegistered {
+		logger.Log.Warn("The domain is already registered!")
+		ctx.JSON(http.StatusOK, gin.H{"error": "The domain is already registered!"})
+		return
+	}
+
+	go MonitorPhishingDomain(domainToRegister.Domain)
+	time.Sleep(1 * time.Second)
+
+	// Save the domain to temp/phishing_monitor_domains.txt
+	// Check if the target directory exists
+	if _, err := os.Stat(PH_MON_SOURCE_DIR); os.IsNotExist(err) {
+		// Create the target directory if it doesn't exist
+		err = os.MkdirAll(PH_MON_SOURCE_DIR, 0755)
+		if err != nil {
+			logger.Log.Error(err.Error())
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+	}
+
+	// Open the file for appending (creates if not exists)
+	f, err := os.OpenFile(filepath.Join(PH_MON_SOURCE_DIR, PH_MON_SOURCE_FILE), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		logger.Log.Error(err.Error())
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		defer f.Close() // Close the file even on error
+		return
+	}
+	defer f.Close() // Close the file after writing
+
+	// Write the data to the file
+	_, err = f.WriteString(domainToRegister.Domain + "\n")
+	if err != nil {
+		logger.Log.Error(err.Error())
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	logger.Log.Infof("The [%s] domain registered to Phishing Monitor.", domainToRegister.Domain)
+	ctx.JSON(http.StatusCreated, gin.H{"msg": "Domain registered to Phishing Monitor. You can check the monitor results in ~5mins"})
+
 }
 
 // GET /api/v1/phishing/monitor -  Shows the status about monitoring domain for phishing
