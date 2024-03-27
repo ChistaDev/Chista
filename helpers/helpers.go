@@ -620,6 +620,62 @@ func GoDotEnvVariable(key string) string {
 	return os.Getenv(key)
 }
 
+// Checks the given file is empty or not
+func IsFileEmpty(filename string) (bool, error) {
+	MU.Lock()
+	defer MU.Unlock()
+	info, err := os.Stat(filename)
+	if err != nil {
+		return false, err
+	}
+	return info.Size() == 0, nil
+}
+
+// Load the contents of the JSON file to given struct
+func LoadJsonToStruct(filePath string, dataStruct interface{}) error {
+	MU.Lock()
+	defer MU.Unlock()
+	// Read the content of the JSON file
+	fileContent, err := os.ReadFile(filePath)
+	if err != nil {
+		logger.Log.Errorf("error reading file: %v", err)
+		return fmt.Errorf("error reading file: %v", err)
+
+	}
+
+	// Unmarshal the JSON content into the provided struct
+	if err := json.Unmarshal(fileContent, dataStruct); err != nil {
+		logger.Log.Errorf("error unmarshalling JSON: %v", err)
+		return fmt.Errorf("error unmarshalling JSON: %v", err)
+	}
+
+	return nil
+}
+
+// Compares two string arrays. If they are same (includes same entries) returns true, otherwise returns false
+func IsStrArraysSame(arr1 []string, arr2 []string) bool {
+	// If lengths are different, arrays cannot be the same
+	if len(arr1) != len(arr2) {
+		return false
+	}
+
+	// Check each element in arr1 against each element in arr2
+	for i := 0; i < len(arr1); i++ {
+		found := false
+		for j := 0; j < len(arr2); j++ {
+			if arr1[i] == arr2[j] {
+				found = true
+				break
+			}
+		}
+		// If an element in arr1 is not found in arr2, arrays are not the same
+		if !found {
+			return false
+		}
+	}
+	return true
+}
+
 // Checks if the given file includes the given string as a line
 func IsFileIncludeLine(filePath, domain string) (bool, error) {
 	file, err := os.Open(filePath)
@@ -673,7 +729,7 @@ func GenerateSimilarDomains(input string, threshold int, tld string) []string {
 // Helper function to manage functions running at specific intervals.
 // It takes a map of functions and their intervals and runs the functions periodically.
 func RunPeriodicly(functions map[string]models.PeriodicFunctions, quit chan struct{}) {
-	SendMessageWS("Activities", "Checking and starting periodic functions...", "trace")
+	SendMessageWS("Helpers", "Checking and starting periodic functions...", "trace")
 	for name, function := range functions {
 		go func(name string, function models.PeriodicFunctions) {
 			logger.Log.Debugf("Starting the %v periodic function\n", name)
@@ -737,6 +793,73 @@ func URLValidator(userInput string) (string, error) {
 	}
 
 	return "", errors.New("sorry our regexes couldn't match your input, please enter a valid domain name or ip and try again")
+}
+
+func ReadFileAndStoreLinesInArray(filename string) ([]string, error) {
+	MU.Lock()
+	defer MU.Unlock()
+	// Read the entire file into a byte slice
+	fileContent, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	// Convert byte slice to string and split by newline characters
+	lines := strings.Split(string(fileContent), "\n")
+
+	return lines, nil
+}
+
+// Remove line if it contains the given string and save the file
+func RemoveLineWithString(filename string, strToRemove string) error {
+	// Open the file with read-write mode
+	file, err := os.OpenFile(filename, os.O_RDWR, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	// Create a scanner to read the file line by line
+	scanner := bufio.NewScanner(file)
+	var lines []string
+
+	// Read each line, if it doesn't contain the specified string, store it in a slice
+	for scanner.Scan() {
+		line := scanner.Text()
+		// Check if the line contains the specified string
+		if !strings.Contains(line, strToRemove) {
+			lines = append(lines, line)
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+
+	// Truncate the file to remove its previous content
+	if err := file.Truncate(0); err != nil {
+		return err
+	}
+
+	// Move the file offset to the beginning
+	if _, err := file.Seek(0, 0); err != nil {
+		return err
+	}
+
+	// Write the modified content back to the file
+	writer := bufio.NewWriter(file)
+	for _, line := range lines {
+		if _, err := writer.WriteString(line + "\n"); err != nil {
+			return err
+		}
+	}
+
+	// Flush the buffer to ensure all data is written to the file
+	if err := writer.Flush(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func ParseGivenDomain(domainToParse string) (string, error) {

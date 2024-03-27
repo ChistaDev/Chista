@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -26,8 +27,9 @@ var (
 	ORIGINAL_WORKING_DIR          string
 	VERBOSITY                     int
 	isVerified                    bool
-	PH_MON_SOURCE_DIR             string = "temp"
+	PH_MON_DIR                    string = "temp"
 	PH_MON_SOURCE_FILE            string = "phishing_monitor_domains.txt"
+	PH_MON_RESULT_FILE            string = "phishing_monitor_domains.json"
 )
 
 // TO DO
@@ -39,22 +41,202 @@ func PeriodicPhishingMonitorTask() {
 		Check the temp/phishing_monitor_domains.txt, if it's not empty:
 			Call MonitorPhishingDomain with each domain one by one
 	*/
+	isFileEmpty, _ := helpers.IsFileEmpty(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE))
+	if !isFileEmpty {
+		domains, err := helpers.ReadFileAndStoreLinesInArray(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE))
+		fmt.Println("DOMAINSSSSSSSSSSSSSSSSSSSSSS")
+		fmt.Println(domains)
+		if err != nil {
+			logger.Log.Errorf("Error while reading phishing monitor source file: %v", err)
+		}
+
+		for _, domain := range domains {
+			if domain != "" {
+				MonitorPhishingDomain(domain)
+				logger.Log.Infof("Monitor Phishing Module runned for: %s", domain)
+			}
+
+		}
+		logger.Log.Info("Periodic Phishing Monitor Task executed.")
+	} else {
+		logger.Log.Warn("Couldn't execute Phishing Monitor Task because the Phishing Monitor Source File is empty. ")
+	}
 
 }
 
 // Calls the GetPhishingDomains(ctx) with a psuedo HTTP request and saves the results to temp/phishing_monitor_results.json
+// Simply runs the Phishing module and saves results.
 func MonitorPhishingDomain(domain string) {
 	/*
-		Call  the GetPhishingDomains(ctx) and capture the response
+		Call  the GetPhishingDomains(ctx *gin.Context)  and capture the response
 		Check temp/phishing_monitor_results.json is empty or new updates detected for the given domain, update the file.
 		After updating the JSON object, update the "status" property as "updated"
 	*/
-	fmt.Println("MONITOR CALLED")
+
+	// Create a new gin context
+	requestUri := "/api/v1/phishing?domain=" + domain
+	dummyRequest, _ := http.NewRequest("GET", requestUri, nil)
+	dummyWriter := httptest.NewRecorder() // Create a response recorder
+	ctx, _ := gin.CreateTestContext(dummyWriter)
+
+	// Bind the dummy request to the context
+	ctx.Request = dummyRequest
+
+	// Call GetPhishingDomains with the created context
+	logger.Log.Infof("Phishing Monitor running for [%s]", domain)
+	GetPhishingDomains(ctx)
+
+	// Access the response from the recorder
+	responseBody := dummyWriter.Body.String()
+	// Now you have the response body, you can further process it as needed
+
+	// Unmarshal the JSON into PhishingResultsModel
+	var phishingResults models.PhishingResultsModel
+	var getPhishingDomainsEndpointResult models.GetPhishingDomainsEndpointResults
+	err := json.Unmarshal([]byte(responseBody), &getPhishingDomainsEndpointResult)
+	if err != nil {
+		logger.Log.Errorf("Error unmarshalling JSON: %v", err)
+		return
+	} else {
+		phishingResults.PossiblePhishingUrls = getPhishingDomainsEndpointResult.PossiblePhishingUrls
+		logger.Log.Infof("JSON unmarshalled. Possible Phishing URLs: %v", phishingResults.PossiblePhishingUrls)
+	}
+
+	// Check if result file already has the domain
+	var resultFile models.ResultFile
+	var phishingUrlsFromFile []string
+
+	// Create the results file if it's not exists
+	helpers.MU.Lock()
+	f, err := os.OpenFile(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		logger.Log.Error(err.Error())
+		defer f.Close() // Close the file even on error
+		return
+	}
+	f.Close() // Close the file
+	helpers.MU.Unlock()
+
+	isFileEmpty, _ := helpers.IsFileEmpty(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE))
+	if !isFileEmpty {
+		err = helpers.LoadJsonToStruct(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), &resultFile)
+		if err != nil {
+			logger.Log.Error("Cannot read the phishing results file")
+			return
+		}
+		// Check if the current domain is in the "domain" field of any result
+		found := false
+		for _, result := range resultFile.Results {
+			if result.Domain == domain {
+				phishingUrlsFromFile = result.PossiblePhishingUrls
+				found = true
+				break
+			}
+		}
+
+		if found {
+			if !helpers.IsStrArraysSame(phishingUrlsFromFile, phishingResults.PossiblePhishingUrls) {
+				// Update existing results
+				for i := range resultFile.Results {
+					if phishingResults.Domain == resultFile.Results[i].Domain {
+						resultFile.Results[i].PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
+						resultFile.Results[i].Status = "updated"
+					}
+				}
+
+			}
+
+		} else {
+			// If not, create a new object in resultFile
+			var phishingResultObjectForMonitor models.PhishingResultsModel
+			phishingResultObjectForMonitor.Domain = domain
+			phishingResultObjectForMonitor.PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
+			// Set status "new" if the object newly created
+			phishingResultObjectForMonitor.Status = "new"
+			resultFile.Results = append(resultFile.Results, phishingResultObjectForMonitor)
+		}
+
+	} else {
+		// File is empty
+		var phishingResultObjectForMonitor models.PhishingResultsModel
+		phishingResultObjectForMonitor.Domain = domain
+		phishingResultObjectForMonitor.PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
+		// Set status "new" if the object newly created
+		phishingResultObjectForMonitor.Status = "new"
+		resultFile.Results = append(resultFile.Results, phishingResultObjectForMonitor)
+	}
+
+	// Marshal updated results back to JSON
+	updatedJSON, err := json.Marshal(resultFile)
+	if err != nil {
+		logger.Log.Errorf("Error marshaling JSON: %v", err)
+		return
+	}
+
+	// Write updated JSON back to file
+	helpers.MU.Lock()
+	err = os.WriteFile(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), updatedJSON, os.ModePerm)
+	if err != nil {
+		logger.Log.Errorf("Error writing file: %v", err)
+		helpers.MU.Unlock()
+		return
+	}
+	helpers.MU.Unlock()
+
+	logger.Log.Infof("Phishing Monitor updated successfully for %s domain", domain)
 
 }
 
 // DELETE /api/v1/phishing/monitor - Removes the given 'domain' from Phishing Monitor
 func RemoveMonitorPhishingDomains(ctx *gin.Context) {
+	if ctx.Query("domain") == "" {
+		logger.Log.Error("Domain is not provided")
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Domain is not provided"})
+		return
+	}
+	targetDomnain := ctx.Query("domain")
+	err := helpers.RemoveLineWithString(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE), targetDomnain)
+	if err != nil {
+		msg := fmt.Sprintf("Couldn't remove the domain from monitor list. Err: %s", err)
+		logger.Log.Error(msg)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+	}
+
+	// Update result JSON file
+	var resultFile models.ResultFile
+	err = helpers.LoadJsonToStruct(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), &resultFile)
+	if err != nil {
+		logger.Log.Error("Cannot read the phishing results file")
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot read the phishing results file"})
+		return
+	}
+
+	var newResultFile models.ResultFile
+	for i := range resultFile.Results {
+		if targetDomnain != resultFile.Results[i].Domain {
+			newResultFile.Results = append(newResultFile.Results, resultFile.Results[i])
+		}
+	}
+
+	// Marshal updated results back to JSON
+	updatedJSON, err := json.Marshal(newResultFile)
+	if err != nil {
+		logger.Log.Errorf("Error marshaling JSON: %v", err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Write updated JSON back to file
+	err = os.WriteFile(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), updatedJSON, os.ModePerm)
+	if err != nil {
+		logger.Log.Errorf("Error writing file: %v", err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	msg := fmt.Sprintf("Domain %s removed from the monitor list.", targetDomnain)
+	logger.Log.Info(msg)
+	ctx.JSON(http.StatusOK, gin.H{"msg": msg})
+	return
 
 }
 
@@ -84,8 +266,17 @@ func RegisterMonitorPhishingDomains(ctx *gin.Context) {
 	domainToRegister.Hostname = hostname
 	domainToRegister.TLD = tld
 
+	// Create the source file if it's not exists
+	f, err := os.OpenFile(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		logger.Log.Error(err.Error())
+		defer f.Close() // Close the file even on error
+		return
+	}
+	f.Close() // Close the file
+
 	// Call MonitorPhishingDomain with the domain
-	alreadyRegistered, err := helpers.IsFileIncludeLine(filepath.Join(PH_MON_SOURCE_DIR, PH_MON_SOURCE_FILE), domainToRegister.Domain)
+	alreadyRegistered, err := helpers.IsFileIncludeLine(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE), domainToRegister.Domain)
 	if err != nil {
 		logger.Log.Error(err.Error())
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -103,9 +294,9 @@ func RegisterMonitorPhishingDomains(ctx *gin.Context) {
 
 	// Save the domain to temp/phishing_monitor_domains.txt
 	// Check if the target directory exists
-	if _, err := os.Stat(PH_MON_SOURCE_DIR); os.IsNotExist(err) {
+	if _, err := os.Stat(PH_MON_DIR); os.IsNotExist(err) {
 		// Create the target directory if it doesn't exist
-		err = os.MkdirAll(PH_MON_SOURCE_DIR, 0755)
+		err = os.MkdirAll(PH_MON_DIR, 0755)
 		if err != nil {
 			logger.Log.Error(err.Error())
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -114,7 +305,7 @@ func RegisterMonitorPhishingDomains(ctx *gin.Context) {
 	}
 
 	// Open the file for appending (creates if not exists)
-	f, err := os.OpenFile(filepath.Join(PH_MON_SOURCE_DIR, PH_MON_SOURCE_FILE), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err = os.OpenFile(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		logger.Log.Error(err.Error())
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -145,6 +336,17 @@ func GetMonitorPhishingDomains(ctx *gin.Context) {
 		If the results same (if status is 'shared'), show the results with "no_update" status
 
 	*/
+
+	var resultFile models.ResultFile
+	err := helpers.LoadJsonToStruct(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), &resultFile)
+	if err != nil {
+		msg := fmt.Sprintf("Couldn't load the monitor result file: %s", filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE))
+		logger.Log.Errorf(msg)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": msg})
+		return
+	}
+	ctx.JSON(http.StatusOK, &resultFile)
+
 }
 
 // GET /api/v1/phishing - List all of the latest phishing domains that related with the supplied query param

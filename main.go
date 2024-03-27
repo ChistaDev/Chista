@@ -27,6 +27,7 @@ func main() {
 		"Ransomware Profiles Data Check": {Fn: controller.GetRansomProfileData, Interval: 24 * time.Hour},
 		"Ransom Data Check":              {Fn: controller.GetRansomwatchData, Interval: 24 * time.Hour},
 		"Apt Profiles Data Check":        {Fn: controller.ScheduleAptData, Interval: 6 * time.Hour},
+		"Phishing Monitor Task":          {Fn: controller.PeriodicPhishingMonitorTask, Interval: 24 * time.Hour},
 	}
 
 	// Create a separate channel and quit signal for each function.
