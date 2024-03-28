@@ -354,6 +354,100 @@
         ]
       }
     },
+    "/phishing/monitor": {
+      "post": {
+        "tags": [
+          "phishing"
+        ],
+        "summary": "Add a domain to phishing monitor module",
+        "description": "Add a new pet to the store",
+        "operationId": "addPet",
+        "requestBody": {
+          "description": "Create a new pet in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhishingMonitorReqBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "HTTP 201 CREATED",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Registered": {
+                    "value": "{\"msg\": \"Domain registered to Phishing Monitor. You can check the monitor results in ~5mins\"}"
+                  },
+                  "AlreadyRegistered": {
+                    "value": "{\"error\": \"The domain is already registered!\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "phishing"
+        ],
+        "summary": "",
+        "description": "Fetches the monitor results.",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Monitor Results": {
+                    "value": "{\n   \"results\": [\n      {\n          \"domain\": \"paypal.com\",\n          \"status\": \"new\",\n          \"possible_phishing_urls\": [\n              \"http://xn--pypal-rwa.com\",\n              \"http://piypal.com\",\n              \"https://patypal.com\"\n          ]\n      },\n      {\n          \"domain\": \"tesla.com\",\n          \"status\": \"new\",\n          \"possible_phishing_urls\": [\n              \"http://tesyla.com\",\n              \"https://teslc.com\"\n          ]\n      }\n  ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "phishing"
+        ],
+        "summary": "",
+        "description": "Removes the given domain from monitor list.",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Domain to remove",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "paypal.com"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Monitor Results": {
+                    "value": "{\n   \"msg\": \"Domain paypal.com removed from the monitor list.\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/phishing": {
       "get": {
         "summary": "",
@@ -500,5 +594,19 @@
       "name": "leak",
       "description": "Everything about leaked data"
     }
-  ]
+  ],
+  "components": {
+    "schemas": {
+      "PhishingMonitorReqBody": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "format": "string",
+            "example": "paypal.com"
+          }
+        }
+      }
+    }
+  }
 }
