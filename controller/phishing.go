@@ -44,8 +44,6 @@ func PeriodicPhishingMonitorTask() {
 	isFileEmpty, _ := helpers.IsFileEmpty(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE))
 	if !isFileEmpty {
 		domains, err := helpers.ReadFileAndStoreLinesInArray(filepath.Join(PH_MON_DIR, PH_MON_SOURCE_FILE))
-		fmt.Println("DOMAINSSSSSSSSSSSSSSSSSSSSSS")
-		fmt.Println(domains)
 		if err != nil {
 			logger.Log.Errorf("Error while reading phishing monitor source file: %v", err)
 		}

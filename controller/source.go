@@ -75,7 +75,7 @@ func GetSources(ctx *gin.Context) {
 	helpers.SendMessageWS("Source", "chista_EXIT_chista", "info")
 }
 
-func GetCTIData(urls string, ctx *gin.Context) {
+func GetCTIData(urls string, ctx *gin.Context) error {
 	// Splits coming query string by comma.
 	splitedQuery := strings.Split(urls, ",")
 
@@ -111,13 +111,16 @@ func GetCTIData(urls string, ctx *gin.Context) {
 		go func(sourceParameter, arg string) {
 			defer wg.Done()
 
-			// Create a new context for each iteration
-			c, cancel := chromedp.NewContext(context.Background())
-			defer cancel() // Ensure the context is canceled after the operation
+			// Creates context for http request.
+			timeoutContext, timeoutCancel := context.WithTimeout(context.Background(), 30*time.Second)
+			defer timeoutCancel()
+
+			chromedpContext, chromedpCancel := chromedp.NewContext(timeoutContext)
+			defer chromedpCancel()
 
 			// Opens a headless chrome and requests the related URL.
 			var newTableHTML string
-			err := chromedp.Run(c,
+			err := chromedp.Run(chromedpContext,
 				chromedp.Navigate(sourceMap[sourceParameter]),
 				chromedp.Sleep(1*time.Second),
 				chromedp.OuterHTML(`tbody`, &newTableHTML, chromedp.ByQuery),
@@ -197,6 +200,7 @@ func filterTable(tableHTML, param, arg string) {
 
 		for _, match := range matches {
 			if match[3] == "online" || match[3] == "valid" {
+				fmt.Println("sourceArgument == match[3]", "------------", arg == match[3])
 				*targetSlice = append(*targetSlice, struct {
 					Name     string `json:"name"`
 					URL      string `json:"url"`
