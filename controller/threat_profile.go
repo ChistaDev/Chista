@@ -131,7 +131,7 @@ func getListOfAPTProfileNames(ctx *gin.Context) []string {
 
 	helpers.SendMessageWS("Threat Profile", "\n-------------------[APT Profile Names]-------------------", "info")
 	// Filtering data according to user input.
-	for i, aptDatum := range aptDataFromFile.AptData {
+	for i, aptDatum := range aptDataFromFile.ThreatProfileAptData {
 		aptNames := make([]string, len(aptDatum.Names))
 
 		for k, aptNameData := range aptDatum.Names {
@@ -230,8 +230,8 @@ func GetRansomProfileData() {
 }
 
 // Retrieves the APT profile data that was requested.
-func checkAPTProfile(aptName string, ctx *gin.Context) models.AptData {
-	var aptData models.AptData
+func checkAPTProfile(aptName string, ctx *gin.Context) models.ThreatProfileAptData {
+	var aptData models.ThreatProfileAptData
 	loweredAPTInputName := strings.ToLower(aptName)
 
 	logger.Log.Debugln("Searching for the apt data.")
@@ -244,7 +244,7 @@ func checkAPTProfile(aptName string, ctx *gin.Context) models.AptData {
 	helpers.SendMessageWS("Threat Profile", "Filtering the apt data...", "debug")
 
 	// Filtering data according to user input.
-	for _, aptDatum := range aptDataFromFile.AptData {
+	for _, aptDatum := range aptDataFromFile.ThreatProfileAptData {
 		for _, aptNameData := range aptDatum.Names {
 			loweredAPTName := strings.ToLower(aptNameData.Name)
 			strippedAPTName := strings.ReplaceAll(loweredAPTName, " ", "")
@@ -452,7 +452,7 @@ func openRansomFileGetRansomData(ctx *gin.Context) []models.RansomProfileData {
 	return jsonRansomData
 }
 
-func openAPTFileGetAPTData(ctx *gin.Context) models.AptDataContainer {
+func openAPTFileGetAPTData(ctx *gin.Context) models.ThreatProfileAptDataContainer {
 	// Reads data from threatProfileAptProfiles.json
 	if _, err := os.Stat(aptDataPath); os.IsNotExist(err) {
 		getAPTData(aptDataPath)
@@ -464,11 +464,11 @@ func openAPTFileGetAPTData(ctx *gin.Context) models.AptDataContainer {
 		helpers.SendMessageWS("Threat Profile", fmt.Sprintf("Error while reading the file: %v", err), "error")
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error while reading the file " + err.Error()})
 		helpers.SendMessageWS("Threat Profile", "chista_EXIT_chista", "info")
-		return models.AptDataContainer{}
+		return models.ThreatProfileAptDataContainer{}
 	}
 
 	// Unmarshalls the data.
-	var aptDataFromFile models.AptDataContainer
+	var aptDataFromFile models.ThreatProfileAptDataContainer
 	err = json.Unmarshal(existingData, &aptDataFromFile)
 	if err != nil {
 		logger.Log.Errorf("Error unmarshalling the data: %v", err)

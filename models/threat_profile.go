@@ -2,7 +2,7 @@ package models
 
 type CombinedProfilesData struct {
 	RansomProfileData RansomProfileData
-	AptData           AptData
+	ThreatProfileAptData           ThreatProfileAptData
 }
 
 // Main Ransomware Profile data container
@@ -25,7 +25,7 @@ type Location struct {
 }
 
 // Main APT Profile data container
-type AptDataContainer struct {
+type ThreatProfileAptDataContainer struct {
 	Authors      []string  `json:"authors"`
 	Category     string    `json:"category"`
 	Name         string    `json:"name"`
@@ -36,10 +36,10 @@ type AptDataContainer struct {
 	License      string    `json:"license"`
 	UUID         string    `json:"uuid"`
 	LastDbChange string    `json:"last-db-change"`
-	AptData      []AptData `json:"values"`
+	ThreatProfileAptData      []ThreatProfileAptData `json:"values"`
 }
 
-type AptData struct {
+type ThreatProfileAptData struct {
 	Actor string `json:"actor"`
 	Names []struct {
 		Name      string `json:"name"`

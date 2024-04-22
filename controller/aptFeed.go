@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	config = &models.ConfigDB{
+	config = &models.APTFeedConfigDB{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
 		Password: os.Getenv("DB_PASS"),
