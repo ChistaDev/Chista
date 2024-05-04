@@ -11,6 +11,7 @@ type APTFeedConfigDB struct {
 	SSLMode  string
 }
 
+// APTFeedData is a struct to hold the data from the APT Intrusion Set.
 type APTFeedData struct {
 	Type        string `json:"type"`
 	ID          string `json:"id"`
@@ -41,6 +42,7 @@ type APTFeedData struct {
 	} `json:"objects"`
 }
 
+// APTFeedAttackPattern is a struct to hold the data from the APT Technics.
 type APTFeedTechnic struct {
 	Type        string `json:"type"`
 	ID          string `json:"id"`
@@ -77,6 +79,7 @@ type APTFeedTechnic struct {
 	} `json:"objects"`
 }
 
+// APTFeedTactic is a struct to hold the data from the APT Tactic.
 type APTFeedTactic struct {
 	Type        string `json:"type"`
 	ID          string `json:"id"`
@@ -103,6 +106,7 @@ type APTFeedTactic struct {
 	} `json:"objects"`
 }
 
+// APTFeedRelationship is a struct to hold the data from the APT Relationship.
 type APTFeedRelationship struct {
 	Type        string `json:"type"`
 	ID          string `json:"id"`
@@ -131,6 +135,7 @@ type APTFeedRelationship struct {
 	} `json:"objects"`
 }
 
+// APTFeedMitigation is a struct to hold the data from the APT Mitigation.
 type APTFeedMitigation struct {
 	Type        string `json:"type"`
 	ID          string `json:"id"`

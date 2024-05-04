@@ -53,6 +53,7 @@ func main() {
 	routes.SourceRoute(router)
 	routes.C2Route(router)
 	routes.ActivitiesRoute(router)
+	routes.AptFeedRoute(router)
 
 	// Serve the APIg
 	router.Run("localhost:7777")
