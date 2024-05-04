@@ -2,12 +2,12 @@ package controller
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"regexp"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/Chista-Framework/Chista/helpers"
@@ -59,23 +59,40 @@ func GetSources(ctx *gin.Context) {
 
 	sources := ctx.Query("src")
 
-	GetCTIData(sources, ctx)
+	// Request for the data sources.
+	errorCtiData := GetCTIData(sources, ctx)
+	if errorCtiData != nil {
+		logger.Log.Errorln(errorCtiData.Error())
+		helpers.SendMessageWS("Source", errorCtiData.Error(), "error")
+	}
 
 	// Calls the function to beautify results.
 	helpers.SendMessageWS("Source", "Returning the filtered data.", "debug")
-	filterSourceOutputs(ctx)
-
 	logger.Log.Infoln("Returning the filtered data.")
-	ctx.JSON(http.StatusOK, results)
 
-	//Clears the data models.
+	errorFilter := filterSourceOutputs()
+	if errorFilter != nil {
+		logger.Log.Errorln(errorFilter.Error())
+		helpers.SendMessageWS("Source", errorFilter.Error(), "error")
+	}
+
+	// Returns the filtered data.
+	if errorCtiData != nil && errorFilter == nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": errorCtiData.Error()})
+	} else if errorCtiData != nil && errorFilter != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": errorCtiData.Error() + " || " + errorFilter.Error()})
+	} else if !ctx.Writer.Written() {
+		ctx.JSON(http.StatusOK, results)
+	}
+
+	// Wipes all data in the data models.
 	results = models.Source{}
 	splitedParams = map[string]string{}
 
 	helpers.SendMessageWS("Source", "chista_EXIT_chista", "info")
 }
 
-func GetCTIData(urls string, ctx *gin.Context) {
+func GetCTIData(urls string, ctx *gin.Context) error {
 	// Splits coming query string by comma.
 	splitedQuery := strings.Split(urls, ",")
 
@@ -83,10 +100,7 @@ func GetCTIData(urls string, ctx *gin.Context) {
 	// Splits parameters, arguments and fills into splitedParams.
 	for _, arg := range splitedQuery {
 		if !strings.Contains(arg, "=") {
-			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`")
-			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`", "error")
-			ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`"})
-			return
+			return errors.New("Please pass an argument to parameter. Usage should be like this: `/api/v1/source?src=forum=your_parameter,market=your_parameter`")
 		}
 
 		paramValue := strings.Split(arg, "=")
@@ -94,54 +108,22 @@ func GetCTIData(urls string, ctx *gin.Context) {
 		if len(paramValue) == 2 && paramValue[1] != "" && paramValue[0] != "" {
 			splitedParams[paramValue[0]] = paramValue[1]
 		} else {
-			logger.Log.Errorln("Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`")
-			helpers.SendMessageWS("Source", "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`", "error")
-			ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Please pass a argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`"})
-			return
+			return errors.New("Please pass an argument to parameter. Usage should be like this: `/api/v1/source?src=ransom=your_parameter,telegram=your_parameter`")
 		}
 	}
 
-	helpers.SendMessageWS("Source", "Reaching data for given parameters.", "debug")
-	logger.Log.Infoln("Reaching data for given parameters.")
-
-	var mu sync.Mutex // Mutex for synchronization
-	var wg sync.WaitGroup
 	for sourceParameter, arg := range splitedParams {
-		wg.Add(1)
-		go func(sourceParameter, arg string) {
-			defer wg.Done()
 
-			// Create a new context for each iteration
-			c, cancel := chromedp.NewContext(context.Background())
-			defer cancel() // Ensure the context is canceled after the operation
+		helpers.SendMessageWS("Source", "Reaching data for given parameter: "+sourceParameter, "debug")
+		logger.Log.Infoln("Reaching data for given parameter." + sourceParameter)
 
-			// Opens a headless chrome and requests the related URL.
-			var newTableHTML string
-			err := chromedp.Run(c,
-				chromedp.Navigate(sourceMap[sourceParameter]),
-				chromedp.Sleep(1*time.Second),
-				chromedp.OuterHTML(`tbody`, &newTableHTML, chromedp.ByQuery),
-			)
-
-			mu.Lock()
-			defer mu.Unlock()
-
-			if err != nil {
-				logger.Log.Errorln("Error during reaching the source:", err)
-				helpers.SendMessageWS("Source", fmt.Sprintf("Error during reaching the source: %v", err), "error")
-
-				// Check if the response status code has been written
-				if !ctx.Writer.Written() {
-					ctx.JSON(http.StatusNotFound, gin.H{"error": "Error during reaching the source."})
-				}
-				return
-			}
-
-			filterTable(newTableHTML, sourceParameter, arg)
-		}(sourceParameter, arg)
+		if err := scrapeData(sourceParameter, arg); err != nil {
+            return err
+        }
 	}
-	wg.Wait()
 
+
+	return nil
 }
 
 func filterTable(tableHTML, param, arg string) {
@@ -213,11 +195,8 @@ func filterTable(tableHTML, param, arg string) {
 }
 
 // This function is used for beautifying the CLI output and filtering unnecessary sources.
-func filterSourceOutputs(ctx *gin.Context) {
+func filterSourceOutputs() error {
 	for sourceParameter, arg := range splitedParams {
-		helpers.SendMessageWS("Source", fmt.Sprintf("Prettifying requested source: %v", sourceParameter), "debug")
-		logger.Log.Debugf("Prettifying requested source: %v", sourceParameter)
-
 		switch sourceParameter {
 		case "market":
 			helpers.SendMessageWS("", "-----------[Market Sources]-----------", "")
@@ -311,9 +290,38 @@ func filterSourceOutputs(ctx *gin.Context) {
 					ransomResult.Name, ransomResult.URL), "")
 			}
 		default:
-			logger.Log.Errorln("Please pass a valid parameter.")
-			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Please pass a valid parameter."})
-			helpers.SendMessageWS("Source", fmt.Sprintln("Please pass a valid parameter."), "error")
+			return errors.New("Please type a valid parameter not: " + sourceParameter)
 		}
+
+		helpers.SendMessageWS("Source", fmt.Sprintf("Prettifying requested source: %v", sourceParameter), "debug")
+		logger.Log.Debugf("Prettifying requested source: %v", sourceParameter)
 	}
+	return nil
+}
+
+
+func scrapeData(sourceParameter, arg string) error {
+
+	// Creates context for http request.
+	timeoutContext, timeoutCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer timeoutCancel()
+
+	chromedpContext, chromedpCancel := chromedp.NewContext(timeoutContext)
+	defer chromedpCancel()
+
+	// Opens a headless chrome and requests the related URL.
+	var newTableHTML string
+	err := chromedp.Run(chromedpContext,
+		chromedp.Navigate(sourceMap[strings.ToLower(sourceParameter)]),
+		chromedp.Sleep(1*time.Second),
+		chromedp.OuterHTML(`tbody`, &newTableHTML, chromedp.ByQuery),
+	)
+	if err != nil {
+		logger.Log.Errorln("Error during reaching the source:", err)
+		helpers.SendMessageWS("Source", fmt.Sprintf("Error during reaching the source: %v", err), "error")
+		return errors.New("Error during reaching the source for: " + sourceParameter)
+	}
+
+	filterTable(newTableHTML, sourceParameter, arg)
+	return nil
 }
