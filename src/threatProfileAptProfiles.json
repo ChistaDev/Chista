@@ -10,7 +10,7 @@
   "tlp": "white",
   "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
   "uuid": "78e854d3-173f-4113-beed-a7b7400131ff",
-  "last-db-change": "2024-03-11",
+  "last-db-change": "2024-03-14",
   "values": [
     {
       "actor": "Big Panda",
@@ -2904,6 +2904,7 @@
         "https://www.f-secure.com/documents/996508/1030745/dukes_whitepaper.pdf",
         "https://www.welivesecurity.com/2019/10/17/operation-ghost-dukes-never-left/",
         "https://www.carbonblack.com/2020/03/26/the-dukes-of-moscow/",
+        "https://www.cisa.gov/sites/default/files/publications/JAR_16-20296A_GRIZZLY%20STEPPE-2016-1229.pdf",
         "https://www.us-cert.gov/sites/default/files/publications/AR-17-20045_Enhanced_Analysis_of_GRIZZLY_STEPPE_Activity.pdf",
         "https://exchange.xforce.ibmcloud.com/threat-group/guid:6acdb86af596b31ca8d273eb5572904f",
         "https://en.wikipedia.org/wiki/Cozy_Bear",
@@ -2924,7 +2925,7 @@
         "https://pan-unit42.github.io/playbook_viewer/?pb=solarphoenix"
       ],
       "uuid": "93ba9804-335e-4782-855d-40af22b93201",
-      "last-card-change": "2024-03-10"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "APT 30, Override Panda",
@@ -3562,7 +3563,7 @@
         "Information theft and espionage"
       ],
       "first-seen": "2012",
-      "description": "(FireEye) FireEye Threat Intelligence assesses with high confidence that APT41 is a prolific cyber threat group that carries out Chinese state-sponsored espionage activity in addition to financially motivated activity potentially outside of state control. Activity traces back to 2012 when individual members of APT41 conducted primarily financially motivated operations focused on the video game industry before expanding into likely state-sponsored activity. This is remarkable because explicit financially motivated targeting is unusual among Chinese state-sponsored threat groups, and evidence suggests these two motivations were balanced concurrently from 2014 onward.\n\n• APT41 overlaps at least partically with public reporting on group including {{Barium}} and {{Winnti Group, Blackfly, Wicked Panda}}. In some cases the primary observed similarity in the publicly reported Winnti activity was the use of the same malware – including HIGHNOON – across otherwise separate clusters of activity.\n• Previous FireEye Threat Intelligence reporting on the use of HIGHNOON and related activity was grouped together under both {{Ke3chang, Vixen Panda, APT 15, GREF, Playful Dragon}} and Mana, although we now understand this to be the work of several Chinese cyber espionage groups that share tools and digital certificates.\n• APT41 reflects our current understanding of what was previously reported as GREF, as well as additional indicators and activity gathered during our extensive review of our intelligence holdings.\n\nAPT 41 has 1 subgroup:\n1. {{Subgroup: Earth Longzhi}}\n\nAlso see {{Earth Lusca}} and {{RedGolf}}.",
+      "description": "(FireEye) FireEye Threat Intelligence assesses with high confidence that APT41 is a prolific cyber threat group that carries out Chinese state-sponsored espionage activity in addition to financially motivated activity potentially outside of state control. Activity traces back to 2012 when individual members of APT41 conducted primarily financially motivated operations focused on the video game industry before expanding into likely state-sponsored activity. This is remarkable because explicit financially motivated targeting is unusual among Chinese state-sponsored threat groups, and evidence suggests these two motivations were balanced concurrently from 2014 onward.\n\n• APT41 overlaps at least partically with public reporting on group including {{Barium}} and {{Winnti Group, Wicked Panda}}. In some cases the primary observed similarity in the publicly reported Winnti activity was the use of the same malware – including HIGHNOON – across otherwise separate clusters of activity.\n• Previous FireEye Threat Intelligence reporting on the use of HIGHNOON and related activity was grouped together under both {{Ke3chang, Vixen Panda, APT 15, GREF, Playful Dragon}} and Mana, although we now understand this to be the work of several Chinese cyber espionage groups that share tools and digital certificates.\n• APT41 reflects our current understanding of what was previously reported as GREF, as well as additional indicators and activity gathered during our extensive review of our intelligence holdings.\n\nAPT 41 has 1 subgroup:\n1. {{Subgroup: Earth Longzhi}}\n\nAlso see {{Earth Lusca}} and {{RedGolf}}.",
       "observed-sectors": [
         "Construction",
         "Defense",
@@ -3824,7 +3825,7 @@
         "https://attack.mitre.org/groups/G0096/"
       ],
       "uuid": "2fe6ac14-796b-4d63-b136-2c20b88bdd9e",
-      "last-card-change": "2023-10-12"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "Earth Longzhi",
@@ -4061,7 +4062,7 @@
         "Information theft and espionage"
       ],
       "first-seen": "2008",
-      "description": "(Talos) Group 72 is a long standing threat actor group involved in Operation SMN, named Axiom by Novetta. The group is sophisticated, well funded, and possesses an established, defined software development methodology. The group targets high profile organizations with high value intellectual property in the manufacturing, industrial, aerospace, defense, media sectors. Geographically, the group almost exclusively targets organizations based in United States, Japan, Taiwan, and Korea. The preferred tactics of the group include watering-hole attacks, spear-phishing, and other web-based tactics.\n\nThe tools and infrastructure used by the attackers are common to a number of other threat actor groups which may indicate some degree of overlap. We have seen similar patterns used in domain registration for malicious domains, and the same tactics used in other threat actor groups leading us to believe that this group may be part of a larger organization that comprises many separate teams, or that different groups share tactics, code and personnel from time to time.\n\nThough both this group and {{Winnti Group, Blackfly, Wicked Panda}} use the malware Winnti, the two groups appear to be distinct based on differences in reporting on the groups’ TTPs and targeting.\n\nCould be related to {{APT 17, Deputy Dog, Elderwood, Sneaky Panda}} and/or {{APT 20, Violin Panda}}.",
+      "description": "(Talos) Group 72 is a long standing threat actor group involved in Operation SMN, named Axiom by Novetta. The group is sophisticated, well funded, and possesses an established, defined software development methodology. The group targets high profile organizations with high value intellectual property in the manufacturing, industrial, aerospace, defense, media sectors. Geographically, the group almost exclusively targets organizations based in United States, Japan, Taiwan, and Korea. The preferred tactics of the group include watering-hole attacks, spear-phishing, and other web-based tactics.\n\nThe tools and infrastructure used by the attackers are common to a number of other threat actor groups which may indicate some degree of overlap. We have seen similar patterns used in domain registration for malicious domains, and the same tactics used in other threat actor groups leading us to believe that this group may be part of a larger organization that comprises many separate teams, or that different groups share tactics, code and personnel from time to time.\n\nThough both this group and {{Winnti Group, Wicked Panda}} use the malware Winnti, the two groups appear to be distinct based on differences in reporting on the groups’ TTPs and targeting.\n\nCould be related to {{APT 17, Deputy Dog, Elderwood, Sneaky Panda}} and/or {{APT 20, Violin Panda}}.",
       "observed-sectors": [
         "Aerospace",
         "Defense",
@@ -4102,7 +4103,7 @@
         "https://attack.mitre.org/groups/G0001/"
       ],
       "uuid": "6fa5b25b-276e-4f24-a54a-86e6c05fb27f",
-      "last-card-change": "2022-12-29"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "Bad Magic, RedStinger",
@@ -9687,6 +9688,10 @@
         {
           "date": "2020-10",
           "activity": "Six Russian GRU Officers Charged in Connection with Worldwide Deployment of Destructive Malware and Other Disruptive Actions in Cyberspace\nhttps://www.justice.gov/opa/pr/six-russian-gru-officers-charged-connection-worldwide-deployment-destructive-malware-and"
+        },
+        {
+          "date": "2022-03",
+          "activity": "US charges 4 Russian govt employees with critical infrastructure hacks\nhttps://www.bleepingcomputer.com/news/security/us-charges-4-russian-govt-employees-with-critical-infrastructure-hacks/"
         }
       ],
       "information": [
@@ -9699,7 +9704,7 @@
         "https://attack.mitre.org/groups/G0035/"
       ],
       "uuid": "a1492ea6-162c-46a9-a2d5-9618641b5ab2",
-      "last-card-change": "2024-03-10"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "Equation Group",
@@ -15718,6 +15723,10 @@
         {
           "name": "LockBit Gang",
           "name-giver": "?"
+        },
+        {
+          "name": "Bitwise Spider",
+          "name-giver": "CrowdStrike"
         }
       ],
       "country": [
@@ -16158,7 +16167,15 @@
         },
         {
           "date": "2024-02",
+          "activity": "LockBit takes credit for February shutdown of South African pension fund\nhttps://therecord.media/lockbit-ransomware-takes-credit-for-south-african-pension-fund-attack"
+        },
+        {
+          "date": "2024-02",
           "activity": "LockBit ransomware returns, restores servers after police disruption\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-returns-restores-servers-after-police-disruption/\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-returns-to-attacks-with-new-encryptors-servers/"
+        },
+        {
+          "date": "2024-03",
+          "activity": "Ransomware Talent Surges to Akira After LockBit's Demise\nhttps://www.bankinfosecurity.com/ransomware-talent-surges-to-akira-after-lockbits-demise-a-24583"
         }
       ],
       "counter-operations": [
@@ -16193,6 +16210,10 @@
         {
           "date": "2024-02",
           "activity": "US offers $15 million bounty for info on LockBit ransomware gang\nhttps://www.bleepingcomputer.com/news/security/us-offers-15-million-bounty-for-info-on-lockbit-ransomware-gang/"
+        },
+        {
+          "date": "2024-03",
+          "activity": "LockBit ransomware affiliate gets four years in jail, to pay $860k\nhttps://www.bleepingcomputer.com/news/security/lockbit-ransomware-affiliate-gets-four-years-in-jail-to-pay-860k/"
         }
       ],
       "information": [
@@ -16209,7 +16230,7 @@
         "https://www.resecurity.com/blog/article/lockbit-30s-bungled-comeback-highlights-the-undying-risk-of-torrent-based-data-leakage"
       ],
       "uuid": "1c9dfb2e-ae8a-43f1-8b60-bcf36d669edf",
-      "last-card-change": "2024-03-07"
+      "last-card-change": "2024-03-14"
     },
     {
       "actor": "LookBack, TA410",
@@ -17938,6 +17959,10 @@
           "name-giver": "Check Point"
         },
         {
+          "name": "PKPLUG",
+          "name-giver": "Palo Alto"
+        },
+        {
           "name": "Stately Taurus",
           "name-giver": "Palo Alto"
         }
@@ -17955,6 +17980,7 @@
         "Aviation",
         "Education",
         "Government",
+        "Healthcare",
         "NGOs",
         "Think Tanks",
         "Telecommunications"
@@ -17990,18 +18016,22 @@
         "Sweden",
         "Taiwan",
         "Thailand",
+        "Tibet",
         "UK",
         "USA",
         "Vietnam",
         "UN"
       ],
       "tools": [
+        "9002 RAT",
         "AdFind",
         "China Chopper",
         "Cobalt Strike",
         "DCSync",
         "DOPLUGS",
+        "Farseer",
         "Hdump",
+        "HenBox",
         "Hodur",
         "HopperTick",
         "Impacket",
@@ -18015,17 +18045,20 @@
         "Orat",
         "Poison Ivy",
         "PlugX",
+        "Poison Ivy",
         "PowerView",
         "PUBLOAD",
         "PVE Find AD Users",
         "RCSession",
         "ShadowPad Winnti",
         "TeamViewer",
+        "THOR",
         "TinyNote",
         "TONEINS",
         "TONESHELL",
         "WmiExec",
-        "WispRider"
+        "WispRider",
+        "Zupdax"
       ],
       "operations": [
         {
@@ -18051,6 +18084,10 @@
         {
           "date": "2021-03",
           "activity": "Indonesian intelligence agency compromised in suspected Chinese hack\nhttps://therecord.media/indonesian-intelligence-agency-compromised-in-suspected-chinese-hack/"
+        },
+        {
+          "date": "2021-03",
+          "activity": "THOR: Previously Unseen PlugX Variant Deployed During Microsoft Exchange Server Attacks by PKPLUG Group\nhttps://unit42.paloaltonetworks.com/thor-plugx-variant/"
         },
         {
           "date": "2021 Mid",
@@ -18135,13 +18172,17 @@
       ],
       "information": [
         "https://www.crowdstrike.com/blog/meet-crowdstrikes-adversary-of-the-month-for-june-mustang-panda/",
+        "https://unit42.paloaltonetworks.com/pkplug_chinese_cyber_espionage_group_attacking_asia/",
         "https://www.trendmicro.com/en_us/research/23/f/behind-the-scenes-unveiling-the-hidden-workings-of-earth-preta.html"
       ],
       "mitre-attack": [
         "https://attack.mitre.org/groups/G0129/"
       ],
+      "playbook": [
+        "https://pan-unit42.github.io/playbook_viewer/?pb=statelytaurus"
+      ],
       "uuid": "d8fa62d2-de5c-4c13-8cdf-6428d02bc4d6",
-      "last-card-change": "2024-03-07"
+      "last-card-change": "2024-03-14"
     },
     {
       "actor": "Naikon, Lotus Panda",
@@ -18285,10 +18326,6 @@
         {
           "name": "SIG37",
           "name-giver": "NSA"
-        },
-        {
-          "name": "Iron Tiger",
-          "name-giver": "CrySys"
         }
       ],
       "country": [
@@ -18310,7 +18347,7 @@
         "https://research.checkpoint.com/2020/nazar-spirits-of-the-past/"
       ],
       "uuid": "7bc83157-e747-4668-ab0d-f343aead75c1",
-      "last-card-change": "2020-05-07"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "NB65",
@@ -21587,63 +21624,6 @@
       "last-card-change": "2021-12-26"
     },
     {
-      "actor": "PKPLUG",
-      "names": [
-        {
-          "name": "PKPLUG",
-          "name-giver": "Palo Alto"
-        },
-        {
-          "name": "Stately Taurus",
-          "name-giver": "Palo Alto"
-        }
-      ],
-      "country": [
-        "China"
-      ],
-      "motivation": [
-        "Information theft and espionage"
-      ],
-      "first-seen": "2016",
-      "description": "(Palo Alto) For three years, Unit 42 has tracked a set of cyber espionage attack campaigns across Asia, which used a mix of publicly available and custom malware. Unit 42 created the moniker “PKPLUG” for the threat actor group, or groups, behind these and other documented attacks referenced later in this report. We say group or groups as our current visibility doesn’t allow us to determine with high confidence if this is the work of one group, or more than one group which uses the same tools and has the same tasking. The name comes from the tactic of delivering PlugX malware inside ZIP archive files as part of a DLL side-loading package. The ZIP file format contains the ASCII magic-bytes “PK” in its header, hence PKPLUG.",
-      "observed-sectors": [
-        "Government",
-        "Healthcare"
-      ],
-      "observed-countries": [
-        "China",
-        "Indonesia",
-        "Mongolia",
-        "Myanmar",
-        "Taiwan",
-        "Tibet",
-        "Vietnam"
-      ],
-      "tools": [
-        "9002 RAT",
-        "Farseer",
-        "HenBox",
-        "PlugX",
-        "Poison Ivy",
-        "THOR",
-        "Zupdax"
-      ],
-      "operations": [
-        {
-          "date": "2021-03",
-          "activity": "THOR: Previously Unseen PlugX Variant Deployed During Microsoft Exchange Server Attacks by PKPLUG Group\nhttps://unit42.paloaltonetworks.com/thor-plugx-variant/"
-        }
-      ],
-      "information": [
-        "https://unit42.paloaltonetworks.com/pkplug_chinese_cyber_espionage_group_attacking_asia/"
-      ],
-      "playbook": [
-        "https://pan-unit42.github.io/playbook_viewer/?pb=statelytaurus"
-      ],
-      "uuid": "3fb2534f-f233-4247-a653-5fc809212951",
-      "last-card-change": "2024-03-10"
-    },
-    {
       "actor": "Platinum",
       "names": [
         {
@@ -22969,10 +22949,6 @@
         {
           "name": "RedGolf",
           "name-giver": "Recorded Future"
-        },
-        {
-          "name": "Brass Typhoon",
-          "name-giver": "Microsoft"
         }
       ],
       "country": [
@@ -23005,7 +22981,7 @@
         "https://go.recordedfuture.com/hubfs/reports/cta-2023-0330.pdf"
       ],
       "uuid": "3b6ec484-5063-48e1-953b-9471e0f71dfd",
-      "last-card-change": "2023-09-06"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "RedHotel, TAG-22",
@@ -25394,6 +25370,7 @@
         "https://threatvector.cylance.com/en_us/home/inside-the-apt28-dll-backdoor-blitz.html",
         "https://securelist.com/zebrocys-multilanguage-malware-salad/90680/",
         "https://marcoramilli.com/2019/12/05/apt28-attacks-evolution/",
+        "https://www.cisa.gov/sites/default/files/publications/JAR_16-20296A_GRIZZLY%20STEPPE-2016-1229.pdf",
         "https://www.us-cert.gov/sites/default/files/publications/AR-17-20045_Enhanced_Analysis_of_GRIZZLY_STEPPE_Activity.pdf",
         "https://exchange.xforce.ibmcloud.com/threat-group/guid:f7b33aa456eb38053abd85968f78833a",
         "https://en.wikipedia.org/wiki/Fancy_Bear",
@@ -25408,7 +25385,7 @@
         "https://pan-unit42.github.io/playbook_viewer/?pb=fighting-ursa"
       ],
       "uuid": "e6037735-ed1b-4ae3-a45b-45d66e2c80f1",
-      "last-card-change": "2024-03-10"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "Sowbug",
@@ -29694,10 +29671,11 @@
         "NCAT"
       ],
       "information": [
-        "https://www.mandiant.com/resources/blog/china-nexus-espionage-southeast-asia"
+        "https://www.mandiant.com/resources/blog/china-nexus-espionage-southeast-asia",
+        "https://therecord.media/espionage-group-using-usb-devices-to-hack-targets-in-southeast-asia"
       ],
       "uuid": "f0a03ff4-df62-4860-a418-164c9a01b78e",
-      "last-card-change": "2022-12-27"
+      "last-card-change": "2024-03-12"
     },
     {
       "actor": "UNC5221, UTA0178",
@@ -30482,7 +30460,7 @@
         "Financial crime"
       ],
       "first-seen": "2018",
-      "description": "(CrowdStrike) {{Winnti Group, Blackfly, Wicked Panda}} refers to the targeted intrusion operations of the actor publicly known as “Winnti,” whereas Wicked Spider represents this group’s financially-motivated criminal activity. Originally, Wicked Spider was observed exploiting a number of gaming companies and stealing code-signing certificates for use in other operations associated with the malware known as Winnti. Now, Winnti is commonly associated with the interests of the government of the People’s Republic of China (PRC).\n\nWicked Spider has been observed targeting technology companies in Germany, Indonesia, the Russian Federation, South Korea, Sweden, Thailand, Turkey, the United States, and elsewhere. Notably, Wicked Spider has often targeted gaming companies for their certificates, which can be used in future PRC-based operations to sign malware. Ongoing analysis is still evaluating how these certificates are used — whether Wicked Spider hands the certificates off to other adversaries for use in future campaigns or stockpiles them for its own use.",
+      "description": "(CrowdStrike) {{Winnti Group, Wicked Panda}} refers to the targeted intrusion operations of the actor publicly known as “Winnti,” whereas Wicked Spider represents this group’s financially-motivated criminal activity. Originally, Wicked Spider was observed exploiting a number of gaming companies and stealing code-signing certificates for use in other operations associated with the malware known as Winnti. Now, Winnti is commonly associated with the interests of the government of the People’s Republic of China (PRC).\n\nWicked Spider has been observed targeting technology companies in Germany, Indonesia, the Russian Federation, South Korea, Sweden, Thailand, Turkey, the United States, and elsewhere. Notably, Wicked Spider has often targeted gaming companies for their certificates, which can be used in future PRC-based operations to sign malware. Ongoing analysis is still evaluating how these certificates are used — whether Wicked Spider hands the certificates off to other adversaries for use in future campaigns or stockpiles them for its own use.",
       "observed-sectors": [
         "Technology"
       ],
@@ -30507,7 +30485,7 @@
         "https://www.crowdstrike.com/blog/meet-crowdstrikes-adversary-of-the-month-for-july-wicked-spider/"
       ],
       "uuid": "2eca8267-0436-448f-aa63-97e70d08ce3e",
-      "last-card-change": "2021-08-10"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "WildCard",
@@ -30711,15 +30689,11 @@
       "last-card-change": "2024-03-10"
     },
     {
-      "actor": "Winnti Group, Blackfly, Wicked Panda",
+      "actor": "Winnti Group, Wicked Panda",
       "names": [
         {
           "name": "Winnti Group",
           "name-giver": "Kaspersky"
-        },
-        {
-          "name": "Blackfly",
-          "name-giver": "Symantec"
         },
         {
           "name": "Wicked Panda",
@@ -30861,7 +30835,7 @@
         "https://attack.mitre.org/groups/G0044/"
       ],
       "uuid": "55d0e323-bb26-4779-b09f-cae04740b0bd",
-      "last-card-change": "2022-07-19"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "Winter Vivern",
@@ -31825,15 +31799,20 @@
       "motivation": [
         "Information theft and espionage"
       ],
-      "first-seen": "2022",
+      "first-seen": "2018",
       "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
       "observed-sectors": [
         "Defense",
         "Government"
       ],
       "observed-countries": [
+        "Cambodia",
+        "Japan",
+        "Myanmar",
         "Netherlands",
-        "Europe and Africa"
+        "Taiwan",
+        "USA",
+        "Worlwide"
       ],
       "tools": [
         "BOLDMOVE",
@@ -31841,16 +31820,82 @@
       ],
       "operations": [
         {
+          "date": "2018-01",
+          "activity": "China blamed for data theft from US Navy contractor\nhttps://www.zdnet.com/article/china-blamed-for-data-theft-from-us-navy-contractor/"
+        },
+        {
+          "date": "2019-06",
+          "activity": "Mitsubishi Electric discloses security breach, China is main suspect\nhttps://www.zdnet.com/article/mitsubishi-electric-discloses-security-breach-china-is-main-suspect/"
+        },
+        {
+          "date": "2020-02",
+          "activity": "China-Linked Threat Group Targets Taiwan Critical Infrastructure, Smokescreen Ransomware\nhttps://medium.com/cycraft/china-linked-threat-group-targets-taiwan-critical-infrastructure-smokescreen-ransomware-c2a155aa53d5"
+        },
+        {
+          "date": "2020-03",
+          "activity": "Unknown China-Based APT Targeting Myanmarese Entities\nhttps://www.anomali.com/blog/unknown-china-based-apt-targeting-myanmarese-entities#When:14:00:00Z"
+        },
+        {
+          "date": "2020-10",
+          "activity": "China hacked Japan’s sensitive defense networks, officials say\nhttps://www.washingtonpost.com/national-security/2023/08/07/china-japan-hack-pentagon/"
+        },
+        {
+          "date": "2021",
+          "activity": "Minority report: Fake human rights documents and websites used in cyberattacks targeting Uyghurs, a Turkic ethnic minority in China\nhttps://blog.checkpoint.com/security/minority-report-fake-human-rights-documents-and-websites-used-in-cyberattacks-targeting-uyghurs-a-turkic-ethnic-minority-in-china/"
+        },
+        {
+          "date": "2022-01",
+          "activity": "News Corp discloses hack from 'persistent' nation state cyber attacks\nhttps://www.bleepingcomputer.com/news/security/news-corp-discloses-hack-from-persistent-nation-state-cyber-attacks/"
+        },
+        {
+          "date": "2022-09",
+          "activity": "VMware ESXi Zero-Day Used by Chinese Espionage Actor to Perform Privileged Guest Operations on Compromised Hypervisors\nhttps://www.mandiant.com/resources/blog/vmware-esxi-zero-day-bypass"
+        },
+        {
+          "date": "2022-10",
+          "activity": "Amnesty International Canada breached by suspected Chinese hackers\nhttps://www.bleepingcomputer.com/news/security/amnesty-international-canada-breached-by-suspected-chinese-hackers/"
+        },
+        {
+          "date": "2022-10",
+          "activity": "Barracuda ESG Zero-Day Vulnerability (CVE-2023-2868) Exploited Globally by Aggressive and Skilled Actor, Suspected Links to China\nhttps://www.mandiant.com/resources/blog/barracuda-esg-exploited-globally"
+        },
+        {
           "date": "2022-10",
           "activity": "Suspected Chinese Threat Actors Exploiting FortiOS Vulnerability (CVE-2022-42475)\nhttps://www.mandiant.com/resources/blog/chinese-actors-exploit-fortios-flaw"
         },
         {
           "date": "2023",
           "activity": "Ministry of Defence of the Netherlands uncovers COATHANGER, a stealthy Chinese FortiGate RAT\nhttps://www.ncsc.nl/binaries/ncsc/documenten/publicaties/2024/februari/6/mivd-aivd-advisory-coathanger-tlp-clear/TLP-CLEAR+MIVD+AIVD+Advisory+COATHANGER.pdf"
+        },
+        {
+          "date": "2023-04",
+          "activity": "China-Taiwan Tensions Spark Surge in Cyberattacks on Taiwan\nhttps://www.trellix.com/blogs/research/china-taiwan-tensions-spark-surge-in-cyberattacks-on-taiwan/"
+        },
+        {
+          "date": "2023-09",
+          "activity": "Chinese APT Targeting Cambodian Government\nhttps://unit42.paloaltonetworks.com/chinese-apt-linked-to-cambodia-government-attacks/"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Hackers stole 'sensitive' data from Taiwan telecom giant: ministry\nhttps://www.france24.com/en/live-news/20240301-hackers-stole-sensitive-data-from-taiwan-telecom-giant-ministry"
         }
       ],
+      "counter-operations": [
+        {
+          "date": "2021-07",
+          "activity": "The United States, Joined by Allies and Partners, Attributes Malicious Cyber Activity and Irresponsible State Behavior to the People’s Republic of China\nhttps://www.whitehouse.gov/briefing-room/statements-releases/2021/07/19/the-united-states-joined-by-allies-and-partners-attributes-malicious-cyber-activity-and-irresponsible-state-behavior-to-the-peoples-republic-of-china/"
+        }
+      ],
+      "information": [
+        "https://go.recordedfuture.com/hubfs/reports/cta-2021-0727.pdf",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-158a",
+        "https://us-cert.cisa.gov/ncas/analysis-reports/ar20-216a",
+        "https://us-cert.cisa.gov/ncas/alerts/aa20-258a",
+        "https://www.cisa.gov/uscert/ncas/alerts/aa22-279a",
+        "https://www.sentinelone.com/labs/unmasking-i-soon-the-leak-that-revealed-chinas-cyber-operations/"
+      ],
       "uuid": "e319c38c-1f2c-434b-b1b9-6457bc585bcd",
-      "last-card-change": "2024-03-11"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "[Unnamed groups: Iran]",
@@ -31936,10 +31981,62 @@
         }
       ],
       "information": [
+        "https://us-cert.cisa.gov/ncas/alerts/aa20-259a",
+        "https://us-cert.cisa.gov/ncas/alerts/aa20-296a",
+        "https://us-cert.cisa.gov/ncas/alerts/aa20-296b",
+        "https://us-cert.cisa.gov/ncas/alerts/aa20-304a",
+        "https://us-cert.cisa.gov/ncas/alerts/aa21-321a",
+        "https://www.cisa.gov/ncas/alerts/aa22-264a",
+        "https://www.cisa.gov/uscert/ncas/alerts/aa22-320a",
+        "https://www.cisa.gov/uscert/ncas/analysis-reports/ar22-320a",
+        "https://go.recordedfuture.com/hubfs/reports/cta-2018-0509.pdf",
         "https://www.waterisac.org/portal/tlpclear-water-utility-control-system-cyber-incident-advisory-icsscada-incident-municipal"
       ],
       "uuid": "01106777-4eb0-4a37-b7d3-c8ca539e2403",
-      "last-card-change": "2024-03-11"
+      "last-card-change": "2024-03-12"
+    },
+    {
+      "actor": "[Unnamed groups: North Korea]",
+      "names": [
+        {
+          "name": "[Unnamed groups: North Korea]",
+          "name-giver": "?"
+        }
+      ],
+      "country": [
+        "North Korea"
+      ],
+      "motivation": [
+        "Information theft and espionage"
+      ],
+      "first-seen": "2019",
+      "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
+      "observed-countries": [
+        "France",
+        "USA"
+      ],
+      "operations": [
+        {
+          "date": "2019-08",
+          "activity": "Suspected North Korean Cyber Espionage Campaign Targets Multiple Foreign Ministries and Think Tanks\nhttps://www.anomali.com/blog/suspected-north-korean-cyber-espionage-campaign-targets-multiple-foreign-ministries-and-think-tanks#When:14:00:00Z"
+        }
+      ],
+      "counter-operations": [
+        {
+          "date": "2019-01",
+          "activity": "Justice Department Announces Court-Authorized Efforts to Map and Disrupt Botnet Used by North Korean Hackers\nhttps://www.justice.gov/opa/pr/justice-department-announces-court-authorized-efforts-map-and-disrupt-botnet-used-north"
+        }
+      ],
+      "information": [
+        "https://www.us-cert.gov/ncas/current-activity/2020/02/14/north-korean-malicious-cyber-activity",
+        "https://www.us-cert.gov/ncas/alerts/aa20-106a",
+        "https://www.us-cert.gov/ncas/current-activity/2020/05/12/north-korean-malicious-cyber-activity",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-187a",
+        "https://www.us-cert.gov/ncas/current-activity/2018/08/09/North-Korean-Malicious-Cyber-Activity",
+        "https://www.us-cert.gov/ncas/current-activity/2019/09/09/north-korean-malicious-cyber-activity"
+      ],
+      "uuid": "42a46962-999d-4cd2-bde5-c842e3efdd22",
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "[Unnamed groups: Russia]",
@@ -31953,17 +32050,34 @@
         "Russia"
       ],
       "motivation": [
-        "Financial gain"
+        "Information theft and espionage",
+        "Financial gain",
+        "Sabotage and destruction"
       ],
-      "first-seen": "2022",
+      "first-seen": "2014",
       "description": "These are reported APT activities attributed to a country, but not to an individual threat group.",
       "observed-sectors": [
         "Financial"
       ],
       "observed-countries": [
-        "Australia"
+        "Australia",
+        "Singapore",
+        "USA",
+        "Worldwide"
       ],
       "operations": [
+        {
+          "date": "2014",
+          "activity": "Yahoo hit with a Massive 500 Million Account Data Breach\nhttps://www.bleepingcomputer.com/news/business/yahoo-hit-with-a-massive-500-million-account-data-breach/"
+        },
+        {
+          "date": "2018-06",
+          "activity": "Russian Attacks Against Singapore Spike During Trump-Kim Summit\nhttps://www.f5.com/labs/articles/threat-intelligence/russian-attacks-against-singapore-spike-during-trump-kim-summit"
+        },
+        {
+          "date": "2022-06",
+          "activity": "Russian hackers may be behind Texas natural gas plant explosion: report\nhttps://americanmilitarynews.com/2022/06/russian-hackers-may-be-behind-texas-natural-gas-plant-explosion-report/"
+        },
         {
           "date": "2022-10",
           "activity": "Medibank cyber incident\nhttps://www.medibank.com.au/livebetter/newsroom/post/medibank-cyber-incident\nhttps://www.bankinfosecurity.com/medibank-hackers-dump-stolen-on-dark-web-a-20604"
@@ -31971,16 +32085,43 @@
       ],
       "counter-operations": [
         {
+          "date": "2017-03",
+          "activity": "US Charges Four Hackers in Yahoo 2014 Security Breach, Including Two FSB Agents\nhttps://www.bleepingcomputer.com/news/security/us-charges-four-hackers-in-yahoo-2014-security-breach-including-two-fsb-agents/"
+        },
+        {
+          "date": "2022-03",
+          "activity": "Justice Department Announces Court-Authorized Disruption of Botnet Controlled by the Russian Federation’s Main Intelligence Directorate (GRU)\nhttps://www.justice.gov/opa/pr/justice-department-announces-court-authorized-disruption-botnet-controlled-russian-federation"
+        },
+        {
+          "date": "2022-06",
+          "activity": "Russian Botnet Disrupted in International Cyber Operation\nhttps://www.justice.gov/usao-sdca/pr/russian-botnet-disrupted-international-cyber-operation"
+        },
+        {
           "date": "2024-01",
           "activity": "Australia, US, UK Sanction Russian Over 2022 Medibank Breach\nhttps://www.bankinfosecurity.com/australia-us-uk-sanction-russian-over-2022-medibank-breach-a-24163"
+        },
+        {
+          "date": "2024-02",
+          "activity": "Justice Department Conducts Court-Authorized Disruption of Botnet Controlled by the Russian Federation’s Main Intelligence Directorate of the General Staff (GRU)\nhttps://www.justice.gov/opa/pr/justice-department-conducts-court-authorized-disruption-botnet-controlled-russian"
         },
         {
           "date": "2024-02",
           "activity": "Russia arrests three alleged SugarLocker ransomware members\nhttps://therecord.media/russia-arrests-sugarlocker-ransomware-members"
         }
       ],
+      "information": [
+        "https://www.cisa.gov/news-events/alerts/2018/03/15/russian-government-cyber-activity-targeting-energy-and-other-critical",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-110a",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-116a",
+        "https://www.cisa.gov/uscert/ncas/alerts/aa22-011a",
+        "https://www.cisa.gov/uscert/ncas/alerts/aa22-074a",
+        "https://www.cisa.gov/uscert/ncas/alerts/aa22-083a",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-347a",
+        "https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-057a",
+        "https://research.checkpoint.com/2019/russianaptecosystem/"
+      ],
       "uuid": "d8af7e66-0392-4082-bdb9-f7157083d079",
-      "last-card-change": "2024-03-11"
+      "last-card-change": "2024-03-13"
     },
     {
       "actor": "8220 Gang",
