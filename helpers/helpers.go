@@ -656,22 +656,29 @@ func LoadJsonToStruct(filePath string, dataStruct interface{}) error {
 func IsStrArraysSame(arr1 []string, arr2 []string) bool {
 	// If lengths are different, arrays cannot be the same
 	if len(arr1) != len(arr2) {
+		logger.Log.Trace("Array lenghts are not same!")
+		logger.Log.Tracef("Len arr1: %d, Len arr2: %d", len(arr1), len(arr2))
+		logger.Log.Tracef("Arr1: %v: ", arr1)
+		logger.Log.Tracef("Arr2: %v: ", arr2)
 		return false
 	}
 
+	found := false
 	// Check each element in arr1 against each element in arr2
 	for i := 0; i < len(arr1); i++ {
-		found := false
+		found = false
 		for j := 0; j < len(arr2); j++ {
 			if arr1[i] == arr2[j] {
 				found = true
 				break
 			}
 		}
-		// If an element in arr1 is not found in arr2, arrays are not the same
-		if !found {
-			return false
-		}
+
+	}
+	// If an element in arr1 is not found in arr2, arrays are not the same
+	if !found {
+		logger.Log.Trace("A new element detected on the other array, so the arrays are not same!")
+		return false
 	}
 	return true
 }

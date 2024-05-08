@@ -68,7 +68,10 @@ func MonitorPhishingDomain(domain string) {
 	/*
 		Call  the GetPhishingDomains(ctx *gin.Context)  and capture the response
 		Check temp/phishing_monitor_results.json is empty or new updates detected for the given domain, update the file.
-		After updating the JSON object, update the "status" property as "updated"
+		Statuses:
+			- new: When a domain is scanned first time.
+			- stable: There is no newly detected phishing URL.
+			- updated: At least one new phishing url detected.
 	*/
 
 	// Create a new gin context
@@ -116,13 +119,14 @@ func MonitorPhishingDomain(domain string) {
 	helpers.MU.Unlock()
 
 	isFileEmpty, _ := helpers.IsFileEmpty(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE))
+	// If the Phishing results JSON fle is NOT empty,
 	if !isFileEmpty {
 		err = helpers.LoadJsonToStruct(filepath.Join(PH_MON_DIR, PH_MON_RESULT_FILE), &resultFile)
 		if err != nil {
 			logger.Log.Error("Cannot read the phishing results file")
 			return
 		}
-		// Check if the current domain is in the "domain" field of any result
+		// Try to find the current domain in file, if found process with the selected object from file
 		found := false
 		for _, result := range resultFile.Results {
 			if result.Domain == domain {
@@ -132,19 +136,33 @@ func MonitorPhishingDomain(domain string) {
 			}
 		}
 
+		// The domain found in the results file, so we need to process with the domain object from the file
 		if found {
-			if !helpers.IsStrArraysSame(phishingUrlsFromFile, phishingResults.PossiblePhishingUrls) {
-				// Update existing results
+			logger.Log.Debug("Domain found in the results file.")
+			if helpers.IsStrArraysSame(phishingUrlsFromFile, phishingResults.PossiblePhishingUrls) {
+				logger.Log.Debug("There is no new phishing URL update")
+				// Change existing results as stable because there is no new update
+				for i := range resultFile.Results {
+					if phishingResults.Domain == resultFile.Results[i].Domain {
+						//resultFile.Results[i].PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
+						resultFile.Results[i].Status = "stable"
+					}
+				}
+
+			} else {
+				logger.Log.Debug("At least one new phishing URL detected, updating the results...")
+				// Phishing results from file and the current results are not same. We should update the results file with new ones.
 				for i := range resultFile.Results {
 					if phishingResults.Domain == resultFile.Results[i].Domain {
 						resultFile.Results[i].PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
 						resultFile.Results[i].Status = "updated"
 					}
 				}
-
 			}
 
 		} else {
+			logger.Log.Debug("Domain NOT found in the results file, creating a new one.")
+			// The domain not found in the result file. This means, we have to create new object in the file.
 			// If not, create a new object in resultFile
 			var phishingResultObjectForMonitor models.PhishingResultsModel
 			phishingResultObjectForMonitor.Domain = domain
@@ -155,7 +173,8 @@ func MonitorPhishingDomain(domain string) {
 		}
 
 	} else {
-		// File is empty
+		logger.Log.Debug("Phishing Results file is empty. Creating...")
+		// File is empty, no need to check contents of the file. Just add the object to the file
 		var phishingResultObjectForMonitor models.PhishingResultsModel
 		phishingResultObjectForMonitor.Domain = domain
 		phishingResultObjectForMonitor.PossiblePhishingUrls = phishingResults.PossiblePhishingUrls
