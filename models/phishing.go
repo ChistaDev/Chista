@@ -72,7 +72,25 @@ type PhishingDomainAsArray struct {
 }
 
 type ResponseDomain struct {
-	Domain string `json:"domain"`
+	Domain string `json:"domain" binding:"required"`
+}
+
+type PhishingResultsModel struct {
+	Domain               string   `json:"domain"`
+	Status               string   `json:"status"`
+	PossiblePhishingUrls []string `json:"possible_phishing_urls"`
+}
+
+type GetPhishingDomainsEndpointResults struct {
+	PossiblePhishingUrls []string `json:"possible_phishing_urls"`
+}
+
+type ResultFile struct {
+	Results []struct {
+		Domain               string   `json:"domain"`
+		Status               string   `json:"status"`
+		PossiblePhishingUrls []string `json:"possible_phishing_urls"`
+	} `json:"results"`
 }
 
 type DnsTwisterToHexResponse struct {
