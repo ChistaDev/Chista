@@ -1,0 +1,401 @@
+[{
+  "URL": "http://purevolume.com",
+  "Domain": "engadget.com",
+  "Port": 389
+}, {
+  "URL": "https://wikimedia.org",
+  "Domain": "altervista.org",
+  "Port": 486
+}, {
+  "URL": "https://ezinearticles.com",
+  "Domain": "com.com",
+  "Port": 204
+}, {
+  "URL": "https://marriott.com",
+  "Domain": "hatena.ne.jp",
+  "Port": 97
+}, {
+  "URL": "https://dailymail.co.uk",
+  "Domain": "google.co.jp",
+  "Port": 199
+}, {
+  "URL": "https://accuweather.com",
+  "Domain": "nsw.gov.au",
+  "Port": 321
+}, {
+  "URL": "http://scientificamerican.com",
+  "Domain": "is.gd",
+  "Port": 201
+}, {
+  "URL": "https://naver.com",
+  "Domain": "sciencedirect.com",
+  "Port": 464
+}, {
+  "URL": "https://issuu.com",
+  "Domain": "abc.net.au",
+  "Port": 257
+}, {
+  "URL": "http://elegantthemes.com",
+  "Domain": "tiny.cc",
+  "Port": 331
+}, {
+  "URL": "https://cpanel.net",
+  "Domain": "cdbaby.com",
+  "Port": 94
+}, {
+  "URL": "http://storify.com",
+  "Domain": "msn.com",
+  "Port": 469
+}, {
+  "URL": "https://cornell.edu",
+  "Domain": "devhub.com",
+  "Port": 213
+}, {
+  "URL": "http://nydailynews.com",
+  "Domain": "hibu.com",
+  "Port": 397
+}, {
+  "URL": "https://dyndns.org",
+  "Domain": "reuters.com",
+  "Port": 142
+}, {
+  "URL": "https://taobao.com",
+  "Domain": "i2i.jp",
+  "Port": 482
+}, {
+  "URL": "https://multiply.com",
+  "Domain": "scribd.com",
+  "Port": 494
+}, {
+  "URL": "https://webeden.co.uk",
+  "Domain": "cbslocal.com",
+  "Port": 110
+}, {
+  "URL": "https://ted.com",
+  "Domain": "list-manage.com",
+  "Port": 493
+}, {
+  "URL": "http://tmall.com",
+  "Domain": "livejournal.com",
+  "Port": 481
+}, {
+  "URL": "https://shinystat.com",
+  "Domain": "mail.ru",
+  "Port": 143
+}, {
+  "URL": "https://taobao.com",
+  "Domain": "hc360.com",
+  "Port": 413
+}, {
+  "URL": "http://biglobe.ne.jp",
+  "Domain": "ustream.tv",
+  "Port": 333
+}, {
+  "URL": "https://opensource.org",
+  "Domain": "tuttocitta.it",
+  "Port": 399
+}, {
+  "URL": "http://ocn.ne.jp",
+  "Domain": "google.co.uk",
+  "Port": 81
+}, {
+  "URL": "http://facebook.com",
+  "Domain": "shutterfly.com",
+  "Port": 249
+}, {
+  "URL": "https://live.com",
+  "Domain": "arstechnica.com",
+  "Port": 479
+}, {
+  "URL": "http://example.com",
+  "Domain": "instagram.com",
+  "Port": 300
+}, {
+  "URL": "https://diigo.com",
+  "Domain": "archive.org",
+  "Port": 276
+}, {
+  "URL": "http://ucla.edu",
+  "Domain": "exblog.jp",
+  "Port": 135
+}, {
+  "URL": "http://mtv.com",
+  "Domain": "dyndns.org",
+  "Port": 191
+}, {
+  "URL": "http://furl.net",
+  "Domain": "theglobeandmail.com",
+  "Port": 331
+}, {
+  "URL": "https://intel.com",
+  "Domain": "time.com",
+  "Port": 435
+}, {
+  "URL": "https://macromedia.com",
+  "Domain": "addthis.com",
+  "Port": 361
+}, {
+  "URL": "https://accuweather.com",
+  "Domain": "deviantart.com",
+  "Port": 181
+}, {
+  "URL": "http://ted.com",
+  "Domain": "sun.com",
+  "Port": 261
+}, {
+  "URL": "http://japanpost.jp",
+  "Domain": "tumblr.com",
+  "Port": 214
+}, {
+  "URL": "http://google.cn",
+  "Domain": "statcounter.com",
+  "Port": 308
+}, {
+  "URL": "https://go.com",
+  "Domain": "marketwatch.com",
+  "Port": 349
+}, {
+  "URL": "https://acquirethisname.com",
+  "Domain": "ustream.tv",
+  "Port": 160
+}, {
+  "URL": "http://tinypic.com",
+  "Domain": "etsy.com",
+  "Port": 302
+}, {
+  "URL": "https://mtv.com",
+  "Domain": "nsw.gov.au",
+  "Port": 307
+}, {
+  "URL": "http://dedecms.com",
+  "Domain": "wix.com",
+  "Port": 376
+}, {
+  "URL": "https://mozilla.com",
+  "Domain": "newsvine.com",
+  "Port": 457
+}, {
+  "URL": "https://networkadvertising.org",
+  "Domain": "mozilla.com",
+  "Port": 234
+}, {
+  "URL": "https://ibm.com",
+  "Domain": "ftc.gov",
+  "Port": 129
+}, {
+  "URL": "http://cbc.ca",
+  "Domain": "cargocollective.com",
+  "Port": 162
+}, {
+  "URL": "https://nsw.gov.au",
+  "Domain": "skyrock.com",
+  "Port": 399
+}, {
+  "URL": "https://fc2.com",
+  "Domain": "rakuten.co.jp",
+  "Port": 488
+}, {
+  "URL": "http://lulu.com",
+  "Domain": "apple.com",
+  "Port": 136
+}, {
+  "URL": "https://gov.uk",
+  "Domain": "mayoclinic.com",
+  "Port": 227
+}, {
+  "URL": "http://uiuc.edu",
+  "Domain": "marriott.com",
+  "Port": 277
+}, {
+  "URL": "http://posterous.com",
+  "Domain": "arizona.edu",
+  "Port": 135
+}, {
+  "URL": "https://scribd.com",
+  "Domain": "e-recht24.de",
+  "Port": 414
+}, {
+  "URL": "https://scribd.com",
+  "Domain": "businessinsider.com",
+  "Port": 218
+}, {
+  "URL": "http://chronoengine.com",
+  "Domain": "mit.edu",
+  "Port": 332
+}, {
+  "URL": "http://oaic.gov.au",
+  "Domain": "businessweek.com",
+  "Port": 430
+}, {
+  "URL": "https://domainmarket.com",
+  "Domain": "dedecms.com",
+  "Port": 305
+}, {
+  "URL": "http://dell.com",
+  "Domain": "huffingtonpost.com",
+  "Port": 81
+}, {
+  "URL": "https://washington.edu",
+  "Domain": "people.com.cn",
+  "Port": 424
+}, {
+  "URL": "https://scientificamerican.com",
+  "Domain": "ihg.com",
+  "Port": 307
+}, {
+  "URL": "https://irs.gov",
+  "Domain": "digg.com",
+  "Port": 206
+}, {
+  "URL": "https://mapquest.com",
+  "Domain": "lycos.com",
+  "Port": 171
+}, {
+  "URL": "http://multiply.com",
+  "Domain": "blogspot.com",
+  "Port": 304
+}, {
+  "URL": "http://businessweek.com",
+  "Domain": "php.net",
+  "Port": 460
+}, {
+  "URL": "https://techcrunch.com",
+  "Domain": "soundcloud.com",
+  "Port": 167
+}, {
+  "URL": "https://skyrock.com",
+  "Domain": "acquirethisname.com",
+  "Port": 233
+}, {
+  "URL": "http://bizjournals.com",
+  "Domain": "census.gov",
+  "Port": 202
+}, {
+  "URL": "http://tamu.edu",
+  "Domain": "mtv.com",
+  "Port": 406
+}, {
+  "URL": "https://zimbio.com",
+  "Domain": "netlog.com",
+  "Port": 414
+}, {
+  "URL": "https://pen.io",
+  "Domain": "hexun.com",
+  "Port": 188
+}, {
+  "URL": "https://comsenz.com",
+  "Domain": "google.com",
+  "Port": 248
+}, {
+  "URL": "http://eepurl.com",
+  "Domain": "berkeley.edu",
+  "Port": 410
+}, {
+  "URL": "http://who.int",
+  "Domain": "last.fm",
+  "Port": 175
+}, {
+  "URL": "https://123-reg.co.uk",
+  "Domain": "netlog.com",
+  "Port": 456
+}, {
+  "URL": "http://tripadvisor.com",
+  "Domain": "deviantart.com",
+  "Port": 428
+}, {
+  "URL": "http://scribd.com",
+  "Domain": "loc.gov",
+  "Port": 216
+}, {
+  "URL": "https://imageshack.us",
+  "Domain": "jigsy.com",
+  "Port": 359
+}, {
+  "URL": "http://newsvine.com",
+  "Domain": "hp.com",
+  "Port": 366
+}, {
+  "URL": "https://netvibes.com",
+  "Domain": "accuweather.com",
+  "Port": 462
+}, {
+  "URL": "http://ucoz.ru",
+  "Domain": "illinois.edu",
+  "Port": 344
+}, {
+  "URL": "http://sogou.com",
+  "Domain": "moonfruit.com",
+  "Port": 450
+}, {
+  "URL": "http://wordpress.com",
+  "Domain": "gnu.org",
+  "Port": 381
+}, {
+  "URL": "https://newsvine.com",
+  "Domain": "java.com",
+  "Port": 109
+}, {
+  "URL": "https://simplemachines.org",
+  "Domain": "dot.gov",
+  "Port": 205
+}, {
+  "URL": "https://biblegateway.com",
+  "Domain": "si.edu",
+  "Port": 247
+}, {
+  "URL": "https://upenn.edu",
+  "Domain": "reference.com",
+  "Port": 164
+}, {
+  "URL": "https://engadget.com",
+  "Domain": "hibu.com",
+  "Port": 469
+}, {
+  "URL": "https://cpanel.net",
+  "Domain": "elegantthemes.com",
+  "Port": 485
+}, {
+  "URL": "http://woothemes.com",
+  "Domain": "i2i.jp",
+  "Port": 194
+}, {
+  "URL": "http://rediff.com",
+  "Domain": "cnbc.com",
+  "Port": 141
+}, {
+  "URL": "http://themeforest.net",
+  "Domain": "google.com.hk",
+  "Port": 358
+}, {
+  "URL": "https://ifeng.com",
+  "Domain": "technorati.com",
+  "Port": 308
+}, {
+  "URL": "http://chron.com",
+  "Domain": "etsy.com",
+  "Port": 187
+}, {
+  "URL": "http://kickstarter.com",
+  "Domain": "wufoo.com",
+  "Port": 475
+}, {
+  "URL": "https://microsoft.com",
+  "Domain": "newsvine.com",
+  "Port": 382
+}, {
+  "URL": "http://elegantthemes.com",
+  "Domain": "amazonaws.com",
+  "Port": 415
+}, {
+  "URL": "http://msu.edu",
+  "Domain": "webnode.com",
+  "Port": 364
+}, {
+  "URL": "http://comsenz.com",
+  "Domain": "deviantart.com",
+  "Port": 486
+}, {
+  "URL": "https://digg.com",
+  "Domain": "ask.com",
+  "Port": 352
+}]
