@@ -5,7 +5,7 @@ import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { useIsDrawerOpen } from '../../contexts/IsDrawerOpenContext';
-import Logo from '../../chista-banner.png';
+import Logo from '../../images/chista-banner-145x40.png';
 import { useDarkMode } from '../../contexts/DarkModeContext';
 import DarkModeButton from '../DarkModeButton/DarkModeButton';
 
@@ -76,6 +76,13 @@ const TopNavbar = () => {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              sx={{
+                backgroundColor: 'transparent',
+                color: 'inherit',
+                '&:hover': {
+                  backgroundColor: 'transparent',
+                },
+              }}
             >
               <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <HomeOutlinedIcon />

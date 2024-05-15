@@ -4,12 +4,18 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import { DarkModeProvider } from './contexts/DarkModeContext';
+import { ToastMessageProvider } from './contexts/ToastMessageContext';
+import { BackendStatusProvider } from './contexts/BackendStatusContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <DarkModeProvider>
-      <App />
+      <ToastMessageProvider>
+        <BackendStatusProvider>
+          <App />
+        </BackendStatusProvider>
+      </ToastMessageProvider>
     </DarkModeProvider>
   </BrowserRouter>
 );

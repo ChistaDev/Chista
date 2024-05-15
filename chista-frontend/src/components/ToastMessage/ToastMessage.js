@@ -1,13 +1,10 @@
 import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { useToastMessage } from '../../contexts/ToastMessageContext';
 
-export default function ToastMessage({
-  openToast,
-  setOpenToast,
-  severity,
-  toastContent,
-}) {
+export default function ToastMessage() {
+  const { openToast, setOpenToast, severity, toastContent } = useToastMessage();
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -20,7 +17,7 @@ export default function ToastMessage({
     <div>
       <Snackbar
         open={openToast}
-        autoHideDuration={6000}
+        autoHideDuration={severity === 'warning' ? null : 12000}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
