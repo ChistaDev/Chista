@@ -1,13 +1,15 @@
 /* eslint-disable no-nested-ternary */
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { Box } from '@mui/material';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from '@mui/material';
 import urlParse from 'url-parse';
 import { usePhishingMonitorAPI } from '../../contexts/PhishingMonitorAPIContext';
 
@@ -31,11 +33,12 @@ const columns = [
 ];
 
 const PhishingMonitorDetailsTable = ({ openRowIndex }) => {
-  const { phishingMonitorData } = usePhishingMonitorAPI();
+  const { phishingMonitorDetailsData } = usePhishingMonitorAPI();
 
-  const tableDetailsData = phishingMonitorData[openRowIndex]
-    ? phishingMonitorData[openRowIndex].possible_phishing_urls
-    : null;
+  const tableDetailsData =
+    phishingMonitorDetailsData && phishingMonitorDetailsData[openRowIndex]
+      ? phishingMonitorDetailsData[openRowIndex].possible_phishing_urls
+      : null;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -109,8 +112,8 @@ const PhishingMonitorDetailsTable = ({ openRowIndex }) => {
                 })
             ) : (
               <TableRow>
-                <TableCell colSpan={2} align="center">
-                  Fetching Data... Please Wait...
+                <TableCell colSpan={3} align="center">
+                  Fetching Data... Please come back in 5 mins...
                 </TableCell>
               </TableRow>
             )}

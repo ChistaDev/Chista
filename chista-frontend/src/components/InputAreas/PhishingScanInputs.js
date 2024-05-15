@@ -4,8 +4,10 @@ import { Button, Box, TextField, Fade } from '@mui/material';
 import TravelExploreOutlinedIcon from '@mui/icons-material/TravelExploreOutlined';
 import { usePhishingScanExcludeInput } from '../../contexts/PhishingScanExcludeInputContext';
 import { usePhishingScanDomainInput } from '../../contexts/PhishingScanDomainInputContext';
+import { useBackendStatus } from '../../contexts/BackendStatusContext';
 import PhishingScanTable from '../Tables/PhishingScanTable';
 import Loading from '../Loading/Loading';
+import ToastMessage from '../ToastMessage/ToastMessage';
 
 const PhishingScanInputs = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -14,46 +16,53 @@ const PhishingScanInputs = () => {
     usePhishingScanDomainInput();
   const { phishingScanExcludeInput, setPhishingScanExcludeInput } =
     usePhishingScanExcludeInput();
+  const { backendStatus } = useBackendStatus();
   const [showDomainError, setShowDomainError] = useState(false);
   const [showExcludeError, setShowExcludeError] = useState(false);
   const [scanData, setScanData] = useState([]);
 
   function validateExcludeInput(input) {
+    // Validate phishingScanExcludedInput format
+
     if (input === '') {
-      return true;
+      setShowExcludeError(false);
+      return;
     }
 
     const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
     const values = input.split(',');
+    let hasError = false;
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < values.length; i++) {
       if (!domainRegex.test(values[i])) {
-        return false; // if exclude input not in the right format
+        setShowExcludeError(true);
+        hasError = true;
       }
     }
 
-    return true; // if exclude input in the right format
+    setShowExcludeError(hasError);
+  }
+
+  function validateDomainInput(input) {
+    if (input === '') {
+      setShowDomainError(false);
+    }
+
+    // Validate phishingMonitorDomainInput format
+    const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
+    if (!domainRegex.test(input)) {
+      setShowDomainError(true);
+    } else {
+      setShowDomainError(false);
+    }
   }
 
   const handleButtonClick = () => {
-    // Validate phishingScanDomainInput format
-    const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
-    if (!domainRegex.test(phishingScanDomainInput)) {
-      setShowDomainError(true);
-      return;
+    if (backendStatus) {
+      setDisplayTable(false);
+      setIsButtonClicked(true);
     }
-
-    // Validate phishingScanExcludedInput format
-    if (!validateExcludeInput(phishingScanExcludeInput)) {
-      setShowExcludeError(true);
-      return;
-    }
-
-    setDisplayTable(false);
-    setIsButtonClicked(true);
-    setShowDomainError(false);
-    setShowExcludeError(false);
   };
 
   useEffect(() => {
@@ -97,15 +106,20 @@ const PhishingScanInputs = () => {
       >
         <TextField
           id="domain-input"
-          label="Domain (xyz.com)"
+          label="Domain (Example: google.com)"
           variant="outlined"
           size="small"
           sx={{ width: '650px' }}
           value={phishingScanDomainInput}
-          onChange={(e) => setPhishingScanDomainInput(e.target.value)}
+          onChange={(e) => {
+            setPhishingScanDomainInput(e.target.value);
+            validateDomainInput(e.target.value);
+          }}
           error={showDomainError}
           helperText={
-            showDomainError ? 'Please enter a valid domain. e.g. xyz.com' : ''
+            showDomainError
+              ? 'Please enter a valid domain. e.g. google.com'
+              : ''
           }
         />
 
@@ -116,7 +130,10 @@ const PhishingScanInputs = () => {
           size="small"
           sx={{ width: '650px' }}
           value={phishingScanExcludeInput}
-          onChange={(e) => setPhishingScanExcludeInput(e.target.value.trim())}
+          onChange={(e) => {
+            setPhishingScanExcludeInput(e.target.value.trim());
+            validateExcludeInput(e.target.value);
+          }}
           error={showExcludeError}
           helperText={
             showExcludeError
@@ -150,6 +167,7 @@ const PhishingScanInputs = () => {
           ) : null}
         </Box>
       </Fade>
+      <ToastMessage />
     </>
   );
 };

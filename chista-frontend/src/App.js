@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import HomePage from './pages/HomePage';
@@ -15,6 +15,8 @@ import { DataLeakScanDomainInputProvider } from './contexts/DataLeakScanDomainIn
 import { DataLeakMonitorDomainInputProvider } from './contexts/DataLeakMonitorDomainInputContext';
 import { PhishingMonitorAPIProvider } from './contexts/PhishingMonitorAPIContext';
 import { useDarkMode } from './contexts/DarkModeContext';
+import { useBackendStatus } from './contexts/BackendStatusContext';
+import { useToastMessage } from './contexts/ToastMessageContext';
 import PhishingScan from './pages/PhishingScan';
 import PhishingMonitor from './pages/PhishingMonitor';
 import ThreatProfileAptGroups from './pages/ThreatProfileAptGroups';
@@ -34,11 +36,25 @@ import SettingsPage from './pages/SettingsPage';
 function App() {
   const { mode } = useDarkMode();
 
+  const { backendStatus } = useBackendStatus();
+
+  const { setOpenToast, setSeverity, setToastContent } = useToastMessage();
+
   const darkTheme = createTheme({
     palette: {
       mode: mode ? 'dark' : 'light',
     },
   });
+
+  useEffect(() => {
+    if (!backendStatus) {
+      setOpenToast(true);
+      setSeverity('warning');
+      setToastContent('Please make sure the backend server is running.');
+    } else {
+      setOpenToast(false);
+    }
+  }, [backendStatus]);
 
   return (
     <Box>

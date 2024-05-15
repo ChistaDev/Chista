@@ -6,15 +6,17 @@ import { usePhishingMonitorDomainInput } from '../../contexts/PhishingMonitorDom
 import { usePhishingMonitorExcludeInput } from '../../contexts/PhishingMonitorExcludeInputContext';
 import PhishingMonitorTable from '../Tables/PhishingMonitorTable';
 import ToastMessage from '../ToastMessage/ToastMessage';
+import { useBackendStatus } from '../../contexts/BackendStatusContext';
+import { useToastMessage } from '../../contexts/ToastMessageContext';
 
 const PhishingMonitorInputs = () => {
-  const [openToast, setOpenToast] = useState(false);
-  const [severity, setSeverity] = useState('');
-  const [toastContent, setToastContent] = useState('');
+  const { backendStatus, setBackendStatus } = useBackendStatus();
+  const { setOpenToast, setSeverity, setToastContent } = useToastMessage();
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [showDomainError, setShowDomainError] = useState(false);
   const [showExcludeError, setShowExcludeError] = useState(false);
+
   const { phishingMonitorDomainInput, setPhishingMonitorDomainInput } =
     usePhishingMonitorDomainInput();
   const { phishingMonitorExcludeInput, setPhishingMonitorExcludeInput } =
@@ -22,8 +24,10 @@ const PhishingMonitorInputs = () => {
   const [phishingMonitorTableData, setPhishingMonitorTableData] = useState([]);
 
   function validateExcludeInput(input) {
+    // Validate phishingScanExcludedInput format
+
     if (input === '') {
-      return true;
+      setShowExcludeError(false);
     }
 
     const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
@@ -32,11 +36,25 @@ const PhishingMonitorInputs = () => {
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < values.length; i++) {
       if (!domainRegex.test(values[i])) {
-        return false; // if exclude input not in the right format
+        setShowExcludeError(true);
       }
     }
 
-    return true; // if exclude input in the right format
+    setShowExcludeError(false);
+  }
+
+  function validateDomainInput(input) {
+    if (input === '') {
+      setShowDomainError(false);
+    }
+
+    // Validate phishingMonitorDomainInput format
+    const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
+    if (!domainRegex.test(input)) {
+      setShowDomainError(true);
+    } else {
+      setShowDomainError(false);
+    }
   }
 
   const handleSaveButtonClick = () => {
@@ -54,20 +72,7 @@ const PhishingMonitorInputs = () => {
       return;
     }
 
-    // Validate phishingMonitorDomainInput format
-    const domainRegex = /^(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,}){1}$/;
-    if (!domainRegex.test(phishingMonitorDomainInput)) {
-      setShowDomainError(true);
-      return;
-    }
-
-    // Validate phishingScanExcludedInput format
-    if (!validateExcludeInput(phishingMonitorExcludeInput)) {
-      setShowExcludeError(true);
-      return;
-    }
-
-    if (phishingMonitorDomainInput.trim() !== '') {
+    if (backendStatus && phishingMonitorDomainInput.trim() !== '') {
       const newRow = {
         sn:
           phishingMonitorTableData.length === 0
@@ -93,10 +98,9 @@ const PhishingMonitorInputs = () => {
           excludedInput: phishingMonitorExcludeInput,
         })
         .then((response) => {
-          // console.log(response);
-          // console.log(response.data.msg);
           setIsButtonClicked(false);
           setOpenToast(true);
+          setBackendStatus(true);
           if (response.data.msg) {
             setSeverity('success');
             setToastContent(response.data.msg);
@@ -108,12 +112,12 @@ const PhishingMonitorInputs = () => {
         })
         .catch((error) => {
           console.error('Error fetching data: ', error);
+          setBackendStatus(false);
         });
     }
   }, [isButtonClicked]);
 
   useEffect(() => {
-    // Bileşen ilk kez render edildiğinde localStorage'dan kayıtlı bir tablo var mı kontrol ediyoruz
     const savedTableData = localStorage.getItem('phishingMonitorTableData');
     if (savedTableData) {
       setPhishingMonitorTableData(JSON.parse(savedTableData));
@@ -121,7 +125,6 @@ const PhishingMonitorInputs = () => {
   }, []);
 
   useEffect(() => {
-    // Tablo güncellendiğinde, güncel tabloyu localStorage'a kaydediyoruz
     localStorage.setItem(
       'phishingMonitorTableData',
       JSON.stringify(phishingMonitorTableData)
@@ -141,14 +144,21 @@ const PhishingMonitorInputs = () => {
       >
         <TextField
           id="domain"
-          label="Domain"
+          label="Domain (Example: google.com)"
           variant="outlined"
           size="small"
           sx={{ width: '650px' }}
           value={phishingMonitorDomainInput}
-          onChange={(e) => setPhishingMonitorDomainInput(e.target.value)}
+          onChange={(e) => {
+            setPhishingMonitorDomainInput(e.target.value);
+            validateDomainInput(e.target.value);
+          }}
           error={showDomainError}
-          helperText={showDomainError ? 'Please enter a valid domain.' : ''}
+          helperText={
+            showDomainError
+              ? 'Please enter a valid domain. (Example: google.com)'
+              : ''
+          }
         />
 
         <TextField
@@ -159,9 +169,10 @@ const PhishingMonitorInputs = () => {
           size="small"
           sx={{ width: '650px' }}
           value={phishingMonitorExcludeInput}
-          onChange={(e) =>
-            setPhishingMonitorExcludeInput(e.target.value.trim())
-          }
+          onChange={(e) => {
+            setPhishingMonitorExcludeInput(e.target.value.trim());
+            validateExcludeInput(e.target.value);
+          }}
           error={showExcludeError}
           helperText={
             showExcludeError
@@ -191,13 +202,7 @@ const PhishingMonitorInputs = () => {
         setSeverity={setSeverity}
         setOpenToast={setOpenToast}
       />
-      <ToastMessage
-        openToast={openToast}
-        setOpenToast={setOpenToast}
-        severity={severity}
-        setSeverity={setSeverity}
-        toastContent={toastContent}
-      />
+      <ToastMessage />
     </>
   );
 };

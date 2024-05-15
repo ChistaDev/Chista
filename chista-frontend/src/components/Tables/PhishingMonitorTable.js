@@ -17,26 +17,10 @@ import {
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PhishingMonitorDetailsTable from './PhishingMonitorDetailsTable';
-import { useDarkMode } from '../../contexts/DarkModeContext';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  maxWidth: '1650px',
-  maxHeight: '90%',
-  overflowY: 'auto',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { usePhishingMonitorAPI } from '../../contexts/PhishingMonitorAPIContext';
 
 const PhishingMonitorTable = ({
   phishingMonitorTableData,
@@ -45,7 +29,7 @@ const PhishingMonitorTable = ({
   setSeverity,
   setOpenToast,
 }) => {
-  const { mode } = useDarkMode();
+  const { setPhishingMonitorDetailsData } = usePhishingMonitorAPI();
   const [openRowIndex, setOpenRowIndex] = React.useState(null);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [deleteIndex, setDeleteIndex] = React.useState(null);
@@ -53,7 +37,15 @@ const PhishingMonitorTable = ({
 
   const handleModalOpen = (rowIndex) => {
     setOpenRowIndex(rowIndex);
-    console.log('Clicked item index:', rowIndex);
+    axios
+      .get('http://localhost:7777/api/v1/phishing/monitor')
+      .then((response) => {
+        setPhishingMonitorDetailsData(response.data.results);
+        console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error);
+      });
   };
 
   const handleModalClose = () => setOpenRowIndex(null);
@@ -96,13 +88,7 @@ const PhishingMonitorTable = ({
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
           <caption>Phishing Monitor </caption>
           <TableHead>
-            <TableRow
-              sx={
-                {
-                  // backgroundColor: '#f4f4f4',
-                }
-              }
-            >
+            <TableRow>
               <TableCell>SN</TableCell>
               <TableCell align="right">DOMAIN</TableCell>
               <TableCell align="right">CREATED AT</TableCell>
@@ -130,7 +116,22 @@ const PhishingMonitorTable = ({
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={style}>
+                    <Paper
+                      sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        p: 4,
+                        maxWidth: 1650,
+                        width: '90%',
+                        height: 630,
+                        maxHeight: '90%',
+                        overflowY: 'auto',
+                      }}
+                    >
                       <Button
                         onClick={handleModalClose}
                         style={{ position: 'absolute', top: 0, right: 0 }}
@@ -141,14 +142,12 @@ const PhishingMonitorTable = ({
                         id="modal-modal-title"
                         variant="h3"
                         component="h2"
-                        sx={{ color: mode ? '#fff' : 'rgba(0, 0, 0, 0.87)' }}
                       >
                         {row.phishingMonitorDomainInput}
                       </Typography>
                       <Typography
                         sx={{
                           mt: 2,
-                          color: mode ? '#fff' : 'rgba(0, 0, 0, 0.87)',
                         }}
                       >
                         <span style={{ fontWeight: 'bold' }}>Created At: </span>
@@ -169,7 +168,7 @@ const PhishingMonitorTable = ({
                         phishingMonitorTableData={phishingMonitorTableData}
                         openRowIndex={openRowIndex}
                       />
-                    </Box>
+                    </Paper>
                   </Modal>
                 </TableCell>
                 <TableCell align="right">

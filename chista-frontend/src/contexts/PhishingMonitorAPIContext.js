@@ -1,10 +1,14 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { useBackendStatus } from './BackendStatusContext';
 
 export const PhishingMonitorAPIContext = createContext();
 
 export const PhishingMonitorAPIProvider = ({ children }) => {
-  const [phishingMonitorData, setPhishingMonitorData] = useState(null);
+  const [phishingMonitorDetailsData, setPhishingMonitorDetailsData] = useState(
+    []
+  );
+  const { setBackendStatus } = useBackendStatus();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,10 +16,12 @@ export const PhishingMonitorAPIProvider = ({ children }) => {
         const response = await axios.get(
           'http://localhost:7777/api/v1/phishing/monitor'
         );
-        setPhishingMonitorData(response.data.results);
+        setBackendStatus(true);
+        setPhishingMonitorDetailsData(response.data.results);
         console.log(response.data.results);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setBackendStatus(false);
       }
     };
 
@@ -27,7 +33,9 @@ export const PhishingMonitorAPIProvider = ({ children }) => {
   }, []);
 
   return (
-    <PhishingMonitorAPIContext.Provider value={{ phishingMonitorData }}>
+    <PhishingMonitorAPIContext.Provider
+      value={{ phishingMonitorDetailsData, setPhishingMonitorDetailsData }}
+    >
       {children}
     </PhishingMonitorAPIContext.Provider>
   );
