@@ -142,12 +142,14 @@ const HomePage = () => {
               sx={{ display: 'flex', justifyContent: 'center' }}
             >
               <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/"
+                src="https://www.youtube.com/embed/_YgUYFRND_Q"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                style={{
+                  width: '560px',
+                  height: '315px',
+                }}
               ></iframe>
             </Box>
 
