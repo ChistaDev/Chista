@@ -29,9 +29,6 @@ Chista is an Open Source Cyber Threat Intelligence (CTI) Framework designed to h
 
 ![cli-demo](cli.gif)
 
-
-[![Introduction to Chista](https://img.youtube.com/vi/_YgUYFRND_Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=_YgUYFRND_Q)
-
 It helps its users understand cyber threats by using data collected from various sources. This data includes IOCs, data leaks, phishing campaigns, threat group activities and CTI sources. By analyzing this data, Chista helps users understand the existence, prevalence, trends and probability of cyber threats. 
 </p>
 <hr>
@@ -52,6 +49,13 @@ It helps its users understand cyber threats by using data collected from various
   <li><b>Providing Resources:</b> Chista provides resources that can be used for threat intelligence for the benefit of users interested in Cyber Threat Intelligence.</li>
 </ul>
 </p>
+
+Watch the video below for an introduction to Chista. In this video, you will find information about the basics of Chista and how to use it: 
+
+[![Introduction to Chista](https://img.youtube.com/vi/_YgUYFRND_Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=_YgUYFRND_Q)
+
+[Chista Youtube Channel](https://www.youtube.com/@ChistaFramework)
+
 <hr>
 
 In this document, you'll find `usage & installation` guide. You can check our [detailed documentation](chista-docs-v1.md) about which includes **developer documentation**.
