@@ -243,13 +243,16 @@ The following message indicates that the Chista API is up and running
 ```sh
 [GIN-debug] Listening and serving HTTP on localhost:7777
 ```
-After this stage, data feed can be provided via API by sending a request to the relevant endpoint
+After this stage, data feed can be provided via API by sending a request to the relevant endpoint. Also, Swagger OpenAPI documentation is available on doc/openapi.json.
 
 Endpoint | Method | Query Params | Description
 --- | --- | --- | ---
 /api/v1/ioc_feed | GET | attacker, verbosity | List all of the IOC data related with used query params.
-/api/v1/leak | GET | email, verbosity | List all of the leak info related with used query params
+/api/v1/leak | GET | email, verbosity | List all of the leak info related with used query params.
 /api/v1/phishing | GET | domain, verbosity | List all of the latest phishing domains that related with the supplied query param.
+/api/v1/phishing/monitor | POST | domain | Add a domain to Phishing Monitor Module.
+/api/v1/phishing/monitor | GET | - | Fetches the Phishing Monitor Module results.
+/api/v1/phishing/monitor | DELETE | domain | Removes the given domain from monitor list.
 /api/v1/impersonate | GET | domain, verbosity | List all of the impersonating domains that related with the supplied query param.
 /api/v1/activities | GET | ransom, list, verbosity | List all of the latest activites of attacker related with the supplied query param.
 /api/v1/source | GET | ransom, apt, forum, market, telegram, exploit, discord, verbosity | List all of the data related with the supplied query param.
