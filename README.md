@@ -17,7 +17,7 @@
 </h1>
 
 <h1 align="center"> Chista | Open Source Threat Intelligence Framework </h1>
-<p align="right"><i>v1.0</i></p>
+<p align="right"><i>v1.1</i></p>
 
 <hr>
 <p>
@@ -26,6 +26,14 @@
 <a href="https://linkedin.com/company/chistadev"><img src="static/linkedin.png" width="30px" alt="Chista Linkedin"></a>
 </p>
 Chista is an Open Source Cyber Threat Intelligence (CTI) Framework designed to help users understand, predict and defend against cyber threats.
+
+
+<ins>**Chista has a sweet UI!**</ins>
+
+
+![cli-demo](/static/chista-dashboard.jpeg)
+
+<ins>**Enough? no... Also has a handsome CLI!**</ins>
 
 ![cli-demo](cli.gif)
 
