@@ -84,9 +84,12 @@ In this document, you'll find `usage & installation` guide. You can check our [d
   - It is needed for OpenSquat.
 - OpenSquat **(Optional, increases Phishing & Impersonate module performance)**
   - https://github.com/atenreiro/opensquat
+- Node.js **(Optional, needed for Chista Dashboard)**
 - search.censys.io API ID and API KEY **(Optional, increases Phishing & Impersonate module performance)**
   - It's used in Phishing module and controlled in .ENV file with `CENSYS_API_SECRET` key. We'll see .ENV file in the **Configuration** section.
-- `7777` and `7778` ports should be available
+- `7777` port should be available for API server
+- `7778` port should be available for Chista CLI tool **(Optional, if you don't want to use CLI it's not necessary)**
+- `3000` port should be available for dashboard application **(Optional, if you don't want to use UI it's not necessary)**
 - "**google-chrome**" executable file should present in $PATH
   - You need to install Google Chrome and it's executable should be found in your PATH (Environment Variables in Windows)
 
