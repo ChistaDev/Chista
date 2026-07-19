@@ -103,8 +103,8 @@ func GetIocs(ctx *gin.Context) {
 	// Wait for client's websocket server initliazation
 	err := helpers.InitiliazeWebSocketConnection()
 	if err != nil {
-		logger.Log.Errorf("Cannot initilaize WebSocket connection with Client. If you want to use just HTTP API set API_ONLY=true")
-		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "Cannot initilaize WebSocket connection with Client. If you want to use just HTTP API set API_ONLY=true"})
+		logger.Log.Errorf("Cannot initialize WebSocket connection with Client. If you want to use just HTTP API set API_ONLY=true")
+		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "Cannot initialize WebSocket connection with Client. If you want to use just HTTP API set API_ONLY=true"})
 		return
 	}
 	defer helpers.CloseWSConnection()
